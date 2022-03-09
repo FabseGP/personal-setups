@@ -58,7 +58,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+c exec clipman pick -t wofi
 
     # Taking a screenshot
-    bindsym Print exec grim -g "$(slurp)" - | swappy -f -
+    bindsym Print exec wayshot --stdout | swappy -f -
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 
-# Preparations
+# Parameters
 
-  read -rp "Is the script executed as bash -i /script/path? Is permit nopass fabsepi added to /etc/doas.conf? " hello
-  read -rp "Type yes to use docker, no to use podman: " docker
+  BEGINNER_DIR=$(pwd)
+  KICAD=""
+  echo "permit nopass $(whoami)" | doas tee -a /etc/doas.conf > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -12,9 +13,9 @@
   doas rm -f /etc/apk/repositories
   doas touch /etc/apk/repositories
   cat << EOF | doas tee -a /etc/apk/repositories > /dev/null
-http://mirrors.dotsrc.org/alpine/edge/community/
-http://mirrors.dotsrc.org/alpine/edge/testing/
-http://mirrors.dotsrc.org/alpine/edge/main/
+https://mirrors.dotsrc.org/alpine/edge/community/
+https://mirrors.dotsrc.org/alpine/edge/testing/
+https://mirrors.dotsrc.org/alpine/edge/main/
 EOF
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -23,32 +24,36 @@ EOF
 
   doas apk update
   doas apk upgrade
-  if [ "$docker" == "yes" ]; then
-    PACKAGES="apk add docker docker-cli-compose"
-  elif [ "$docker" == "no" ]; then
-    PACKAGES="apk add podman podman-docker py3-podman podman-remote fuse-overlayfs shadow slirp4netns"
-  fi
-  doas apk add $PACKAGES afetch cgroups bottom musl-locales openssh google-authenticator rsnapshot openssh-server-pam lang libressl udisks2 sed man-pages ttf-dejavu cups cups-libs sshguard cups-pdf cups-client cups-filters git py3-pip swaybg pcmanfm bc mako lz4 cbonsai nerd-fonts haveged gcc make build-base kbd-bkeymaps curl wget i2c-tools lm_sensors perl lsblk e2fsprogs-extra networkmanager nftables tzdata mysql-client firefox mysql pipewire ttf-opensans pipewire-pulse libuser libreoffice pavucontrol i3status-rust fzf rclone syncthing rsync alacritty terminator fcron unrar unzip zsh zsh-autosuggestions zsh-syntax-highlighting neovim btrfs-progs mousepad xarchiver nnn mpv swappy gotop wayfire nodejs-current npm lsof zathura zathura-pdf-mupdf eudev sway swaylock-effects swayidle figlet mesa-dri-gallium xdg-desktop-portal-wlr xdg-desktop-portal-kde gammastep wf-config clipman gnome-calculator polkit-gnome pipewire-media-session grim dialog grep font-awesome swaylockd
+  doas apk add podman-docker py3-podman podman-remote fuse-overlayfs shadow slirp4netns \
+  podman-zsh-completion podman-compose macchina bottom musl-locales openssh bc grim dialog \
+  lang libressl udisks2 sed man-pages ttf-dejavu cups-pdf git py3-pip pcmanfm wf-config \
+  dunst zstd lz4 cbonsai nerd-fonts gcc make wget build-base kbd-bkeymaps curl i2c-tools \
+  lm_sensors perl lsblk e2fsprogs-extra nftables tzdata mysql-client firefox mysql pipewire \
+  ttf-opensans pipewire-pulse libuser rclone fuzzel pavucontrol i3status-rust libreoffice fzf \
+  zsh syncthing rsync foot terminator unrar unzip zsh-autosuggestions zsh-syntax-highlighting \
+  neovim btrfs-progs mousepad xarchiver nnn mpv swappy river nodejs-current npm lsof zathura \
+  zathura-pdf-mupdf sway swaylock-effects swayidle mesa-dri-gallium xdg-desktop-portal-wlr \
+  xdg-desktop-portal-kde wl-gammarelay clipman gnome-calculator polkit-gnome wireplumper eudev \
+  grep font-awesome swaylockd podman cgroups cups connman cronie haveged sshguard rsnapshot
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Services + openssh enhanements
 
-  if [ "$docker" == "yes" ]; then
-    doas rc-update add docker default
-  elif [ "$docker" == "no" ]; then
-    doas rc-update add podman default
-    doas rc-service podman start
-    doas modprobe tun
-    doas usermod --add-subuids 100000-165535 fabsepi
-    doas usermod --add-subgids 100000-165535 fabsepi
-    podman system migrate
-  fi
   doas rc-update add swap boot
   doas rc-update add haveged boot
-  for service in fcron syncthing dbus sshguard sshd cgroups cupsd mariadb fuse nftables networkmanager; do
+  for service in rsnapshot podman cronie syncthing dbus sshguard sshd cgroups cupsd mariadb fuse nftables connmand; do
     doas rc-update add $service default
   done
+  doas rc-service mariadb start
+  doas rc-service syncthing start
+  doas rc-service fcron start
+  doas rc-service podman start
+  doas modprobe tun
+  doas echo tun >> /etc/modules
+  doas usermod --add-subuids 100000-165535 $(whoami)
+  doas usermod --add-subgids 100000-165535 $(whoami)
+  podman system migrate
   doas /etc/init.d/sshd start
   cat << EOF | doas tee -a /etc/ssh/sshd.config > /dev/null
 
@@ -105,80 +110,27 @@ auth		required			pam_nologin.so	successok
 auth		include				google-authenticator
 
 EOF
-  doas google-authenticator
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Powerlevel10k-theme
 
-  mkdir -p /home/fabsepi/.local/share/fonts
-  doas lchsh fabsepi
+  mkdir -p /home/$(whoami)/.local/share/fonts
+  doas lchsh $(whoami)
   doas lchsh
-  touch /home/fabsepi/.zshrc
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/fabsepi/powerlevel10k
-  touch /home/fabsepi/.config/zsh/.zshenv
-  touch /home/fabsepi/.config/zsh/.zshrc
-  cat << EOF | tee -a /home/fabsepi/.zshenv > /dev/null
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:/usr/local/bin"
-fi
-
-export MOZ_ENABLE_WAYLAND=1
-export SDL_VIDEODRIVER=wayland
-export _JAVA_AWT_WM_NONREPARENTING=1
-export EDITOR="nvim"
-export VISUAL="nvim"
-export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP=sway
-export QT_QPA_PLATFORM=wayland
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export HISTFILE="home/fabse/.zhistory"    # History filepath
-export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
-
-EOF
-  cat << EOF | tee -a /home/fabsepi/.zshrc > /dev/null
-
-autoload -U compinit; compinit
-zstyle ':completion::complete:*' gain-privileges 1
-
-exit_zsh() { exit }
-zle -N exit_zsh
-bindkey '^D' exit_zsh
-
-_comp_options+=(globdots) # With hidden files
-
-cbonsai -p
-
-bindkey -v
-export KEYTIMEOUT=1
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
-alias rm="rm -i"
-alias sway="dbus-run-session sway"
-
-EOF
+  touch /home/$(whoami)/.zshrc
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$(whoami)/powerlevel10k
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # User and groups
 
-  for GRP in spi i2c gpio; do
+  for GRP in spi i2c gpio docker sftpusers; do
     doas addgroup --system $GRP
   done
-  for GRP in adm dialout cdrom audio users video games wheel input tty gpio spi i2c plugdev netdev; do
-    doas adduser fabsepi $GRP 
+  for GRP in disk wheel video audio input lp netdev plugdev users gpio spi i2c docker; do
+    doas adduser $(whoami) $GRP 
   done
-  if [ "$docker" == "yes" ]; then
-    doas adduser fabsepi docker
-  elif [ "$docker" == "no" ]; then
-    doas groupadd docker
-    doas adduser fabsepi docker
-  fi
-  doas groupadd sftpusers
   doas adduser sftpfabse
   doas adduser sftpfabse sftpusers
 
@@ -186,20 +138,9 @@ EOF
 
 # Extra's
 
-  mv /home/fabsepi/Setup_and_configs/RPI4/Scripts /home/fabsepi
-  mv /home/fabsepi/Setup_and_configs/RPI4/Dockers /home/fabsepi
-  mv /home/fabsepi/Setup_and_configs/RPI4/container_setup.sh /home/fabsepi
-  chmod u+x /home/fabsepi/container_setup.sh
-  mkdir /home/fabsepi/Pro-Fox
-  git clone https://github.com/xmansyx/Pro-Fox.git /home/fabsepi/Pro-Fox
-  doas mkdir /media/SEAGATE
+  doas sed -i s/#unicode="NO"\n\n#/#unicode="NO"\n\nunicode="YES"\n\n#/ /etc/rc.conf
   doas rm -rf /etc/motd
   doas touch /etc/motd
-  doas mkdir /etc/pipewire
-  chmod u+x /home/fabsepi/Scripts/*
-  doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire/
-  doas sed -i -e "/{ path = "\/usr\/bin\/pipewire-media-session" args = ""}/s/^#//" /etc/pipewire/pipewire.conf
-  doas sed -i s/#unicode="NO"\n\n#/#unicode="NO"\n\nunicode="YES"\n\n#/ /etc/rc.conf
   cat << EOF | doas tee -a /etc/motd > /dev/null
   
 Welcome to Alpine Linux - delivered to you by Fabse Inc.!
@@ -207,9 +148,8 @@ Welcome to Alpine Linux - delivered to you by Fabse Inc.!
 Proceed with caution, as puns is looming around :D
 
 EOF
-  doas rc-service syncthing start
   syncthing
-  sed -i 's/127.0.0.1/192.168.0.108/g' /home/fabsepi/.config/syncthing/config.xml
+  sed -i 's/127.0.0.1/192.168.0.108/g' /home/$(whoami)/.config/syncthing/config.xml
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -242,12 +182,11 @@ EOF
 
 # Add fcron jobs
 
-  doas rc-service fcron start
-  eval "$(crontab -l; echo "@reboot /home/fabsepi/Scripts/syncthing.sh"|awk '!x[$0]++'|crontab -)"
-  eval "$(crontab -l; echo "@reboot /home/fabsepi/Scripts/leon.sh"|awk '!x[$0]++'|crontab -)"
-  eval "$(crontab -l; echo "@reboot /home/fabsepi/Scripts/etherpad.sh"|awk '!x[$0]++'|crontab -)"
-  echo "@reboot /home/fabsepi/Scripts/seagate.sh" | doas tee -a /etc/crontab > /dev/null
-  eval "$(crontab -l; echo "@reboot /home/fabsepi/Scripts/pipewire.sh"|awk '!x[$0]++'|crontab -)"
+  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/syncthing.sh"|awk '!x[$0]++'|crontab -)"
+  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/leon.sh"|awk '!x[$0]++'|crontab -)"
+  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/etherpad.sh"|awk '!x[$0]++'|crontab -)"
+  echo "@reboot /home/$(whoami)/scripts/seagate.sh" | doas tee -a /etc/crontab > /dev/null
+  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/pipewire.sh"|awk '!x[$0]++'|crontab -)"
   doas mv /home/fabsepi/Setup_and_configs/RPI4/rsnapshot.conf /etc/rsnapshot.conf
   doas mv /home/fabsepi/Setup_and_configs/RPI4/Scripts/rsnapshot_daily.sh /etc/periodic/daily
   doas mv /home/fabsepi/Setup_and_configs/RPI4/Scripts/rsnapshot_weekly.sh /etc/periodic/weekly
@@ -259,7 +198,7 @@ EOF
 # Mariadb (etherpad)
 
   doas /etc/init.d/mariadb setup
-  doas rc-service mariadb start
+  doas rc-service mariadb restart
   doas mysql_secure_installation
   mysql -u root --password=Alpine54321DB67890Maria -e "CREATE database etherpad_lite_db"
   mysql -u root --password=Alpine54321DB67890Maria -e "CREATE USER etherpad_fabsepi@localhost identified by 'Ether54321Pad67890FABsePI'"
@@ -283,7 +222,7 @@ EOF
 # Goodbye
 
   rm -rf Setup_and_configs
-  doas sed -i '/permit nopass fabsepi/d' /etc/doas.conf
+  doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf
   echo
   echo "And you're welcome :))"
   echo

@@ -1,3 +1,16 @@
+# Lengthen uptime output
+long_uptime = true
+
+# Lengthen kernel output
+long_kernel = false
+
+# Toggle between displaying the current shell or your user's default one.
+current_shell = true
+
+# Toggle between displaying the number of physical or logical cores of your
+# processor.
+physical_cores = true 
+
 # Disables color.
 no_color = false
 
@@ -57,9 +70,6 @@ color = "Blue"
 #   - Red
 #   - Magenta
 separator_color = "Blue"
-
-# Shorten uptime format
-short_uptime = false
 
 # Lengthen shell output
 long_shell = true

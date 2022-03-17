@@ -3,7 +3,6 @@
 # Parameters
 
   BEGINNER_DIR=$(pwd)
-  KICAD=""
   echo "permit nopass $(whoami)" | doas tee -a /etc/doas.conf > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------

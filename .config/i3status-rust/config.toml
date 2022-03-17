@@ -38,18 +38,12 @@ chip = "*-isa-*"
 inputs = ["Package id 0"]
 
 [[block]]
-block = "time"
-interval = 60
-format = "%a %d/%m %R"
-
-[[block]]
 block = "battery"
 driver = "upower"
 device="BAT1"
-format = "{percentage}% {time}"
+format = "{percentage:6#100} {percentage} {time}"
 
 [[block]]
-block = "networkmanager"
-on_click = "alacritty -e nmtui"
-interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
-interface_name_include = []
+block = "time"
+interval = 60
+format = "%a %d/%m %R"

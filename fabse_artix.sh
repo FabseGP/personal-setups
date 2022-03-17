@@ -22,7 +22,7 @@
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
                                          linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
                                          otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
-                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit 
+                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit
   doas pacman --noconfirm -Rdd polkit elogind
  
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@
                                             avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
                                             sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
                                             bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
-                                            river-noxwayland-git wayshot-bin lutris-git $AUR                    
+                                            river-noxwayland-git wayshot-bin lutris-git rivercarro-git $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

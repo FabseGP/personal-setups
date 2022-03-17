@@ -8,38 +8,25 @@
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
-# Correct start + passwordless + hdd-mount
-
-
-  echo
-  read -rp "Should Kicad (alongside xorg-xwayland) be installed? Either \"true\" or \"false\" " KICAD
-  echo
-  
-#-----------------------------------------------------------------------------------------------------------------+-----------------
-
 # Package-installation
   
-  if [[ "$KICAD" == "true" ]]; then
-    PACKAGES="kicad kicad-library kicad-library-3d xorg-xwayland"
-    REMOVE_1="xorg-xwayland"
-  fi
   doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
                                          iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
-                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf \
+                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf pipewire \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
-                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
-                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer go pipewire pipewire-alsa \
+                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
+                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
                                          zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify links vimiv aisleriot \
                                          bsd-games mypaint android-tools figlet ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver\
-                                         bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr \
+                                         bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr go \
                                          tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
-                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust \
+                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust kicad-library \
                                          linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans $PACKAGES \
                                          otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit \
                                          syncthing-dinit lm_sensors-dinit tlp-dinit avahi-dinit intel-undervolt-dinit thermald-dinit \
                                          cpupower-dinit libvirt-dinit
-  doas pacman --noconfirm -Rdd polkit elogind $REMOVE_1
+  doas pacman --noconfirm -Rdd polkit elogind
  
 #----------------------------------------------------------------------------------------------------------------------------------
 

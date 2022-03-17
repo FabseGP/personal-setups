@@ -10,7 +10,7 @@
   
   doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
                                          iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
-                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf pipewire \
+                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
@@ -19,11 +19,10 @@
                                          bsd-games mypaint android-tools figlet ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver\
                                          bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr go \
                                          tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
-                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust kicad-library \
-                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans $PACKAGES \
-                                         otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit \
-                                         syncthing-dinit lm_sensors-dinit tlp-dinit avahi-dinit intel-undervolt-dinit thermald-dinit \
-                                         cpupower-dinit libvirt-dinit
+                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
+                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
+                                         otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
+                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit 
   doas pacman --noconfirm -Rdd polkit elogind
  
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -47,25 +46,22 @@
 
 # Dinit-services
 
-  doas dinitctl enable cupsd
-  doas dinitctl enable syncthing
-  doas dinitctl enable lm_sensors
-  doas dinitctl enable cpupower
-  doas dinitctl enable intel-undervolt
-  doas dinitctl enable tlp
-  doas dinitctl enable thermald
-  doas dinitctl enable avahi-daemon
-  doas dinitctl enable libvirtd
-  doas dinitctl enable virtlogd
+  doas ln -s /etc/dinit.d/cupsd /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/syncthing /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/lm_sensors /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/cpupower /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/tlp /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/thermald /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/avahi-daemon /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/libvirtd /etc/dinit.d/boot.d
+  doas ln -s /etc/dinit.d/virtlogd /etc/dinit.d/boot.d
   doas sensors-detect --auto
-  doas dinitctl start intel-undervolt
-  doas cp configs/intel-undervolt.conf /etc/intel-undervolt.conf
-  doas intel-undervolt apply
-  doas usermod -a -G libvirt,games $(whoami)
+  doas usermod -a -G libvirt,games fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
   doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i "s/#user = "root"/user = "$(whoami)"/" /etc/libvirt/qemu.conf	
-  doas sed -i "s/#group = "root"/group = "$(whoami)"/" /etc/libvirt/qemu.conf	
+  doas sed -i "s/#user = "root"/user = "fabse"/" /etc/libvirt/qemu.conf	
+  doas sed -i "s/#group = "root"/group = "fabse"/" /etc/libvirt/qemu.conf	
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +75,7 @@
 
 # Default shell
 
-  doas chsh -s /usr/bin/zsh $(whoami)
+  doas chsh -s /usr/bin/zsh fabse
   doas chsh -s /usr/bin/zsh root
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -96,7 +92,9 @@
 
 # Installing dotfiles
 
-
+  doas dinitctl start intel-undervolt
+  doas cp configs/intel-undervolt.conf /etc/intel-undervolt.conf
+  doas intel-undervolt apply
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

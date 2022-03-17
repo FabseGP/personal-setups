@@ -3,8 +3,6 @@
 # Parameters
 
   BEGINNER_DIR=$(pwd)
-  KICAD=""
-  echo "permit nopass $(whoami)" | doas tee -a /etc/doas.conf > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -37,11 +35,11 @@
     AUR="dot-bin"
   fi
   rm -rf dot-bin
-  paru --cleanafter --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
-                                sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
-                                bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
-                                river-noxwayland-git wayshot-bin lutris-git $AUR                    
+  paru --cleanafter --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
+                                            avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
+                                            sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
+                                            bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
+                                            river-noxwayland-git wayshot-bin lutris-git $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -112,4 +110,3 @@
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
 EOF
-  doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf

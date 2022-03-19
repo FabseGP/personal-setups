@@ -34,11 +34,11 @@
     AUR="dot-bin"
   fi
   rm -rf dot-bin
-  paru --cleanafter --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                            avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
-                                            sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
-                                            bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
-                                            river-noxwayland-git wayshot-bin lutris-git rivercarro-git $AUR                    
+  paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
+                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
+                                                         bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
+                                                         river-noxwayland-git wayshot-bin lutris-git rivercarro-git $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -90,15 +90,12 @@
   cp -r .config/* /home/fabse/.config/*
   cp -r {librewolf,scripts,wallpapers} /home/fabse
   chmod u+x /home/fabse/scripts/*
-  doas cp -r etc/* /etc
   cp -r .local /home/fabse
   mkdir /home/fabse/.local/share/fonts
   cp {.gtkrc-2.0,.zhistory,.zlogin,.zlogout,.zshenv,.zshrc} /home/fabse  
-  cd $BEGINNER_DIR || return
-
-  doas dinitctl start intel-undervolt
-  doas cp configs/intel-undervolt.conf /etc/intel-undervolt.conf
+  doas cp -r etc/* /etc
   doas intel-undervolt apply
+  cd $BEGINNER_DIR || return
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

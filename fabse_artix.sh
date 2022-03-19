@@ -92,7 +92,7 @@
   chmod u+x /home/fabse/scripts/*
   cp -r .local /home/fabse
   mkdir /home/fabse/.local/share/fonts
-  cp {.gtkrc-2.0,.zhistory,.zlogin,.zlogout,.zshenv,.zshrc} /home/fabse  
+  cp .* /home/fabse  
   doas cp -r etc/* /etc
   doas intel-undervolt apply
   cd $BEGINNER_DIR || return

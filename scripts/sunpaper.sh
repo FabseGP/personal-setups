@@ -24,7 +24,7 @@ longitude="9.900540W"
 # Apple: The-Beach The-Cliffs The-Lake The-Desert
 # Louis Coyle: Lakeside
 # 
-wallpaperPath="$HOME/sunpaper/images/Corporate-Synergy"
+wallpaperPath="$HOME/wallpapers/sunpaper/Corporate-Synergy"
 
 # Set how you want your wallpaper displayed
 # stretch | center | tile | scale | zoom | fill

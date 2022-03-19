@@ -37,7 +37,7 @@
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
                                                          bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
-                                                         river-noxwayland-git wayshot-bin lutris-git rivercarro-git $AUR                    
+                                                         river-noxwayland-git wayshot-bin lutris-git rivercarro-git ventoy-bin $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
   doas pacman --noconfirm -Rdd polkit elogind

@@ -95,7 +95,6 @@
   mkdir /home/fabse/.local/share/fonts
   cp {.gtkrc-2.0,.zhistory,.zlogin,.zlogout,.zshenv,.zshrc} /home/fabse  
   cd $BEGINNER_DIR || return
-  rm -rf personal-setups
 
   doas dinitctl start intel-undervolt
   doas cp configs/intel-undervolt.conf /etc/intel-undervolt.conf

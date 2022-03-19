@@ -46,16 +46,9 @@
 
 # Dinit-services
 
-  doas ln -s /etc/dinit.d/cupsd /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/syncthing /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/lm_sensors /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/cpupower /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/tlp /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/thermald /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/avahi-daemon /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/libvirtd /etc/dinit.d/boot.d
-  doas ln -s /etc/dinit.d/virtlogd /etc/dinit.d/boot.d
+  for service in cups syncthing lm_sensors cpupower intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
+    doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
+  done
   doas sensors-detect --auto
   doas usermod -a -G libvirt,games fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
@@ -91,6 +84,18 @@
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Installing dotfiles
+
+  git clone https://gitlab.com/FabseGP02/personal-setups.git
+  cd personal-setups
+  cp -r .config/* /home/fabse/.config/*
+  cp -r {librewolf,scripts,wallpapers} /home/fabse
+  chmod u+x /home/fabse/scripts/*
+  doas cp -r etc/* /etc
+  cp -r .local /home/fabse
+  mkdir /home/fabse/.local/share/fonts
+  cp {.gtkrc-2.0,.zhistory,.zlogin,.zlogout,.zshenv,.zshrc} /home/fabse  
+  cd $BEGINNER_DIR || return
+  rm -rf personal-setups
 
   doas dinitctl start intel-undervolt
   doas cp configs/intel-undervolt.conf /etc/intel-undervolt.conf

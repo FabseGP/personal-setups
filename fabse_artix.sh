@@ -8,7 +8,7 @@
 
 # Package-installation
   
-  doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
+  doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 figlet \
                                          iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
                                          step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf links \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
@@ -16,7 +16,7 @@
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
                                          zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify  vimiv aisleriot ripgrep \
-                                         bsd-games mypaint android-tools figlet ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver \
+                                         bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver playerctl \
                                          bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr go \
                                          tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \

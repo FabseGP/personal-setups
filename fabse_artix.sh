@@ -10,13 +10,13 @@
   
   doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
                                          iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
-                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf \
+                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf links \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
-                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify links vimiv aisleriot \
-                                         bsd-games mypaint android-tools figlet ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver\
+                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify  vimiv aisleriot ripgrep \
+                                         bsd-games mypaint android-tools figlet ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver \
                                          bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr go \
                                          tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
@@ -87,12 +87,16 @@
 
   git clone https://gitlab.com/FabseGP02/personal-setups.git
   cd personal-setups
-  cp -r .config/* /home/fabse/.config/*
+  cp -r .config/* /home/fabse/.config/
+  rm -rf /home/fabse/.config/zsh
   cp -r {librewolf,scripts,wallpapers} /home/fabse
   chmod u+x /home/fabse/scripts/*
   cp -r .local /home/fabse
-  mkdir /home/fabse/.local/share/fonts
+  mkdir -p /home/fabse/.local/{bin,share/fonts}
   cp .* /home/fabse  
+  curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+  cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
+  cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh
   doas cp -r etc/* /etc
   doas intel-undervolt apply
   cd $BEGINNER_DIR || return
@@ -101,6 +105,7 @@
 
 # Miscellaneous
 
+  doas sed -i 's/mkinitcpio/mkinitcpio elogind polkit/' /etc/pacman.conf
   doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
   curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh > install.sh
   chmod u+x install.sh

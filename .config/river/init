@@ -18,20 +18,22 @@ riverctl map normal $mod Return spawn 'footclient' &
 # dmenu replacement with the gruvbox material color, of course
 riverctl map normal mod spawn "dmenu_run_gruv" &
 
-# Volume control
-riverctl map normal None XF86AudioRaiseVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ +2%'
-riverctl map normal None XF86AudioLowerVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ -2%'
-riverctl map normal None XF86AudioMute         spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+for mode in normal locked; do
+  # Volume control
+  riverctl map normal None XF86AudioRaiseVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ +2%'
+  riverctl map normal None XF86AudioLowerVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ -2%'
+  riverctl map normal None XF86AudioMute         spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
 
-# Audio player control
-riverctl map normal None XF86AudioMedia spawn 'playerctl play-pause'
-riverctl map normal None XF86AudioPlay  spawn 'playerctl play-pause'
-riverctl map normal None XF86AudioPrev  spawn 'playerctl previous'
-riverctl map normal None XF86AudioNext  spawn 'playerctl next'
+  # Audio player control
+  riverctl map normal None XF86AudioMedia spawn 'playerctl play-pause'
+  riverctl map normal None XF86AudioPlay  spawn 'playerctl play-pause'
+  riverctl map normal None XF86AudioPrev  spawn 'playerctl previous'
+  riverctl map normal None XF86AudioNext  spawn 'playerctl next'
 
-# Brightness control
-riverctl map normal None XF86MonBrightnessUp   spawn 'brightnessctl set +2%'
-riverctl map normal None XF86MonBrightnessDown spawn 'brightnessctl set 2%-'
+  # Brightness control
+  riverctl map normal None XF86MonBrightnessUp   spawn 'brightnessctl set +2%'
+  riverctl map normal None XF86MonBrightnessDown spawn 'brightnessctl set 2%-'
+done
 
 # Take screenshot with wayshot + swappy
 riverctl map normal Print spawn 'wayshot --stdout | swappy -f -'

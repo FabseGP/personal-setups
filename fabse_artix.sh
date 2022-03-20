@@ -105,7 +105,6 @@
 
 # Miscellaneous
 
-  doas sed -i 's/mkinitcpio/mkinitcpio elogind polkit/' /etc/pacman.conf
   doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
   curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh > install.sh
   chmod u+x install.sh

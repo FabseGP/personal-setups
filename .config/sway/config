@@ -242,7 +242,7 @@ bar {
     status_command /usr/bin/i3status-rs /home/fabse/.config/i3status-rust/config.toml
     colors {
         separator #666666
-        background #222222personal-setups
+        background #222222
         statusline #dddddd
         focused_workspace #0088CC #0088CC #ffffff
         active_workspace #333333 #333333 #ffffff
@@ -259,7 +259,7 @@ bar {
   exec_always dunst
   exec_always pipewire
   exec_always pipewire-pulse
-  exec_always pipewire-media-session
+  exec_always wireplumber
   exec_always swaymsg "workspace 1; exec syncthing;"
   exec_always /home/fabse/scripts/sunpaper.sh -d
 
@@ -270,8 +270,8 @@ bar {
   set $gnome-schema org.gnome.desktop.interface
 
   exec_always {
-    gsettings set $gnome-schema gtk-theme 'Sweet-Dark'
-    gsettings set $gnome-schema icon-theme 'Tela-blue'
-    gsettings set $gnome-schema cursor-theme 'Bibata-Rainbow-Modern'
+    gsettings set "$gnome_schema" gtk-theme "Sweet-Dark"
+    gsettings set "$gnome_schema" icon-theme "Tela-blue"
+    gsettings set "$gnome_schema" cursor-theme "Bibata-Rainbow-Modern"
 }
 

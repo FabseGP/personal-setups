@@ -3,33 +3,31 @@
 # Parameters
 
   BEGINNER_DIR=$(pwd)
-  GNOME_DESKTOP="$(ls -- *gnome-*)"
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Package-installation
   
   cd packages || exit
-  GNOME_DESKTOP="$(ls -- *gnome-*)"
-  doas pacman --noconfirm -U $GNOME_DESKTOP
+  POLKIT="$(ls -- *polkit-*)"
+  doas pacman --noconfirm -U $POLKIT
   doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 figlet \
                                          iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
-                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator fzf links \
+                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator links \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
                                          zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify  vimiv aisleriot ripgrep \
                                          bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver playerctl \
-                                         bashtop nnn dialog alsa-utils bottom ld-lsb lsd imv xdg-desktop-portal-kde xdg-desktop-portal-wlr go \
+                                         bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd go fzf \
                                          tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
-                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library lutris \
+                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
                                          otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                          syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit
-cd $BEGINNER_DIR || exit
+  cd $BEGINNER_DIR || exit
                                       
- 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Installation of packages from AUR
@@ -38,12 +36,11 @@ cd $BEGINNER_DIR || exit
   if ! grep -q "Flagged out-of-date" dot-bin; then
     AUR="dot-bin"
   fi
-  rm -rf dot-bin
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wl-gammarelay \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
                                                          bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop toilet \
-                                                         river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin $AUR                    
+                                                         river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin lutris-git $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
   doas pacman --noconfirm -Rdd polkit elogind

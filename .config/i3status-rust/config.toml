@@ -9,9 +9,9 @@ format = "{output_name} {volume}"
 
 [[block]]
 block = "hueshift"
-hue_shifter = "wl-gammarelay"
-step = 50
-click_temp = 3500
+hue_shifter = "wlsunset"
+step = 100
+click_temp = 3000
 
 [[block]]
 block = "backlight"

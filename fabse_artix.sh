@@ -21,7 +21,7 @@
                                          zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify  vimiv aisleriot ripgrep \
                                          bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver playerctl \
                                          bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd go fzf \
-                                         tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole rofi \
+                                         tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
                                          linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
                                          otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
@@ -38,9 +38,9 @@
   fi
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset toilet \
-                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-fancy-git \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git \
                                                          bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop lutris-git \
-                                                         river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin $AUR                    
+                                                         river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

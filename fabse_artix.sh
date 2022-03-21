@@ -37,7 +37,7 @@
     AUR="dot-bin"
   fi
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset toilet \
+                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git \
                                                          bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop lutris-git \
                                                          river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland $AUR                    

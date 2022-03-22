@@ -11,20 +11,20 @@
   cd packages || exit
   POLKIT="$(ls -- *polkit-*)"
   doas pacman --noconfirm -U $POLKIT
-  doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 figlet \
-                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany geany-plugins \
+  doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
+                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany-plugins geany \
                                          step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot terminator links \
                                          bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
-                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify  vimiv aisleriot ripgrep \
+                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify vimiv aisleriot ripgrep \
                                          bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver playerctl \
-                                         bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd go fzf \
-                                         tar xz asciinema python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
+                                         bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd go \
+                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet fzf \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
                                          linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
-                                         otf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
+                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                          syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit
   cd $BEGINNER_DIR || exit
                                       
@@ -37,10 +37,10 @@
     AUR="dot-bin"
   fi
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset \
-                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git \
-                                                         bastet freshfetch-bin cbonsai nudoku clipman osp-tracker macchina revolt-desktop lutris-git \
-                                                         river-noxwayland-git wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland $AUR                    
+                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git nudoku \
+                                                         freshfetch-bin cbonsai osp-tracker macchina revolt-desktop lutris-git river-noxwayland-git \
+                                                         wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

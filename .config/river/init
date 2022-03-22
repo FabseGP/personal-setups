@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Set default wallpaper
+  swaybg -i /home/fabse/wallpapers/swaypaper.jpeg
+
+# Set terminal
+  terminal="footclient"
+
+# Set launcher
+  launcher="rofi -show run"
+
 # Services to execute at start
   /usr/bin/dunst
   /usr/bin/pipewire
@@ -8,23 +17,24 @@
   /usr/bin/syncthing
   /home/fabse/scripts/sunpaper.sh -d
   foot --server
-
-# Set terminal
-  terminal="footclient"
-
-# Set launcher
-  launcher="rofi -show"
+  wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+  wlsunset -l 55.27023 -L 9.90081
+  riverctl spawn yambar
 
 # Theme and mouse-cursor
   riverctl xcursor-theme Bibata-Rainbow-Modern 32
   riverctl focus-follows-cursor normal
-
   gnome_schema="org.gnome.desktop.interface"
   gsettings set $gnome_schema gtk-theme "Sweet-Dark"
   gsettings set $gnome_schema icon-theme "Tela-blue"
   gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-  gsettings set "$gnome_schema" cursor-theme "Bibata-Rainbow-Modern"
-  gsettings set "$gnome_schema" cursor-size "32"
+  gsettings set $gnome_schema cursor-size "32"
+
+# Touchpad-configs
+  for pad in $(riverctl list-inputs | grep -i touchpad ); do
+    riverctl input $pad events enabled
+    riverctl input $pad tap enabled
+  done
 
 # Shortcut to terminal
   riverctl map normal Super Return spawn $terminal
@@ -49,9 +59,6 @@
 
 # Shortcut to take screenshot with wayshot + swappy
   riverctl map normal Print spawn "wayshot --stdout | swappy -f -"
-
-# Shortcut to night-mode
-  riverctl map normal Super y spawn "pidof wlsunset && killall wlsunset || wlsunset -l 14.6 -L 121"
 
 # Shortcut to exit river
   riverctl map normal Super+Shift E exit &

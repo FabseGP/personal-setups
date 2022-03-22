@@ -40,7 +40,7 @@
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git nudoku \
                                                          freshfetch-bin cbonsai osp-tracker macchina revolt-desktop lutris-git river-noxwayland-git \
-                                                         wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman $AUR                    
+                                                         wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman yambar $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

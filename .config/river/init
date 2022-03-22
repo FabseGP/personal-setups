@@ -17,7 +17,7 @@
   /usr/bin/syncthing
   /home/fabse/scripts/sunpaper.sh -d
   foot --server
-  wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+  wl-paste -t text --watch clipman store
   wlsunset -l 55.27023 -L 9.90081
   riverctl spawn yambar
 

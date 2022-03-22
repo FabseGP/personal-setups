@@ -18,7 +18,7 @@
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /home/fabse/wallpapers/swaypaper.jpeg fill
+  swaybg -i /home/fabse/wallpapers/swaypaper.jpeg
 
 ### Idle configuration
 #
@@ -250,10 +250,12 @@ bar {
   # Theme
     set $gnome-schema org.gnome.desktop.interface
 
+# Shortcut to night-mode
+  bindsym $mod+y exec pidof wlsunset && killall wlsunset || wlsunset -l 55.27023 -L 9.90081
+
   exec_always {
     gsettings set $gnome_schema gtk-theme "Sweet-Dark"
     gsettings set $gnome_schema icon-theme "Tela-blue"
     gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-    gsettings set "$gnome_schema" cursor-theme "Bibata-Rainbow-Modern"
-    gsettings set "$gnome_schema" cursor-size "32"
+    gsettings set $gnome_schema cursor-size "32"
 }

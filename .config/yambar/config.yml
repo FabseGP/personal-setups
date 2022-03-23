@@ -1,192 +1,108 @@
-# Typical laptop setup, with wifi, brightness, battery etc, for
-# i3/Sway.
+icon: &icon
+  font: 'RobotoMono Nerd Font:pixelsize=14'
 
-# For X11/i3, you'll want to replace calls to swaymsg with i3-msg, and
-# the sway-xkb module with the xkb module.
-
-# fonts we'll be re-using here and there
-awesome: &awesome Font Awesome 5 Free:style=solid:pixelsize=14
-awesome_brands: &awesome_brands Font Awesome 5 Brands:pixelsize=16
-
-std_underline: &std_underline {underline: { size: 2, color: ff0000ff}}
-
-# This is THE bar configuration
 bar:
-  height: 26
   location: top
-  spacing: 5
-  margin: 7
-
-  # Default font
-  font: Adobe Helvetica:pixelsize=12
-
-  foreground: ffffffff
-  background: 111111cc
-
-  border:
-    width: 1
-    color: 999999cc
-    margin: 5
-    top-margin: 0
+  height: 15
+  font: RobotoMono Nerd Font:size=12
+  background: 080808FF
+  spacing: 10
 
   left:
-    - river:
-        anchors:
-          - base: &river_base
-              left-margin: 10
-              right-margin: 13 
-              tag: id 
-              default: {string: {text: , font: *hack}}
-              values:
-                1: {string: {text: ﳐ, font: *hack}}  
-                2: {string: {text: , font: *hack}}  
-                3: {string: {text: , font: *hack}}  
-                4: {string: {text: , font: *hack}}  
-                5: {string: {text: , font: *hack}}  
-                10: {string: {text: "scratchpad", font: *hack}}  
-                11: {string: {text: "work", font: *hack}}  
-
+    - foreign-toplevel:
         content:
           map:
-            on-click: 
-              left: sh -c "riverctl set-focused-tags $((1 << ({id} - 1)))"
-              right: sh -c "riverctl toggle-focused-tags $((1 << ({id} -1)))"
-              middle: sh -c "riverctl toggle-view-tags $((1 << ({id} -1)))"
-            tag: state
+            tag: activated
             values:
-              urgent:
-                map:
-                  <<: *river_base
-                  deco: {background: {color: D08770ff}}
-              focused:
-                map:
-                  <<: *river_base
-                  deco: *bg_default
-              visible:
-                map:
-                  tag: occupied
-                  values:
-                    false: {map: {<<: *river_base}}
-                    true: {map: {<<: *river_base, deco: *bg_default}}
-              unfocused:
-                map:
-                  <<: *river_base
-              invisible:
-                map:
-                  tag: occupied
-                  values:
-                    false: {empty: {}}
-                    true: {map: {<<: *river_base, deco: {underline: {size: 3, color: ea6962ff}}}}
-    - cpu:
-        interval: 2500
+              false: {empty: {}}
+              true:
+                - string: {text: "{app-id}: {title}"}
+    - script:
+        path: /home/fabse/.config/yambar/playerctl/playerctl
         content:
-          string: {text: "{cpu1}%"}
+          - map:
+              tag: playing
+              values:
+                true:
+                  - string: {text: "\uF04B {title} {duration}", foreground: "5FFF47FF"}
+                false:
+                  - string: {text: "\uF04C {title} {duration}", foreground: "FFD78740"}
+  right:
+    - river:
+         title: {string: { text: "{seat} - {title}" }}
+         content:
+          map:
+            tag: occupied
+            values:
+              false: {empty: {}}
+              true:
+                string:
+                  margin: 5
+                  text: "{id}: {state}"
+    - script:
+        path: /home/fabse/.config/yambar/weather.sh
+        foreground: 'FFD787FF'
+        content:
+          - string: {text: "{icon}", font: "owfont", <<: *icon}
+          - string: {text: " {temp}\u00B0"}
+          - string: {text: " ({feels_like}\u00B0)"}
+    - script:
+        path: /home/fabse/.config/yambar/pulse/pulse
+        foreground: 'AF87FFFF'
+        content:
+          - map:
+              tag: headset
+              values:
+                true:
+                  - string: {text: "\uF7CA", <<: *icon}
+                false:
+                  - string: {text: "\uF886", <<: *icon}
+          - string: {text: " {volume}%"}
+    - script:
+        path: /home/fabse/.config/yambar/cpu.sh
+        foreground: '5FD7FFFF'
+        content:
+          map:
+            tag: high
+            values:
+              true:
+                - string: {text: "{bar}", foreground: 'FF206FFF'}
+                - string: {text: " {value}%", foreground: 'FF206FFF'}
+              false:
+                - string: {text: "{bar}"}
+                - string: {text: " {value}%"}
+    - backlight:
+        name: intel_backlight
+        content:
+          string: {text: "backlight: {percent}%"}
     - mem:
         interval: 2500
         content:
-          string: {text: "{used:mb}MB"}
-
-  center:
-    - mpd:
-        host: /run/mpd/socket
-        anchors:
-          list: &artist_album_title
-            spacing: 0
-            items:
-              - map:
-                  tag: state
-                  values:
-                    playing: {string: {text: "{artist}"}}
-                    paused: {string: {text: "{artist}", foreground: ffffff66}}
-              - string: {text: " | ", foreground: ffffff66}
-              - map:
-                  tag: state
-                  values:
-                    playing: {string: {text: "{album}"}}
-                    paused: {string: {text: "{album}", foreground: ffffff66}}
-              - string: {text: " | ", foreground: ffffff66}
-              - map:
-                  tag: state
-                  values:
-                    playing: {string: {text: "{title}", foreground: ffa0a0ff}}
-                    paused: {string: {text: "{title}", foreground: ffffff66}}
-
-        content:
-          map:
-            margin: 10
-            tag: state
-            values:
-              offline: {string: {text: offline, foreground: ff0000ff}}
-              stopped: {string: {text: stopped}}
-              paused: {list: *artist_album_title}
-              playing: {list: *artist_album_title}
-
-  right:
+          string: {text: "memory: {percent_used}%"}
     - network:
-        name: wlan0
+        name: 'wlan0'
         content:
           map:
             tag: carrier
             values:
-              false: {empty: {}}
               true:
                 map:
                   tag: state
-                  default: {string: {text: , font: *awesome, foreground: ffffff66}}
+                  default:
+                    string: {text: "\uF6D7   {ssid}"}
                   values:
                     up:
-                      map:
-                        tag: ipv4
-                        default: {string: {text: , font: *awesome}}
-                        values:
-                          "": {string: {text: , font: *awesome, foreground: ffffff66}}
-    - network:
-        name: wlp2s0
-        content:
-          map:
-            tag: state
-            default: {string: {text: , font: *awesome, foreground: ffffff66}}
-            values:
-              down: {string: {text: , font: *awesome, foreground: ff0000ff}}
-              up:
-                map:
-                  tag: ipv4
-                  default:
-                    - string: {text: , font: *awesome}
-                    - string: {text: "{ssid}"}
-                  values:
-                    "":
-                      - string: {text: , font: *awesome, foreground: ffffff66}
-                      - string: {text: "{ssid}", foreground: ffffff66}
-    - alsa:
-        card: hw:PCH
-        mixer: Master
-        content:
-          map:
-            tag: online
-            values:
-              false: {string: {text: , font: *awesome, foreground: ff0000ff}}
-              true:
-                map:
-                  on-click: /bin/sh -c "amixer -q sset Speaker unmute && amixer -q sset Headphone unmute && amixer -q sset Master toggle"
-                  tag: muted
-                  values:
-                    true: {string: {text: , font: *awesome, foreground: ffffff66}}
+                      string: {text: "\uFAA8   {ssid}"}
                     false:
-                      ramp:
-                        tag: volume
-                        items:
-                          - string: {text: , font: *awesome}
-                          - string: {text: , font: *awesome}
-                          - string: {text: , font: *awesome}
-                          - string: {text: , font: *awesome}
-                          - string: {text: , font: *awesome}
-    - backlight:
-        name: intel_backlight
-        content: [ string: {text: , font: *awesome}, string: {text: "{percent}%"}]
+                      string: {text: "\uF818   offline"}
+    - clock:
+        foreground: FFD787FF
+        time-format: "%d %b, %H:%M"
+        content:
+          - string: {text: "{time}"}
     - battery:
-        name: BAT0
-        poll-interval: 30
+        name: BAT1
+        poll-interval: 5
         anchors:
           discharging: &discharging
             list:
@@ -194,17 +110,17 @@ bar:
                 - ramp:
                     tag: capacity
                     items:
-                      - string: {text: , foreground: ff0000ff, font: *awesome}
-                      - string: {text: , foreground: ffa600ff, font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , font: *awesome}
-                      - string: {text: , foreground: 00ff00ff, font: *awesome}
-                - string: {text: "{capacity}% {estimate}"}
+                      - string: {text: ' ', foreground: ff0000ff}
+                      - string: {text: ' ', foreground: ffa600ff}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ',}
+                      - string: {text: ' ', foreground: 00ff00ff}
+                - string: {text: "   {capacity}%"}
         content:
           map:
             tag: state
@@ -213,37 +129,24 @@ bar:
                 <<: *discharging
               discharging:
                 <<: *discharging
-              charging:
-                - string: {text: , foreground: 00ff00ff, font: *awesome}
-                - string: {text: "{capacity}% {estimate}"}
+              charging: &charging
+                - string: {text: ' ', foreground: 00ff00ff}
+                - string: {text: " {capacity}%"}
               full:
-                - string: {text: , foreground: 00ff00ff, font: *awesome}
-                - string: {text: "{capacity}% full"}
+                - string: {text: ' ', foreground: 00ff00ff}
+                - string: {text: " {capacity}%"}
               not charging:
-                - ramp:
-                    tag: capacity
-                    items:
-                      - string: {text:  , foreground: ff0000ff, font: *awesome}
-                      - string: {text:  , foreground: ffa600ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                      - string: {text:  , foreground: 00ff00ff, font: *awesome}
-                - string: {text: "{capacity}%"}
-    - clock:
-        time-format: "%H:%M %Z"
-        content:
-          - string: {text: , font: *awesome}
-          - string: {text: "{date}", right-margin: 5}
-          - string: {text: , font: *awesome}
-          - string: {text: "{time}"}
-    - label:
-        content:
-          string:
-            on-click: loginctl poweroff
-            text: 
-            font: *awesome
+                 - ramp:
+                     tag: capacity
+                     items:
+                       - string: {text: '  ', foreground: ff0000ff}
+                       - string: {text: '  ', foreground: ffa600ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                       - string: {text: '  ', foreground: 00ff00ff}
+                 - string: {text: "   {capacity}%"}

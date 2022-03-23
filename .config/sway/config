@@ -13,12 +13,12 @@
   set $term footclient
 
 # Clipman
-  exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+  exec wl-paste -t text --watch clipman store
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-  swaybg -i /home/fabse/wallpapers/swaypaper.jpeg
+  output * bg /home/fabse/wallpapers/swaypaper.jpg fill
 
 ### Idle configuration
 #
@@ -45,7 +45,7 @@
 
     # Start your launcher
       for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-      set $menu exec alacritty --class=launcher -e sway-launcher-desktop
+      set $menu exec $term --class=launcher -e sway-launcher-desktop
       bindsym $mod+d exec $menu
       for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
 
@@ -234,6 +234,7 @@ bar {
   # Configuring i3-gaps
     gaps inner 5
     default_border pixel 2
+    smart_borders on
 
   # What to execute on startup
     exec_always foot --server

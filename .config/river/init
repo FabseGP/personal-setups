@@ -15,6 +15,7 @@
   /usr/bin/pipewire-pulse
   /usr/bin/wireplumber
   /usr/bin/syncthing
+  /usr/bin/mpd
   /home/fabse/scripts/sunpaper.sh -d
   foot --server
   wl-paste -t text --watch clipman store

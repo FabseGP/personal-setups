@@ -1,262 +1,117 @@
-# Fabse's mega seje sway-config
+#!/usr/bin/bash
 
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
-  set $mod Mod4
-# Home row direction keys, like vim
-  set $left h
-  set $down j
-  set $up k
-  set $right l
-# Your preferred terminal emulator
-  set $term footclient
+# Parameters
 
-# Clipman
-  exec wl-paste -t text --watch clipman store
+  BEGINNER_DIR=$(pwd)
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-  output * bg /home/fabse/wallpapers/swaypaper.jpeg fill
+#----------------------------------------------------------------------------------------------------------------------------------
 
-### Idle configuration
-#
-# Example configuration:
-#
-  exec swayidle -w \
-       timeout 600 'swaylock -f -c 000000' \
-       timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+# Package-installation
+  
+  cd packages || exit
+  POLKIT="$(ls -- *polkit-*)"
+  doas pacman --noconfirm -U $POLKIT
+  doas pacman --noconfirm --needed -Syyu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
+                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany-plugins geany \
+                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot links playerctl \
+                                         bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
+                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
+                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
+                                         pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
+                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify vimiv aisleriot ripgrep \
+                                         bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go \
+                                         bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd \
+                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet \
+                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
+                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
+                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
+                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit cpupower-dinit libvirt-dinit
+  cd $BEGINNER_DIR || exit
+                                      
+#----------------------------------------------------------------------------------------------------------------------------------
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-      bindsym $mod+Return exec $term
+# Installation of packages from AUR
 
-    # Kill focused window
-      bindsym $mod+Shift+q kill
+  wget https://aur.archlinux.org/packages/dot-bin
+  if ! grep -q "Flagged out-of-date" dot-bin; then
+    AUR="dot-bin"
+  fi
+  paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
+                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git nudoku \
+                                                         freshfetch-bin cbonsai osp-tracker macchina revolt-desktop lutris-git river-noxwayland-git \
+                                                         wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman yambar $AUR                    
+  paru -Scd --noconfirm
+  doas archlinux-java set java-17-openjdk
 
-    # Start your launcher
-      for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-      set $menu exec $term --class=launcher -e sway-launcher-desktop
-      bindsym $mod+d exec $menu
-      for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Start swaylock
-      bindsym Ctrl+l exec swaylock-fancy -pef Comic-Sans-MS -- scrot -z
+# Dinit-services
 
-    # History of copied text
-      bindsym $mod+c exec clipman pick -t wofi
+  for service in cups syncthing lm_sensors cpupower intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
+    doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
+  done
+  doas sensors-detect --auto
+  doas usermod -a -G libvirt,games fabse
+  doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
+  doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
+  doas sed -i "s/#user = "root"/user = "fabse"/" /etc/libvirt/qemu.conf	
+  doas sed -i "s/#group = "root"/group = "fabse"/" /etc/libvirt/qemu.conf	
 
-    # Taking a screenshot
-      bindsym Print exec wayshot --stdout | swappy -f -
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-      floating_modifier $mod normal
+# Default apps
 
-    # Reload the configuration file
-      bindsym $mod+Shift+c reload
+  handlr add .pdf org.pwmt.zathura.desktop
+  handlr add .png vimiv.desktop
+  handlr add .jpeg vimiv.desktop
 
-    # Exit sway (logs you out of your Wayland session)
-      bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session and make everyone sad.' -b '*Sigh* Roger roger' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-      bindsym $mod+$left focus left
-      bindsym $mod+$down focus down
-      bindsym $mod+$up focus up
-      bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-      bindsym $mod+Left focus left
-      bindsym $mod+Down focus down
-      bindsym $mod+Up focus up
-      bindsym $mod+Right focus right
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Move the focused window with the same, but add Shift
-      bindsym $mod+Shift+$left move left
-      bindsym $mod+Shift+$down move down
-      bindsym $mod+Shift+$up move up
-      bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-      bindsym $mod+Shift+Left move left
-      bindsym $mod+Shift+Down move down
-      bindsym $mod+Shift+Up move up
-      bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-      bindsym $mod+1 workspace number 1
-      bindsym $mod+2 workspace number 2
-      bindsym $mod+3 workspace number 3
-      bindsym $mod+4 workspace number 4
-      bindsym $mod+5 workspace number 5
-      bindsym $mod+6 workspace number 6
-      bindsym $mod+7 workspace number 7
-      bindsym $mod+8 workspace number 8
-      bindsym $mod+9 workspace number 9
-      bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-      bindsym $mod+Shift+1 move container to workspace number 1
-      bindsym $mod+Shift+2 move container to workspace number 2
-      bindsym $mod+Shift+3 move container to workspace number 3
-      bindsym $mod+Shift+4 move container to workspace number 4
-      bindsym $mod+Shift+5 move container to workspace number 5
-      bindsym $mod+Shift+6 move container to workspace number 6
-      bindsym $mod+Shift+7 move container to workspace number 7
-      bindsym $mod+Shift+8 move container to workspace number 8
-      bindsym $mod+Shift+9 move container to workspace number 9
-      bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-      bindsym $mod+b splith
-      bindsym $mod+v splitv
+# Default shell
 
-    # Switch the current container between different layout styles
-      bindsym $mod+s layout stacking
-      bindsym $mod+w layout tabbed
-      bindsym $mod+e layout toggle split
+  doas chsh -s /usr/bin/zsh fabse
+  doas chsh -s /usr/bin/zsh root
 
-    # Make the current focus fullscreen
-      bindsym $mod+f fullscreen
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Toggle the current focus between tiling and floating mode
-      bindsym $mod+Shift+space floating toggle
+# Grub-theme
 
-    # Swap focus between the tiling area and the floating area
-      bindsym $mod+space focus mode_toggle
+  git clone https://github.com/vinceliuice/grub2-themes.git
+  cd grub2-themes || return
+  doas ./install.sh -b
+  cd $BEGINNER_DIR || return
+  rm -rf grub2-themes
 
-    # Move focus to the parent container
-      bindsym $mod+a focus parent
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Binding audio and brightness adjustments
-      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
-      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
-      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-      bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-      bindsym XF86MonBrightnessDown exec brightnessctl set 2%-
-      bindsym XF86MonBrightnessUp exec brightnessctl set +2%
-      bindsym XF86AudioPlay exec playerctl play-pause
-      bindsym XF86AudioNext exec playerctl next
-      bindsym XF86AudioPrev exec playerctl previous
+# Installing dotfiles
 
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+  git clone https://gitlab.com/FabseGP02/personal-setups.git
+  cd personal-setups
+  cp -r .config/* /home/fabse/.config/
+  rm -rf /home/fabse/.config/zsh
+  cp -r {librewolf,scripts,wallpapers} /home/fabse
+  chmod u+x /home/fabse/scripts/*
+  cp -r .local /home/fabse
+  mkdir -p /home/fabse/.local/{bin,share/fonts}
+  cp .* /home/fabse  
+  curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+  cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
+  cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh
+  doas cp -r etc/* /etc
+  doas intel-undervolt apply
+  cd $BEGINNER_DIR || return
 
-    # Move the currently focused window to the scratchpad
-      bindsym $mod+Shift+minus move scratchpad
+#----------------------------------------------------------------------------------------------------------------------------------
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-      bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
-  mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-      bindsym $left resize shrink width 10px
-      bindsym $down resize grow height 10px
-      bindsym $up resize shrink height 10px
-      bindsym $right resize grow width 10px
+# Miscellaneous
 
-    # Ditto, with arrow keys
-      bindsym Left resize shrink width 10px
-      bindsym Down resize grow height 10px
-      bindsym Up resize shrink height 10px
-      bindsym Right resize grow width 10px
+  doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
+  curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh > install.sh
+  chmod u+x install.sh
+  echo "1" | ./install.sh
+  cat << EOF | doas tee -a /etc/issue > /dev/null
+This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
-    # Return to default mode
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-}
-  bindsym $mod+r mode "resize"
-
-  include /etc/sway/config.d/*
-
-input * {
-  xkb_layout "dk"
-  xkb_options "grp:win_space_toggle"
-}
-
-bindsym --to-code {
-  $mod+$left focus left
-  $mod+$down focus down
-  $mod+$up focus up
-  $mod+$right focus right
-}
-
-input <identifier> xkb_model "pc101"
-
-input type:touchpad {
-    tap enabled
-    natural_scroll disabled
-}
-
-bar {
-    font pango:DejaVu Sans Mono
-    position top
-    status_command /usr/bin/i3status-rs /home/fabse/.config/i3status-rust/config.toml
-    colors {
-        separator #666666
-        background #222222
-        statusline #dddddd
-        focused_workspace #0088CC #0088CC #ffffff
-        active_workspace #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace #2f343a #900000 #ffffff
-    }
-}
-
-  # Configuring i3-gaps
-    gaps inner 5
-    default_border pixel 2
-    smart_borders on
-
-  # What to execute on startup
-    exec_always foot --server
-    exec_always dunst
-    exec_always pipewire
-    exec_always pipewire-pulse
-    exec_always wireplumber
-    exec_always swaymsg "workspace 1; exec syncthing;"
-    exec_always /home/fabse/scripts/sunpaper.sh -d
-
-  # Sworkstyle
-    exec sworkstyle &> /tmp/sworkstyle.log
-
-  # Theme
-    set $gnome-schema org.gnome.desktop.interface
-
-# Shortcut to night-mode
-  bindsym $mod+y exec pidof wlsunset && killall wlsunset || wlsunset -l 55.27023 -L 9.90081
-
-  exec_always {
-    gsettings set $gnome_schema gtk-theme "Sweet-Dark"
-    gsettings set $gnome_schema icon-theme "Tela-blue"
-    gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-    gsettings set $gnome_schema cursor-size "32"
-}
+EOF

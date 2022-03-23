@@ -41,7 +41,7 @@ inputs = ["Package id 0"]
 block = "battery"
 driver = "upower"
 device="BAT1"
-format = "{percentage:6#100} {percentage} {time}"
+format = " {percentage}% {time}"
 
 [[block]]
 block = "time"

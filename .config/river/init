@@ -10,12 +10,11 @@
   launcher="rofi -show run"
 
 # Services to execute at start
-  /usr/bin/dunst
+  /usr/bin/mako
   /usr/bin/pipewire
   /usr/bin/pipewire-pulse
   /usr/bin/wireplumber
   /usr/bin/syncthing
-  /usr/bin/mpd
   /home/fabse/scripts/sunpaper.sh -d
   foot --server
   wl-paste -t text --watch clipman store
@@ -61,8 +60,12 @@
 # Shortcut to take screenshot with wayshot + swappy
   riverctl map normal Print spawn "wayshot --stdout | swappy -f -"
 
+# Shortcut to toggle night mode
+  riverctl map normal Super y spawn "wlsunset -l 14.6 -L 121"
+
+
 # Shortcut to exit river
-  riverctl map normal Super+Shift E exit &
+  riverctl map normal Super+Shift E exit
 
 # Shortcut to reload river configuration
   riverctl map normal $mod+Shift R spawn "~/.config/river/init"

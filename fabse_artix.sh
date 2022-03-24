@@ -38,9 +38,9 @@
   fi
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet \
-                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop waylock-git nudoku \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \
                                                          freshfetch-bin cbonsai osp-tracker macchina revolt-desktop lutris-git river-noxwayland-git \
-                                                         wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman yambar $AUR                    
+                                                         nudoku wayshot-bin rivercarro-git ventoy-bin rofi-lbonn-wayland clipman yambar $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -94,7 +94,8 @@
   cp -r {librewolf,scripts,wallpapers} /home/fabse
   chmod u+x /home/fabse/scripts/*
   cp -r .local /home/fabse
-  mkdir -p /home/fabse/.local/{bin,share/fonts}
+  mkdir -p /home/fabse/.local/bin
+  fc-cache -f -v 
   cp .* /home/fabse  
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
   cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim

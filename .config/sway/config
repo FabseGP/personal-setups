@@ -10,7 +10,7 @@
   set $up k
   set $right l
 # Your preferred terminal emulator
-  set $term footclient
+  set $term foot
 
 # Clipman
   exec wl-paste -t text --watch clipman store
@@ -45,12 +45,12 @@
 
     # Start your launcher
       for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-      set $menu exec $term --class=launcher -e sway-launcher-desktop
+      set $menu exec alacritty --class=launcher -e sway-launcher-desktop
       bindsym $mod+d exec $menu
       for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
 
-    # Start swaylock
-      bindsym Ctrl+l exec swaylock-fancy -pef Comic-Sans-MS -- scrot -z
+    # Start swaylock-effects
+      bindsym Ctrl+l exec swaylock
 
     # History of copied text
       bindsym $mod+c exec clipman pick -t wofi
@@ -238,12 +238,13 @@ bar {
 
   # What to execute on startup
     exec_always foot --server
-    exec_always mako
+    exec_always dunst
     exec_always pipewire
     exec_always pipewire-pulse
     exec_always wireplumber
     exec_always swaymsg "workspace 1; exec syncthing;"
     exec_always /home/fabse/scripts/sunpaper.sh -d
+    exec_always mpd
 
   # Sworkstyle
     exec sworkstyle &> /tmp/sworkstyle.log
@@ -255,7 +256,7 @@ bar {
     xwayland disable
 
   # Shortcut to night-mode
-    bindsym $mod+y exec wlsunset -l 14.6 -L 121
+    bindsym $mod+y exec pidof wlsunset && killall wlsunset || wlsunset -l 55.27023 -L 9.90081
 
   exec_always {
     gsettings set $gnome_schema gtk-theme "Sweet-Dark"

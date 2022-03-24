@@ -63,6 +63,8 @@
 # Shortcut to toggle night mode
   riverctl map normal Super y spawn "wlsunset -l 14.6 -L 121"
 
+# Shortcut to screenlock
+  riverctl map normal Control l spawn swaylock
 
 # Shortcut to exit river
   riverctl map normal Super+Shift E exit

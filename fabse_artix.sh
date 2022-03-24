@@ -18,7 +18,7 @@
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
-                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl dunst libnotify vimiv aisleriot ripgrep \
+                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify vimiv aisleriot ripgrep \
                                          bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go \
                                          bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd \
                                          tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet \

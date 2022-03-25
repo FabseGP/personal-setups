@@ -7,7 +7,7 @@
   terminal="footclient"
 
 # Set launcher
-  launcher="rofi -show run"
+  launcher="wofi"
 
 # Services to execute at start
   /usr/bin/mako

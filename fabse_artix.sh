@@ -96,7 +96,7 @@
   cp -r .local /home/fabse
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 
-  cp .* /home/fabse  
+  cp .zshenv /home/fabse  
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
   cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
   cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh

@@ -24,9 +24,9 @@ bar:
               tag: playing
               values:
                 true:
-                  - string: {text: "\uF04B {title} {duration}", foreground: "5FFF47FF"}
+                  - string: {text: "\uF04B {title} ", foreground: "5FFF47FF"}
                 false:
-                  - string: {text: "\uF04C {title} {duration}", foreground: "FFD78740"}
+                  - string: {text: "\uF04C {title} ", foreground: "FFD78740"}
   right:
     - river:
          title: {string: { text: "{seat} - {title}" }}

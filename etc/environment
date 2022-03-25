@@ -1,13 +1,23 @@
-# By Fabse
+# Export default folder for zsh-files
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZIM_HOME="$ZDOTDIR/.zim"
+
+# Defaulting all apps to wayland
 export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1
-export EDITOR="nvim"
-export VISUAL="nvim"
 export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=wayland
+export XDG_SESSION_DESKTOP=wayland
+export SDL_VIDEODRIVER=wayland
 export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+# Export default paths and editors
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
-export HISTFILE="home/fabse/.zhistory"    # History filepath
-export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
+export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+export TERMINAL_COMMAND="footclient"

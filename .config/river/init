@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Set default wallpaper
-  swaybg -i /home/fabse/wallpapers/swaypaper.jpg
-
+  swaybg -m fill -i /home/fabse/wallpapers/swaypaper.jpg
+  
 # Set terminal
   terminal="footclient"
 

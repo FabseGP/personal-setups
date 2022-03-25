@@ -18,10 +18,10 @@
                                          gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
                                          bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
                                          pipewire-pulse wireplumber libpipewire02 wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
-                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify vimiv aisleriot ripgrep \
-                                         bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go \
+                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify vimiv aisleriot ripgrep bat \
+                                         bsd-games mypaint android-tools ffmpegthumbs man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go git \
                                          bashtop nnn dialog alsa-utils bottom ld-lsb imv xdg-desktop-portal-kde xdg-desktop-portal-wlr lsd wofi \
-                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet \
+                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet neovim \
                                          cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs python python-pip rclone rust pipewire \
                                          linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
                                          ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
@@ -96,7 +96,7 @@
   cp -r .local /home/fabse
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 
-  cp .zshenv /home/fabse  
+  cp .* /home/fabse  
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
   cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
   cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh

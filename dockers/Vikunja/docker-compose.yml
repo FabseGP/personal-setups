@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb:latest
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: 73gdnw7SHFG8gyFvyd6sfhgyA
+      MYSQL_USER: vikunja
+      MYSQL_PASSWORD: Vi5432Kunja18749Alpine7sdgdhs
+      MYSQL_DATABASE: vikunja_db
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+  api:
+    image: vikunja/api:unstable
+    environment:
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_PASSWORD: Vi5432Kunja18749Alpine7sdgdhs
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja_db
+      VIKUNJA_SERVICE_TIMEZONE: Europe/Copenhagen
+      VIKUNJA_DATABASE_TLS: preferred
+      VIKUNJA_FILES_MAXSIZE: 50MB
+    ports:
+      - 3456:3456
+    volumes:
+      - ./files:/app/vikunja/files
+    depends_on:
+      - db
+    restart: always
+  frontend:
+    image: vikunja/frontend:unstable
+    ports:
+      - 7777:80
+    environment:
+      VIKUNJA_API_URL: http://<your-ip-here>:3456/
+    restart: always
+networks:
+  default:
+    external:
+      name: pacman
+      

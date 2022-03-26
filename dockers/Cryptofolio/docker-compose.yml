@@ -1,0 +1,14 @@
+version: ".8"
+services:
+    cryptofolio:
+        image: xtrendence/cryptofolio:latest
+        container_name: Cryptofolio
+        restart: always
+        ports:
+            - 33333:80
+        volumes:
+            - ./data:/var/www/html/api/data
+networks:
+  default:
+    external:
+      name: pacman   

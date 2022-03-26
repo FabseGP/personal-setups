@@ -1,0 +1,204 @@
+pageInfo:
+  title: Fabse Inc.
+  description: Welcome to my awesome dashboard with free puns :)
+  footerText: If curious about the source code, please check fabsepi.space
+  logo: https://i.ibb.co/yhbt6CY/dashy.png
+  navLinks:
+  - title: Home
+    path: /
+  - title: I'm bored
+    path: https://theuselessweb.com/
+appConfig:
+  statusCheck: true
+  enableFontAwesome: true
+  theme: colorful
+  enableErrorReporting: true
+sections:
+- name: Productivity
+  displayData:
+    cols: 1
+    rows: 1
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: Etherpad
+    description: Open-source online editor
+    icon: etherpad.png
+    url: https://etherpad.fabsemanpi.space
+    target: sametab
+  - title: Hedgedoc
+    description: Open-source markdown editor
+    icon: hedgedoc.png
+    url: https://hedgedoc.fabsemanpi.space
+    target: sametab
+  - title: Docspell
+    description: Document organizer
+    icon: docspell.png
+    url: https://docspell.fabsemanpi.space
+    target: sametab
+  - title: Vikunja
+    description: South American camelids
+    icon: vikunja.png
+    url: https://vikunja.fabsemanpi.space
+    target: sametab
+  - title: Wiki.js
+    description: Make documentation a joy to write
+    icon: wiki_js.PNG
+    url: https://wiki.js.fabsemanpi.space
+    target: sametab
+- name: Automation
+  displayData:
+    cols: 1
+    rows: 1
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: OpenHAB
+    description: Home-automation
+    icon: openhab.png
+    url: https://openhab.fabsemanpi.space
+    target: sametab
+  - title: Leon-AI
+    description: Open-source AI
+    icon: leon.png
+    url: https://leon.fabsemanpi.space
+    target: sametab
+  - title: Firefly
+    description: Tracking my expenses
+    icon: firefly.png
+    url: https://firefly.fabsemanpi.space
+    target: sametab
+  - title: Cryptofolio
+    description: Monitoring my cryptocurrency portfolio
+    icon: cryptofolio.png
+    url: https://cryptofolio.fabsemanpi.space
+    target: sametab
+  - title: ArchiveBox
+    description: Web-archiving toolbox
+    icon: archivebox.PNG
+    url: https://archivebox.fabsemanpi.space
+    target: sametab
+- name: File management
+  displayData:
+    cols: 1
+    rows: 1
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: Filebrowser
+    description: Accessing all synchronized files
+    icon: filebrowser.png
+    url: https://filebrowser.fabsemanpi.space
+    target: sametab
+  - title: Photoprism
+    description: Photo and video gallery
+    icon: photoprism.png
+    url: https://photoprism.fabsemanpi.space
+    target: sametab
+  - title: Syncthing_100
+    description: Synchronizing files across all platforms
+    icon: syncthing.png
+    url: https://syncthing.rpi4.fabsemanpi.space
+    target: sametab
+  - title: Syncthing_99
+    description: Laptop interface regarding synchronizing
+    icon: syncthing_artix.png
+    url: https://syncthing.artix.fabsemanpi.space
+    target: sametab
+- name: Media and file transfers
+  displayData:
+    cols: 1
+    rows: 1
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: Navidrome
+    description: Music server and collector
+    icon: navidrome.png
+    url: https://navidrome.fabsemanpi.space
+    target: sametab
+  - title: Sharry
+    description: File transfers with link-sharing
+    icon: sharry.png
+    url: https://sharry.fabsemanpi.space
+    target: sametab
+  - title: Exatorrent
+    description: Beautiful torrent client
+    icon: exatorrent.png
+    url: https://exatorrent.fabsemanpi.space
+    target: sametab
+- name: System management
+  displayData:
+    cols: 2
+    rows: 2
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: Nginx proxy manager
+    description: Managing reverse-proxies
+    icon: nginxproxymanager.png
+    url: https://nginx.fabsemanpi.space
+    target: sametab
+  - title: Netdata
+    description: Frontend for system management
+    icon: netdata.png
+    url: https://netdata.fabsemanpi.space
+    target: sametab
+  - title: Uptime-kuma
+    description: Monitoring status of my services
+    icon: uptime-kuma.png
+    url: https://uptime.fabsemanpi.space
+    target: sametab
+  - title: Yacht
+    description: A sailing or power vessel used for pleasure
+    icon: yacht.png
+    url: https://yacht.fabsemanpi.space
+    target: sametab
+  - title: Grafana
+    description: Open-source data visualiser with modularity
+    icon: grafana.png
+    url: https://grafana.fabsemanpi.space
+    target: sametab
+  - title: Prometheus
+    description: Open-source database indexer with monitoring
+    icon: prometheus.png
+    url: https://prometheus.fabsemanpi.space
+    target: sametab
+  - title: Crowdsec
+    description: Open-source behavior detection engine
+    icon: crowdsec.png
+    url: https://crowdsec.fabsemanpi.space
+    target: sametab
+- name: External services
+  displayData:
+    cols: 2
+    rows: 1
+    sortBy: random
+    collapsed: false
+    itemSize: large
+  items:
+  - title: Definely not a Rick-roll
+    description: I really mean it
+    icon: fabsepi.png
+    url: http://fabsepi.space
+    target: newtab
+  - title: Xkcd
+    description: Best webcomic since Donald Duck
+    icon: xkcd.png
+    url: https://xkcd.com
+    target: newtab
+  - title: Librespeed
+    description: Speedtest with quote no bullshit
+    icon: librespeed.png
+    url: https://librespeed.org/
+    target: newtab
+  - title: Hextris
+    description: Tetris-inspired puzzle game
+    icon: hextris.PNG
+    url: https://hextris.io
+    target: newtab

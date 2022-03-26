@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  watchtower:
+    container_name: Watchtower
+    image: containrrr/watchtower:latest
+    restart: always
+    environment:
+      - TZ=Europe/Copenhagen
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_ROLLING_RESTART=true
+      - WATCHTOWER_POLL_INTERVAL=21600
+      - WATCHTOWER_DEBUG=true
+    volumes:
+      - /var/run/podman/podman.sock:/var/run/docker.sock # /var/run/docker.sock
+networks:
+  default:
+    external:
+      name: pacman

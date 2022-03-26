@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  leon-ai:
+    container_name: Leon-AI
+    restart: always
+    build:
+      context: './'
+    image: 'leonai/leon'
+    ports:
+      - '${LEON_PORT:-1337}:${LEON_PORT:-1337}'
+    environment:
+      LEON_PORT: ${LEON_PORT:-1337}
+    stdin_open: true
+    tty: true
+    command: 'npm run start'
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 1m
+      timeout: 3s
+networks:
+  default:
+    external:
+      name: pacman
+

@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  dashy:
+    image: lissy93/dashy:multi-arch
+    container_name: Dashy
+    volumes:
+      - ./config/fabse_conf.yml:/app/public/conf.yml
+      - ./icons:/app/public/item-icons/
+    ports:
+      - 7632:80
+    # Set any environmental variables
+    environment:
+      - NODE_ENV=production
+    restart: always
+networks:
+  default:
+    external:
+      name: pacman

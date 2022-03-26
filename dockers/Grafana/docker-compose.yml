@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  grafana:
+    ports:
+      - '6625:3000'
+    container_name: Grafana
+    image: grafana/grafana:main
+    restart: always
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_SERVER_ENABLE_GZIP=true
+      - GF_SECURITY_COOKIE_SECURE=true
+      - GF_PANELS_ENABLE_ALPHA=true
+volumes:
+  grafana-storage:
+    external: true
+networks:
+  default:
+    external:
+      name: pacman

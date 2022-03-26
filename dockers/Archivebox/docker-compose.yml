@@ -1,0 +1,31 @@
+# Usage:
+#     docker-compose run archivebox init --setup
+#     docker-compose up
+#     echo "https://example.com" | docker-compose run archivebox archivebox add
+#     docker-compose run archivebox add --depth=1 https://example.com/some/feed.rss
+#     docker-compose run archivebox config --set PUBLIC_INDEX=True
+#     docker-compose run archivebox help
+# Documentation:
+#     https://github.com/ArchiveBox/ArchiveBox/wiki/Docker#docker-compose
+
+version: '3.8'
+services:
+  archivebox:
+    image: archivebox/archivebox:dev
+    container_name: ArchiveBox
+    command: server --quick-init 0.0.0.0:12346 schedule --foreground --every=day --depth=1 'https://getpocket.com/users/fabseman/feed/all'
+    ports:
+      - 12346:8000
+    environment:
+      - ALLOWED_HOSTS=*                   # add any config options you want as env vars
+      - MEDIA_MAX_SIZE=750m
+      - USE_COLOR=True
+      - SHOW_PROGRESS=False
+    volumes:
+      - /media/SEAGATe/FABSE_GATE/Diverse/ArchiveBox:/data
+networks:
+  default:
+    external:
+      name: pacman
+      
+      

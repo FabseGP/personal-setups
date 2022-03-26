@@ -49,7 +49,7 @@
 
 # Dinit-services
 
-  for service in cups syncthing lm_sensors cpupower intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
+  for service in cupsd syncthing lm_sensors cpupower intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   doas sensors-detect --auto

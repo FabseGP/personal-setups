@@ -88,7 +88,7 @@
 # Installing dotfiles
 
   git clone https://gitlab.com/FabseGP02/personal-setups.git
-  cd personal-setups
+  cd personal-setups || exit
   cp -r .config/* /home/fabse/.config/
   chmod u+x /home/fabse/.config/river/init
   rm -rf /home/fabse/.config/zsh

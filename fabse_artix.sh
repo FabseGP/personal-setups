@@ -116,3 +116,4 @@
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
 EOF
+  doas pacman --noconfirm --useask -Syu

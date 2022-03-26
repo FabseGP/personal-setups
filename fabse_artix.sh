@@ -71,8 +71,8 @@
 
 # Default shell
 
-  doas chsh -s /usr/bin/zsh fabse
-  doas chsh -s /usr/bin/zsh root
+  doas usermod --shell /usr/bin/zsh fabse
+  doas usermod --shell /usr/bin/zsh root
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -88,8 +88,6 @@
 
 # Installing dotfiles
 
-  git clone https://gitlab.com/FabseGP02/personal-setups.git
-  cd personal-setups
   cp -r .config/* /home/fabse/.config/
   rm -rf /home/fabse/.config/{zsh,rsnapshot}
   cp -r {librewolf,wallpapers} /home/fabse
@@ -100,7 +98,7 @@
   fc-cache -f -v 
   cp .zshenv /home/fabse  
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-  cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
+  cp -r .config/zsh/.zim/.zimrc /home/fabse/.config/zsh/.zimrc
   cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh
   doas cp -r etc/* /etc
   doas intel-undervolt apply

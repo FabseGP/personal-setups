@@ -36,6 +36,7 @@
   if ! grep -q "Flagged out-of-date" dot-bin; then
     AUR="dot-bin"
   fi
+  paru --noconfirm -Syu
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
                                                          avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \

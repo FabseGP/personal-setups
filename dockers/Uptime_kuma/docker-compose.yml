@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  uptime-kuma:
+    container_name: Uptime-kuma
+    image: louislam/uptime-kuma:nightly-alpine
+    restart: always
+    volumes:
+      - ./uptime-kuma:/app/data
+    ports:
+      - 4387:3001
+networks:
+  default:
+    external:
+      name: pacman

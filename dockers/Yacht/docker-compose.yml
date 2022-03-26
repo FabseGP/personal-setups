@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  yacht:
+    container_name: Yacht
+    restart: always
+    ports:
+      - 6582:8000
+    volumes:
+      - yacht:/config
+      - /var/run/podman/podman.sock:/var/run/docker.sock
+    image: selfhostedpro/yacht:devel
+volumes:
+  yacht:
+networks:
+  default:
+    external:
+      name: pacman

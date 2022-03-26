@@ -88,16 +88,16 @@
 # Installing dotfiles
 
   git clone https://gitlab.com/FabseGP02/personal-setups.git
-  cd personal-setups || exit
+  cd personal-setups
   cp -r .config/* /home/fabse/.config/
-  chmod u+x /home/fabse/.config/river/init
-  rm -rf /home/fabse/.config/zsh
-  cp -r {librewolf,scripts,wallpapers} /home/fabse
+  rm -rf /home/fabse/.config/{zsh,rsnapshot}
+  cp -r {librewolf,wallpapers} /home/fabse
+  cp -r scripts/artix /home/fabse/scripts
   chmod u+x /home/fabse/scripts/*
   cp -r .local /home/fabse
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 
-  cp .* /home/fabse  
+  cp .zshenv /home/fabse  
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
   cp -r .config/zsh/.zim/* /home/fabse/.config/zsh/.zim
   cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  prometheus:
+    ports:
+      - '12827:9090'
+    volumes:
+      - './data:/etc/prometheus'
+    image: prom/prometheus:main
+    restart: always
+    container_name: Prometheus
+networks:
+  default:
+    external:
+      name: pacman

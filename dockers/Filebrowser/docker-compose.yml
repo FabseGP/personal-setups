@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  filebrowser:
+    image: hurlenko/filebrowser
+    container_name: Filebrowser
+    user: "${UID}:${GID}"
+    ports:
+      - 18365:8080
+    volumes:
+      - "/media/SEAGATE/FABSE_GATE:/data"
+      - "./config:/config"
+    environment:
+      - FB_BASEURL=/filebrowser
+    restart: always
+networks:
+  default:
+    external:
+      name: pacman

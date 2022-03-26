@@ -1,0 +1,73 @@
+version: '3.8'
+services:
+  restserver:
+    image: docspell/restserver:nightly
+    container_name: Docspell-restserver
+    command:
+      - /opt/docspell.conf
+    restart: always
+    ports:
+      - "7880:7880"
+    volumes:
+      - ./docspell.conf:/opt/docspell.conf
+    env_file: ./.env
+    depends_on:
+      - solr
+  joex:
+    image: docspell/joex:nightly
+    container_name: Docspell-joex
+    command:
+      - /opt/docspell.conf
+    restart: always
+    env_file: ./.env
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./docspell.conf:/opt/docspell.conf
+    depends_on:
+      - solr
+  consumedir:
+    image: docspell/dsc:nightly
+    container_name: Docspell-consumedir
+    command:
+      - dsc
+      - "-d"
+      - "http://docspell-restserver:7880"
+      - "watch"
+      - "--delete"
+      - "-ir"
+      - "--header"
+      - "Docspell-Integration:$DOCSPELL_HEADER_VALUE"
+      - "/opt/docs"
+    restart: always
+    env_file: ./.env
+    volumes:
+      - ./docs:/opt/docs
+    depends_on:
+      - restserver
+  db:
+    image: postgres:latest
+    container_name: Postgres_db
+    restart: always
+    volumes:
+      - docspell-postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=docspell_user
+      - POSTGRES_PASSWORD=Doc8363db928SpElL
+      - POSTGRES_DB=db_docspell
+  solr:
+    image: solr:latest
+    container_name: Docspell-solr
+    restart: always
+    volumes:
+      - docspell-solr_data:/var/solr
+    command:
+      - solr-precreate
+      - docspell
+volumes:
+  docspell-postgres_data:
+  docspell-solr_data:
+networks:
+  default:
+    external:
+      name: pacman

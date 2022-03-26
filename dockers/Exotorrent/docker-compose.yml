@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  torrent:
+    container_name: Exatorrent
+    image: ghcr.io/varbhat/exatorrent:latest
+    restart: always
+    volumes:
+      - "/media/SEAGATE/FABSE_GATE/Diverse/Exotorrent_downloads:/exa/exadir"
+    ports:
+      - 5000:5000
+      - 42069:42069
+    environment: 
+      - admin="adminuser"
+      - passw="37tb7LTtXNYEWG1cuMz18Fo1lNUZXLl4ZA6lwHgJDCUmaXv6Ub1"
+networks:
+  default:
+    external:
+      name: pacman

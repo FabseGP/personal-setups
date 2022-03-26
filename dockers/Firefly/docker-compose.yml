@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    image: fireflyiii/core:develop
+    restart: always
+    container_name: Firefly
+    volumes:
+      - firefly_iii_upload:/var/www/html/storage/upload
+    env_file: .env
+    ports:
+      - 11111:8080
+    depends_on:
+      - db
+  db:
+    image: mariadb:latest   
+    hostname: fireflyiiidb
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=7y3be7dfgv327wgs
+      - MYSQL_USER=firefly
+      - MYSQL_PASSWORD=hiouds79y347y9yfjhbicd8732ygu
+      - MYSQL_DATABASE=firefly
+    volumes:
+      - firefly_iii_db:/var/lib/mysql
+volumes:
+   firefly_iii_upload:
+   firefly_iii_db:
+networks:
+  default:
+    external:
+      name: pacman

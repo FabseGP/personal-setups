@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  web:
+    image: fabsepi/etherpad
+    container_name: Etherpad
+    restart: always
+    depends_on:
+      - mydb
+    ports:
+      - "19263:19263"
+    environment:
+      - DB_TYPE=mysql
+      - DB_MYSQL_HOST=mydb
+      - DB_MYSQL_PORT=7621
+      - DB_MYSQL_NAME=etherpad_lite_db
+      - DB_MYSQL_USER=etherpad_fabsepi
+      - DB_MYSQL_PASS=MySEth7262928shs
+  mydb:
+    image: yobasystems/alpine-mariadb:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=dhds736SSH82237
+      - MYSQL_DATABASE=etherpad_lite_db
+      - MYSQL_USER=etherpad_fabsepi
+      - MYSQL_PASSWOR=MySEth7262928shs
+networks:
+  default:
+    external:
+      name: pacman
+      

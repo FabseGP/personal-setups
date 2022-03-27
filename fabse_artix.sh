@@ -53,8 +53,8 @@
   doas usermod -a -G libvirt,games,kvm fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
   doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i 's/#user = "root"/user = "hejsa"/' /etc/libvirt/qemu.conf	
-  doas sed -i 's/#group = "root"/group = "hejsa"/' /etc/libvirt/qemu.conf	
+  doas sed -i 's/#user = "root"/user = "fabse"/' /etc/libvirt/qemu.conf	
+  doas sed -i 's/#group = "root"/group = "fabse"/' /etc/libvirt/qemu.conf	
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

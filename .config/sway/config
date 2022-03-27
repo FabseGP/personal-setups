@@ -251,6 +251,7 @@ bar {
 
   # Theme
     set $gnome-schema org.gnome.desktop.interface
+    seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
     xwayland disable

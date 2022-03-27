@@ -8,9 +8,9 @@
 
 # Package-installation
   
-  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany \
-                                        iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins \
-                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks bat \
+  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
+                                        iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
+                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
                                         bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf \
                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \

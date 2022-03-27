@@ -97,6 +97,9 @@
   cp .zshenv /home/fabse  
   doas cp -r etc/* /etc
   doas intel-undervolt apply
+  git clone https://github.com/hexive/sunpaper.git
+  mkdir /home/fabse/wallpapers/sunpaper
+  cp -r sunpaper/images/* /home/fabse/wallpapers/sunpaper
   cd $BEGINNER_DIR || return
 
 #----------------------------------------------------------------------------------------------------------------------------------

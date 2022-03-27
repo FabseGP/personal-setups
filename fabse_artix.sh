@@ -8,24 +8,21 @@
 
 # Package-installation
   
-  cd packages || exit
-  POLKIT="$(ls -- *polkit-*)"
-  doas pacman --noconfirm -U $POLKIT
-  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils openbsd-netcat dnsmasq nss-mdns pcmanfm-gtk3 \
-                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra kalzium geany-plugins geany \
-                                         step libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks playerctl \
-                                         bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf wayland \
-                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy kicad \
-                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
-                                         pipewire-pulse wireplumber wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions \
-                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot ripgrep bat \
-                                         bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go git \
-                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi \
-                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet neovim \
-                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone rust pipewire \
-                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans kicad-library \
-                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
-                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
+  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany \
+                                        iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins \
+                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks bat \
+                                        bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf \
+                                        gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
+                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
+                                        pipewire-pulse wireplumber wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions neovim \
+                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot ripgrep \
+                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go git wayland \
+                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library kicad \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet  \
+                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone rust  \
+                                        linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
+                                        ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
+                                        syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
   cd $BEGINNER_DIR || exit
                                       
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -38,10 +35,10 @@
   fi
   paru --noconfirm -Syu
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         avogadroapp bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme-bin wlsunset bastet-xdg-git \
-                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git vimiv-qt \
-                                                         freshfetch-bin cbonsai macchina revolt-desktop lutris-git river-noxwayland-git \
-                                                         nudoku-git wayshot-bin rivercarro-git ventoy-bin clipman yambar $AUR                    
+                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme-bin wlsunset bastet-xdg-git \
+                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \
+                                                         freshfetch-bin cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt \
+                                                         avogadroapp nudoku-git wayshot-bin rivercarro-git ventoy-bin clipman yambar $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -53,11 +50,11 @@
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   doas sensors-detect --auto
-  doas usermod -a -G libvirt,games fabse
+  doas usermod -a -G libvirt,games,kvm fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
   doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i "s/#user = "root"/user = "fabse"/" /etc/libvirt/qemu.conf	
-  doas sed -i "s/#group = "root"/group = "fabse"/" /etc/libvirt/qemu.conf	
+  doas sed -i 's/#user = "root"/user = "hejsa"/' /etc/libvirt/qemu.conf	
+  doas sed -i 's/#group = "root"/group = "hejsa"/' /etc/libvirt/qemu.conf	
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -89,7 +86,8 @@
 # Installing dotfiles
 
   cp -r .config/* /home/fabse/.config/
-  rm -rf /home/fabse/.config/{zsh,rsnapshot}
+  rm -rf /home/fabse/.config/rsnapshot
+  mkdir /home/fabse/.config/zsh/.zim
   cp -r {librewolf,wallpapers} /home/fabse
   cp -r scripts/artix /home/fabse/scripts
   chmod u+x /home/fabse/scripts/*
@@ -97,9 +95,6 @@
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 
   cp .zshenv /home/fabse  
-  curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-  cp -r .config/zsh/.zim/.zimrc /home/fabse/.config/zsh/.zimrc
-  cp -r .config/zsh/{.zlogin,.zlogout,.zshrc,.zshenv} /home/fabse/.config/zsh
   doas cp -r etc/* /etc
   doas intel-undervolt apply
   cd $BEGINNER_DIR || return

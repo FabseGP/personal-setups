@@ -35,10 +35,10 @@
   fi
   paru --noconfirm -Syu
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet-xdg-git \
+                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet-xdg-git clipman \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \
-                                                         cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp \
-                                                         nudoku-git wayshot-bin rivercarro-git ventoy-bin clipman yambar $AUR                    
+                                                         cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
+                                                         nudoku-git wayshot-bin rivercarro-git ventoy-bin ttf-meslo-nerd-font-powerlevel10k $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

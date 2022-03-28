@@ -217,7 +217,7 @@ input type:touchpad {
 }
 
 bar {
-    font pango:DejaVu Sans Mono
+    font pango:DejaVu Sans Mono, FontAwesome 12
     position top
     status_command /usr/bin/i3status-rs /home/fabse/.config/i3status-rust/config.toml
     colors {

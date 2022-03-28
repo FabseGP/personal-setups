@@ -10,7 +10,7 @@
   set $up k
   set $right l
 # Your preferred terminal emulator
-  set $term foot
+  set $term footclient
 
 # Clipman
   exec wl-paste -t text --watch clipman store
@@ -237,17 +237,19 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec foot --server
-    exec mako
-    exec pipewire
-    exec pipewire-pulse
-    exec swaymsg "workspace 1; exec syncthing;"
-    exec /home/fabse/scripts/sunpaper.sh -d
+    exec_always foot --server
+    exec_always mako
+    exec_always pipewire
+    exec_always pipewire-pulse
+    exec_always wireplumber
+    exec_always swaymsg "workspace 1; exec syncthing;"
+    exec_always /home/fabse/scripts/sunpaper.sh -d
 
   # Sworkstyle
     exec sworkstyle &> /tmp/sworkstyle.log
 
-  # Cursor-theme
+  # Theme
+    set $gnome-schema org.gnome.desktop.interface
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
@@ -255,3 +257,10 @@ bar {
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081
+
+  exec_always {
+    gsettings set $gnome_schema gtk-theme "Sweet-Dark"
+    gsettings set $gnome_schema icon-theme "Tela-blue"
+    gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
+    gsettings set $gnome_schema cursor-size "32"
+}

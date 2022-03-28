@@ -11,15 +11,15 @@
   doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
                                         libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
-                                        bitwarden pacman-contrib foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf \
+                                        bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
-                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa kicad-library-3d \
+                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland \
                                         pipewire-pulse wireplumber wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions neovim \
-                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot ripgrep \
-                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go git wayland \
-                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library kicad \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole figlet  \
-                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone rust  \
+                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot kicad \
+                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go figlet \
+                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
+                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone \
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
@@ -35,10 +35,10 @@
   fi
   paru --noconfirm -Syu
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme-bin wlsunset bastet-xdg-git \
+                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet-xdg-git \
                                                          sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \
-                                                         freshfetch-bin cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt \
-                                                         avogadroapp nudoku-git wayshot-bin rivercarro-git ventoy-bin clipman yambar $AUR                    
+                                                         cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp \
+                                                         nudoku-git wayshot-bin rivercarro-git ventoy-bin clipman yambar $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

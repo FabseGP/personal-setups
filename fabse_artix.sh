@@ -18,8 +18,8 @@
                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot kicad \
                                         bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go figlet \
                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole \
-                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole jq \
+                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                         syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
@@ -79,7 +79,6 @@
   cd grub2-themes || return
   doas ./install.sh -b
   cd $BEGINNER_DIR || return
-  rm -rf grub2-themes
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +90,6 @@
   cp -r {librewolf,wallpapers} /home/fabse
   cp -r scripts/artix /home/fabse/scripts
   chmod u+x /home/fabse/scripts/*
-  chmod u+x /home/fabse/.config/yambar/{cpu.sh,weather.sh,playerctl/*}
   cp -r .local /home/fabse
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 
@@ -107,6 +105,10 @@
 
 # Miscellaneous
 
+  git clone https://github.com/niizam/vantage.git
+  cd vantage
+  chmod u+x install.sh
+  doas ./install.sh
   doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
   curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh > install.sh
   chmod u+x install.sh

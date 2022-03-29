@@ -1,49 +1,48 @@
 #!/bin/sh
 
 # Set default wallpaper
-  swaybg -m fill -i /home/fabse/wallpapers/swaypaper.jpg
-  
-# Set terminal
-  terminal="footclient"
-
-# Set launcher
-  launcher="wofi"
-
-# Set mod-button
-  mod="Mod4"
+  riverctl spawn "swaybg -m fill -i /home/fabse/wallpapers/natsu-and-happy.jpg" &
 
 # Services to execute at start
-  /usr/bin/mako
-  /usr/bin/pipewire
-  /usr/bin/pipewire-pulse
-  /usr/bin/wireplumber
-  /usr/bin/syncthing
-  /usr/bin/yambar
-  /home/fabse/scripts/sunpaper.sh -d
-  foot --server
-  wl-paste -t text --watch clipman store
-  wlsunset -l 55.27023 -L 9.90081
-
-# Theme and mouse-cursor
-  riverctl xcursor-theme Bibata-Rainbow-Modern 32
-  riverctl focus-follows-cursor normal
-  gnome_schema="org.gnome.desktop.interface"
-  gsettings set $gnome_schema gtk-theme "Sweet-Dark"
-  gsettings set $gnome_schema icon-theme "Tela-blue"
-  gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-  gsettings set $gnome_schema cursor-size "32"
-
-# Touchpad-configs
-  for pad in $(riverctl list-inputs | grep -i touchpad ); do
-    riverctl input $pad events enabled
-    riverctl input $pad tap enabled
+  for service in yambar foot; do
+    if ! [[ $(pidof $service) ]]; then
+      if [[ "$service" == "foot" ]]; then
+        terminal="footclient"
+        riverctl spawn "foot --server"
+      elif [[ "$service" == "wl-paste" ]]; then
+        riverctl spawn "wl-paste -t text --watch clipman store"
+      elif [[ "$service" == "wlsunset" ]]; then
+        riverctl spawn "wlsunset -l 55.27023 -L 9.90081"
+      else
+        riverctl spawn $service
+      fi
+    elif [[ $(pidof $service) ]]; then
+      if [[ "$service" == "foot" ]]; then
+        terminal="foot"
+      fi
+    fi
   done
 
 # Shortcut to terminal
-  riverctl map normal $mod Return spawn $terminal
+  riverctl map normal Super Return spawn $terminal &
 
 # Shortcut to launcher
-  riverctl map normal $mod D spawn $launcher
+  riverctl map normal Super D spawn wofi &
+
+# Shortcut to take screenshot with wayshot + swappy
+  riverctl map normal Print spawn "wayshot --stdout | swappy -f -" &
+
+# Shortcut to toggle night mode
+  riverctl map normal Super y spawn "wlsunset -l 14.6 -L 121" &
+
+# Theme and mouse-cursor
+  riverctl xcursor-theme Bibata-Rainbow-Modern 32 &
+  riverctl focus-follows-cursor normal &
+  gnome_schema="org.gnome.desktop.interface" &
+  gsettings set $gnome_schema gtk-theme "Sweet-Dark" &
+  gsettings set $gnome_schema icon-theme "Tela-blue" &
+  gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern" &
+  gsettings set $gnome_schema cursor-size "32" &
 
 # Audio and brightness controls
   for mode in normal locked; do
@@ -60,116 +59,110 @@
     riverctl map $mode None XF86MonBrightnessDown spawn "brightnessctl set 2%-"
   done
 
-# Shortcut to take screenshot with wayshot + swappy
-  riverctl map normal Print spawn "wayshot --stdout | swappy -f -"
-
-# Shortcut to toggle night mode
-  riverctl map normal $mod y spawn "wlsunset -l 14.6 -L 121"
-
 # Shortcut to screenlock
   riverctl map normal Control l spawn swaylock
 
 # Shortcut to exit river
-  riverctl map normal $mod+Shift E exit
+  riverctl map normal Super+Shift E exit
 
 # Shortcut to reload river configuration
-  riverctl map normal $mod+Shift R spawn "~/.config/river/init"
+  riverctl map normal Super+Shift C spawn "~/.config/river/init"
 
 # Shortcut to toggle float
-  riverctl map normal $mod Space toggle-float
+  riverctl map normal Super Space toggle-float
 
 # Shortcut to toggle fullscreen
-  riverctl map normal $mod+Shift F toggle-fullscreen
+  riverctl map normal Super+Shift F toggle-fullscreen
 
 # Shortcut to close the focused view
-  riverctl map normal $mod Q close
+  riverctl map normal Super Q close
 
 # Shortcut to focus the next/previous view in the layout stack
-  riverctl map normal $mod J focus-view next
-  riverctl map normal $mod K focus-view previous
+  riverctl map normal Super N focus-view next
+  riverctl map normal Super P focus-view previous
 
 # Shortcut to swap the focused view with the next/previous view in the layout stack
-  riverctl map normal $mod+Shift J swap next
-  riverctl map normal $mod+Shift K swap previous
+  riverctl map normal Super+Shift N swap next
+  riverctl map normal Super+Shift P swap previous
 
 # Shortcut to focus the next/previous output
-  riverctl map normal $mod Period focus-output next
-  riverctl map normal $mod Comma focus-output previous
+  riverctl map normal Super Period focus-output next
+  riverctl map normal Super Comma focus-output previous
 
 # Shortcut to send the focused view to the next/previous output
-  riverctl map normal $mod+Shift+Period send-to-output next
-  riverctl map normal $mod+Shift+Comma send-to-output previous
+  riverctl map normal Super+Shift+Period send-to-output next
+  riverctl map normal Super+Shift+Comma send-to-output previous
 
 # Shortcut to decrease/increase the main ratio of rivercarro(1)
-  riverctl map normal $mod H send-layout-cmd rivercarro "main-ratio -0.05"
-  riverctl map normal $mod L send-layout-cmd rivercarro "main-ratio +0.05"
+  riverctl map normal Super H send-layout-cmd rivercarro "main-ratio -0.05"
+  riverctl map normal Super L send-layout-cmd rivercarro "main-ratio +0.05"
 
 # Shortcut to increment/decrement the main count of rivercarro(1)
-  riverctl map normal $mod+Shift H send-layout-cmd rivercarro "main-count +1"
-  riverctl map normal $mod+Shift L send-layout-cmd rivercarro "main-count -1"
+  riverctl map normal Super+Shift H send-layout-cmd rivercarro "main-count +1"
+  riverctl map normal Super+Shift L send-layout-cmd rivercarro "main-count -1"
 
 # Shortcut to move views
-  riverctl map normal $mod+Alt H move left 100
-  riverctl map normal $mod+Alt J move down 100
-  riverctl map normal $mod+Alt K move up 100
-  riverctl map normal $mod+Alt L move right 100
+  riverctl map normal Super+Alt L move left 100
+  riverctl map normal Super+Alt D move down 100
+  riverctl map normal Super+Alt U move up 100
+  riverctl map normal Super+Alt R move right 100
 
 # Shortcut to snap views to screen edges
-  riverctl map normal $mod+Alt+Control H snap left
-  riverctl map normal $mod+Alt+Control J snap down
-  riverctl map normal $mod+Alt+Control K snap up
-  riverctl map normal $mod+Alt+Control L snap right
+  riverctl map normal Super+Alt+Control L snap left
+  riverctl map normal Super+Alt+Control D snap down
+  riverctl map normal Super+Alt+Control U snap up
+  riverctl map normal Super+Alt+Control R snap right
 
 # Shortcut to resize views
-  riverctl map normal $mod+Alt+Shift H resize horizontal -100
-  riverctl map normal $mod+Alt+Shift J resize vertical 100
-  riverctl map normal $mod+Alt+Shift K resize vertical -100
-  riverctl map normal $mod+Alt+Shift L resize horizontal 100
+  riverctl map normal Super+Alt+Shift L resize horizontal -100
+  riverctl map normal Super+Alt+Shift D resize vertical 100
+  riverctl map normal Super+Alt+Shift U resize vertical -100
+  riverctl map normal Super+Alt+Shift R resize horizontal 100
 
 # Shortcut to move views
-  riverctl map-pointer normal $mod BTN_LEFT move-view
+  riverctl map-pointer normal Super BTN_LEFT move-view
 
 # Shortcut to resize views
-  riverctl map-pointer normal $mod BTN_RIGHT resize-view
+  riverctl map-pointer normal Super BTN_RIGHT resize-view
 
   for i in $(seq 1 9); do
     tags=$((1 << ($i - 1)))
 
     # Shortcut to focus tag [0-8]
-      riverctl map normal $mod $i set-focused-tags $tags
+      riverctl map normal Super $i set-focused-tags $tags
 
     # Shortcut to tag focused view with tag [0-8]
-      riverctl map normal $mod+Shift $i set-view-tags $tags
+      riverctl map normal Super+Shift $i set-view-tags $tags
 
     # Shortcut to toggle focus of tag [0-8]
-    riverctl map normal $mod+Control $i toggle-focused-tags $tags
+    riverctl map normal Super+Control $i toggle-focused-tags $tags
 
     # Shortcut to toggle tag [0-8] of focused view
-    riverctl map normal $mod+Shift+Control $i toggle-view-tags $tags
+    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
   done
 
-# $mod+0 to focus all tags
-# $mod+Shift+0 to tag focused view with all tags
+# Super+0 to focus all tags
+# Super+Shift+0 to tag focused view with all tags
   all_tags=$(((1 << 32) - 1))
 
-  riverctl map normal $mod 0 set-focused-tags $all_tags
-  riverctl map normal $mod+Shift 0 set-view-tags $all_tags
+  riverctl map normal Super 0 set-focused-tags $all_tags
+  riverctl map normal Super+Shift 0 set-view-tags $all_tags
 
 # Shortcut to change layout orientation
-  riverctl map normal $mod Up    send-layout-cmd rivercarro "main-location top"
-  riverctl map normal $mod Right send-layout-cmd rivercarro "main-location right"
-  riverctl map normal $mod Down  send-layout-cmd rivercarro "main-location bottom"
-  riverctl map normal $mod Left  send-layout-cmd rivercarro "main-location left"
+  riverctl map normal Super Up    send-layout-cmd rivercarro "main-location top"
+  riverctl map normal Super Right send-layout-cmd rivercarro "main-location right"
+  riverctl map normal Super Down  send-layout-cmd rivercarro "main-location bottom"
+  riverctl map normal Super Left  send-layout-cmd rivercarro "main-location left"
 
 # Declare a passthrough mode. This mode has only a single mapping to return to
 # normal mode. This makes it useful for testing a nested wayland compositor
   riverctl declare-mode passthrough
 
-# $mod+F11 to enter passthrough mode
-  riverctl map normal $mod F11 enter-mode passthrough
+# Super+F11 to enter passthrough mode
+  riverctl map normal Super F11 enter-mode passthrough
 
-# $mod+F11 to return to normal mode
-  riverctl map passthrough $mod F11 enter-mode normal
+# Super+F11 to return to normal mode
+  riverctl map passthrough Super F11 enter-mode normal
 
 # Set background and border color
   riverctl background-color 0x002b36
@@ -187,6 +180,12 @@
 # Set app-ids and titles of views which should use client side decorations
   riverctl csd-filter-remove app-id "firefox"
   riverctl csd-filter-remove app-id "zathura"
+
+# Touchpad-configs
+  for pad in $(riverctl list-inputs | grep -i touchpad ); do
+    riverctl input $pad events enabled
+    riverctl input $pad tap enabled
+  done
 
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.

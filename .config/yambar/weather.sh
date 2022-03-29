@@ -2,8 +2,6 @@
 
 set -e
 
-. ~/.config/env.conf
-
 OWM_URL='https://api.openweathermap.org/data/2.5/weather?appid=ba6e5d8c7ea61606ae0d38e335243ebd&q=Assens,Denmark&lang=ua'
 
 echo "icon|string|..."

@@ -235,7 +235,7 @@ bar {
 
   # What to execute on startup
     exec killall foot mako pipewire pipewire-pulse wireplumber sworkstyle wl-paste clipman
-    exec foot --server
+    exec_always foot --server
     exec mako
     exec pipewire
     exec pipewire-pulse

@@ -12,9 +12,6 @@
 # Your preferred terminal emulator
   set $term footclient
 
-# Clipman
-  exec wl-paste -t text --watch clipman store
-
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -237,15 +234,15 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec_always foot --server
-    exec_always mako
-    exec_always pipewire
-    exec_always pipewire-pulse
-    exec_always wireplumber
-    exec_always swaymsg "workspace 1; exec syncthing;"
-    exec_always /home/fabse/scripts/sunpaper.sh -d
-
-  # Sworkstyle
+    exec killall foot mako pipewire pipewire-pulse wireplumber sworkstyle wl-paste clipman
+    exec foot --server
+    exec mako
+    exec pipewire
+    exec pipewire-pulse
+    exec wireplumber
+    exec wl-paste -t text --watch clipman store
+    exec swaymsg "workspace 1; exec syncthing;"
+    exec /home/fabse/scripts/sunpaper.sh -d
     exec sworkstyle &> /tmp/sworkstyle.log
 
   # Theme

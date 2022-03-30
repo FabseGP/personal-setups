@@ -3,25 +3,15 @@
 # Set default wallpaper
   riverctl spawn "swaybg -m fill -i /home/fabse/wallpapers/natsu-and-happy.jpg" &
 
+# Set default terminal depending on foot running or not
+  if ! [[ $(pidof foot) ]]; then
+    terminal="footclient"
+  else
+    terminal="foot"
+  fi
+
 # Services to execute at start
-  for service in yambar foot; do
-    if ! [[ $(pidof $service) ]]; then
-      if [[ "$service" == "foot" ]]; then
-        terminal="footclient"
-        riverctl spawn "foot --server"
-      elif [[ "$service" == "wl-paste" ]]; then
-        riverctl spawn "wl-paste -t text --watch clipman store"
-      elif [[ "$service" == "wlsunset" ]]; then
-        riverctl spawn "wlsunset -l 55.27023 -L 9.90081"
-      else
-        riverctl spawn $service
-      fi
-    elif [[ $(pidof $service) ]]; then
-      if [[ "$service" == "foot" ]]; then
-        terminal="foot"
-      fi
-    fi
-  done
+  bash /home/fabse/scripts/autostart.sh river &
 
 # Shortcut to terminal
   riverctl map normal Super Return spawn $terminal &
@@ -34,6 +24,9 @@
 
 # Shortcut to toggle night mode
   riverctl map normal Super y spawn "wlsunset -l 14.6 -L 121" &
+
+# Shortcut to open pcmanfm
+#  riverctl map normal Mod1 N spawn "pcmanfm"
 
 # Theme and mouse-cursor
   riverctl xcursor-theme Bibata-Rainbow-Modern 32 &
@@ -175,6 +168,7 @@
 # Make certain views start floating
   riverctl float-filter-add app-id float
   riverctl float-filter-add app-id fabse_launcher
+  riverctl float-filter-add "popup"
   riverctl float-filter-add title "popup title with spaces"
 
 # Set app-ids and titles of views which should use client side decorations

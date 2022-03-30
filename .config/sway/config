@@ -234,15 +234,8 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec killall foot mako pipewire pipewire-pulse wireplumber sworkstyle wl-paste clipman
-    exec_always foot --server
-    exec mako
-    exec pipewire
-    exec pipewire-pulse
-    exec wireplumber
-    exec wl-paste -t text --watch clipman store
-    exec swaymsg "workspace 1; exec syncthing;"
-    exec /home/fabse/scripts/sunpaper.sh -d
+    exec /home/fabse/scripts/autostart.sh sway
+    exec /home/fabse/.config/sway/sunpaper.sh -d
     exec sworkstyle &> /tmp/sworkstyle.log
 
   # Theme

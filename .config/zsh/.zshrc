@@ -112,7 +112,7 @@ alias "rm -f"="rm -i"
 alias "rm -rf"="rm -i"
 alias yay="paru"
 alias sway="dbus-run-session sway"
-alias river="dbus-run-session river"
+alias river="XKB_DEFAULT_LAYOUT=dk dbus-run-session river"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

@@ -1,5 +1,11 @@
 # Fabse's mega seje sway-config
 
+  # Starting services and assigning terminal
+    exec_always /home/fabse/scripts/autostart.sh sway
+
+  # Include other files in config-folder
+    include /home/fabse/.config/sway/*
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -9,8 +15,6 @@
   set $down j
   set $up k
   set $right l
-# Your preferred terminal emulator
-  set $term footclient
 
 ### Output configuration
 #
@@ -234,9 +238,14 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec /home/fabse/scripts/autostart.sh sway
     exec /home/fabse/.config/sway/sunpaper.sh -d
     exec sworkstyle &> /tmp/sworkstyle.log
+    exec_always {
+    gsettings set $gnome_schema gtk-theme "Sweet-Dark"
+    gsettings set $gnome_schema icon-theme "Tela-blue"
+    gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
+    gsettings set $gnome_schema cursor-size "32"
+}
 
   # Theme
     set $gnome-schema org.gnome.desktop.interface
@@ -247,10 +256,3 @@ bar {
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081
-
-  exec_always {
-    gsettings set $gnome_schema gtk-theme "Sweet-Dark"
-    gsettings set $gnome_schema icon-theme "Tela-blue"
-    gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-    gsettings set $gnome_schema cursor-size "32"
-}

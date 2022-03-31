@@ -70,7 +70,7 @@
       bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-      bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session and make everyone sad.' -b '*Sigh* Roger roger' 'swaymsg exit'
+      bindsym $mod+Shift+e exec /home/fabse/scripts/logout.sh sway 
 #
 # Moving around:
 #

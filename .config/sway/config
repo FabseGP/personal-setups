@@ -4,7 +4,8 @@
     exec_always /home/fabse/scripts/autostart.sh sway
 
   # Include other files in config-folder
-    include /home/fabse/.config/sway/*
+    include /home/fabse/.config/sway/exec
+    include /home/fabse/.config/sway/terminal
 
 ### Variables
 #
@@ -26,9 +27,10 @@
 # Example configuration:
 #
   exec swayidle -w \
-       timeout 600 'swaylock -f -c 000000' \
+       timeout 5 'swaymsg seat seat0 cursor set 2000 2000' \
+       timeout 600 '/home/fabse/.config/sway/screensaver.sh' \
        timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep 'swaylock -f -c 000000'
+       before-sleep '/home/fabse/.config/sway/screensaver.sh'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -51,7 +53,7 @@
       for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
 
     # Start swaylock-effects
-      bindsym Ctrl+l exec swaylock
+      bindsym Ctrl+l exec /home/fabse/.config/sway/screensaver.sh
 
     # History of copied text
       bindsym $mod+c exec clipman pick -t wofi
@@ -256,3 +258,7 @@ bar {
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081
+
+  # Enable floating windows for screensaver
+    for_window [title="Screensaver"] floating enable
+    for_window [title="Screensaver"] fullscreen enable

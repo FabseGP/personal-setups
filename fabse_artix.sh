@@ -102,7 +102,7 @@
   cp -r {librewolf,wallpapers} /home/fabse
   cp -r scripts/artix /home/fabse/scripts
   chmod u+x /home/fabse/scripts/*
-  chmod u+x /home/fabse/.config/{yambar/{cpu.sh,weather.sh,playerctl/*},sway/sunpaper.sh}
+  chmod u+x /home/fabse/.config/{yambar/{cpu.sh,weather.sh,playerctl/*},sway/{sunpaper.sh,screensaver.sh}}
   cp -r .local /home/fabse
   mkdir -p /home/fabse/.local/bin
   fc-cache -f -v 

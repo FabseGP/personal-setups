@@ -23,7 +23,6 @@
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                         lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
-  cd $BEGINNER_DIR || exit
                                       
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -34,11 +33,24 @@
     AUR="dot-bin"
   fi
   paru --noconfirm -Syu
-  paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle kvantum-theme-sweet-mars-git nodejs-reveal-md \
-                                                         bibata-rainbow-cursor-theme candy-icons-git tela-icon-theme wlsunset bastet-xdg-git clipman \
-                                                         sweet-gtk-theme-dark otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git \
-                                                         cbonsai macchina revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
-                                                         nudoku-git wayshot-bin rivercarro-git ventoy-bin ttf-meslo-nerd-font-powerlevel10k $AUR                    
+  cd packages || exit
+  BASTET="$(ls -- *bastet-*)"
+  BIBATA="$(ls -- *bibata-*)"
+  CANDY="$(ls -- *candy-*)"
+  CBONSAI="$(ls -- *cbonsai-*)"
+  NUDOKU="$(ls -- *nudoku-*)"
+  POKEMON="$(ls -- *pokemon-*)"
+  SUNWAIT="$(ls -- *sunwait-*)"
+  SWEET_GTK="$(ls -- *sweet-gtk-*)"
+  SWEET_QT="$(ls -- *sweet-kde-*)"
+  TELA="$(ls -- *tela-*)"
+  TTF_POWER="$(ls -- *ttf-*)"
+  doas pacman --noconfirm --needed -U $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TTF_POWER
+  cd $BEGINNER_DIR || exit
+  paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
+                                                         otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
+                                                         revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
+                                                         wayshot-bin rivercarro-git ventoy-bin $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 

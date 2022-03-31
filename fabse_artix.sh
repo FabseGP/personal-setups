@@ -22,7 +22,7 @@
                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
-                                        syncthing-dinit lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
+                                        lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
   cd $BEGINNER_DIR || exit
                                       
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@
 
 # Dinit-services
 
-  for service in cupsd syncthing lm_sensors intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
+  for service in cupsd lm_sensors intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   doas sensors-detect --auto

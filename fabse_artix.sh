@@ -115,6 +115,11 @@
   git clone https://github.com/hexive/sunpaper.git
   mkdir /home/fabse/wallpapers/sunpaper
   cp -r sunpaper/images/* /home/fabse/wallpapers/sunpaper
+  if [[ -d "/home/fabse/.librewolf" ]]; then
+    rm -rf /home/fabse/.librewolf
+  fi
+  cd librewolf
+  tar -xvf librewolf-browser-profile.tar.bz2 -C /home/fabse
   cd $BEGINNER_DIR || return
 
 #----------------------------------------------------------------------------------------------------------------------------------

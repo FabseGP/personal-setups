@@ -34,18 +34,21 @@
   fi
   paru --noconfirm -Syu
   cd packages || exit
+  PIPES_1="$(ls -- *bash-pipes-*)"
   BASTET="$(ls -- *bastet-*)"
   BIBATA="$(ls -- *bibata-*)"
   CANDY="$(ls -- *candy-*)"
   CBONSAI="$(ls -- *cbonsai-*)"
   NUDOKU="$(ls -- *nudoku-*)"
+  PIPES_2="$(ls -- *pipes.sh-*)"
   POKEMON="$(ls -- *pokemon-*)"
   SUNWAIT="$(ls -- *sunwait-*)"
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
   TTF_POWER="$(ls -- *ttf-*)"
-  doas pacman --noconfirm --needed -U $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TTF_POWER
+  doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $PIPES_2 \
+                                      $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TTF_POWER
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
                                                          otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \

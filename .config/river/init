@@ -53,7 +53,7 @@
   riverctl map normal Control l spawn "swaylock -f"
 
 # Shortcut to exit river
-  riverctl map normal Super+Shift E exit
+  riverctl map normal Super+Shift E spawn "/home/fabse/scripts/logout.sh river"
 
 # Shortcut to reload river configuration
   riverctl map normal Super+Shift C spawn "~/.config/river/init"

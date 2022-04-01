@@ -53,7 +53,7 @@
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
                                                          otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
                                                          revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
-                                                         wayshot-bin rivercarro-git ventoy-bin $AUR                    
+                                                         wayshot-bin rivercarro-git ventoy-bin nvim-packer-git $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -118,7 +118,7 @@
   if [[ -d "/home/fabse/.librewolf" ]]; then
     rm -rf /home/fabse/.librewolf
   fi
-  cd librewolf
+  cd librewolf || exit
   tar -xvf librewolf-browser-profile.tar.bz2 -C /home/fabse
   cd $BEGINNER_DIR || return
 
@@ -127,7 +127,7 @@
 # Miscellaneous
 
   git clone https://github.com/niizam/vantage.git
-  cd vantage
+  cd vantage || exit
   chmod u+x install.sh
   doas ./install.sh
   doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop

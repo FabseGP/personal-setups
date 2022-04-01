@@ -29,7 +29,7 @@ EOF
 exec_always $service
 EOF
         fi
-      elif [[ $(pidof foot) ]]; then
+      elif [[ "$service" == "foot" ]] && [[ $(pidof foot) ]]; then
         if [[ $(pidof river) ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
 set \$term foot

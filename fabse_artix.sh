@@ -13,12 +13,12 @@
                                         libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
                                         bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
-                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland \
-                                        pipewire-pulse wireplumber wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions neovim \
+                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland zsh \
+                                        pipewire-pulse pipewire-jack wireplumber wine-staging zsh-theme-powerlevel10k zsh-autosuggestions \
                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl libnotify aisleriot kicad syncthing \
                                         bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go figlet \
                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole jq \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole jq neovim \
                                         cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \

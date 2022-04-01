@@ -122,6 +122,10 @@
   cd librewolf || exit
   tar -xvf librewolf-browser-profile.tar.bz2 -C /home/fabse
   cd $BEGINNER_DIR || return
+  for electron in $(pacman -Qs electron1); do
+    value=${electron#*/}
+    cp /home/fabse/.config/electron-flags.conf /home/fabse/.config/$value-flags.conf
+  done
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

@@ -20,7 +20,7 @@
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-  output * bg /home/fabse/wallpapers/swaypaper.jpg fill
+#  output * bg /home/fabse/wallpapers/swaypaper.jpg fill
 
 ### Idle configuration
 #
@@ -240,16 +240,15 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec /home/fabse/.config/sway/sunpaper.sh -d
+    exec_always /home/fabse/.config/sway/sunpaper.sh -d
     exec sworkstyle &> /tmp/sworkstyle.log
 
   # Theme
-    set $gnome-schema org.gnome.desktop.interface
     exec_always {
-    gsettings set $gnome_schema gtk-theme "Sweet-Dark"
-    gsettings set $gnome_schema icon-theme "Tela-blue"
-    gsettings set $gnome_schema cursor-theme "Bibata-Rainbow-Modern"
-    gsettings set $gnome_schema cursor-size "32"
+    gsettings set org.gnome.desktop.interface gtk-theme "Sweet-Dark"
+    gsettings set org.gnome.desktop.interface icon-theme "Tela-blue"
+    gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Rainbow-Modern"
+    gsettings set org.gnome.desktop.interface cursor-size "32"
 }
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 

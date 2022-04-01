@@ -27,7 +27,7 @@
 # Example configuration:
 #
   exec swayidle -w \
-       timeout 5 'swaymsg seat seat0 cursor set 2000 2000' \
+       timeout 60 'swaymsg seat seat0 cursor set 2000 2000' \
        timeout 600 'exec /home/fabse/.config/sway/screensaver.sh' \
        timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
        before-sleep 'exec /home/fabse/.config/sway/screensaver.sh'

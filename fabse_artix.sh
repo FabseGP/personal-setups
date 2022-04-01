@@ -46,14 +46,15 @@
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
+  TOKYONIGHT="$(ls -- *neovim-*)"
   TTF_POWER="$(ls -- *ttf-*)"
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $PIPES_2 \
-                                      $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TTF_POWER
+                                      $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TOKYONIGHT $TTF_POWER
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
                                                          otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
                                                          revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
-                                                         wayshot-bin rivercarro-git ventoy-bin nvim-packer-git $AUR                    
+                                                         wayshot-bin rivercarro-git ventoy-bin $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -107,7 +108,7 @@
   chmod u+x /home/fabse/scripts/*
   chmod u+x /home/fabse/.config/{yambar/{cpu.sh,weather.sh,playerctl/*},sway/{sunpaper.sh,screensaver.sh}}
   cp -r .local /home/fabse
-  mkdir -p /home/fabse/.local/bin
+  mkdir -p /home/fabse/{Skærmbilleder,.local/bin}
   fc-cache -f -v 
   cp .zshenv /home/fabse  
   doas cp -r etc/* /etc

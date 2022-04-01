@@ -53,7 +53,7 @@
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
                                                          otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
-                                                         revolt-desktop lutris-git river-noxwayland-git vimiv-qt avogadroapp yambar \
+                                                         revolt-desktop lutris-git river-noxwayland-git vimiv-qt-git avogadroapp yambar \
                                                          wayshot-bin rivercarro-git ventoy-bin $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
   if [[ "$1" == "sway" ]]; then
     rm -rf /home/fabse/.config/sway/{exec,terminal}
@@ -30,11 +30,16 @@ exec_always $service
 EOF
         fi
       elif [[ $(pidof foot) ]]; then
-        cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
+        if [[ $(pidof river) ]]; then
+          cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
 set \$term foot
 EOF
+        else
+          cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
+set \$term footclient
+EOF
+        fi
       fi
-      chmod u+x /home/fabse/.config/sway/exec
     elif [[ "$1" == "river" ]]; then
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then

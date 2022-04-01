@@ -8,14 +8,14 @@
 
 # Package-installation
   
-  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
+  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat mako \
                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
                                         libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
                                         bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland \
                                         pipewire-pulse wireplumber wine-staging zsh zsh-theme-powerlevel10k zsh-autosuggestions neovim \
-                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl mako libnotify aisleriot kicad \
+                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl libnotify aisleriot kicad syncthing \
                                         bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go figlet \
                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole jq \

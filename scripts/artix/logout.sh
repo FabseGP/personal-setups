@@ -1,6 +1,6 @@
 #!/bin/bash
 
-  for service in yambar foot pipewire pipewire-pulse wireplumber mako wl-paste sunpaper sworkstyle syncthing; do
+  for service in yambar foot pipewire mako wl-paste sunpaper sworkstyle syncthing; do
     if [[ "$1" == "sway" ]] && [[ $(pidof river) ]]; then
       :
     elif [[ "$1" == "river" ]] && [[ $(pidof sway) ]]; then

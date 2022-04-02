@@ -152,3 +152,4 @@ This object that you, sir, are using is property of Fabse Inc. - expect therefor
 
 EOF
   doas pacman --noconfirm -Syu
+  zsh

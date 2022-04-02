@@ -8,18 +8,21 @@
 
 # Package-installation
   
-  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat mako \
+  cd packages || exit
+  WIREPLUMBER="$(ls -- *wireplumber-*)"
+  doas pacman --noconfirm --needed -U $WIREPLUMBER
+  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
                                         libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
                                         bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
                                         gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland zsh \
-                                        pipewire-pulse pipewire-jack wireplumber wine-staging zsh-theme-powerlevel10k zsh-autosuggestions \
+                                        pipewire-pulse pipewire-jack wine-staging zsh-theme-powerlevel10k zsh-autosuggestions mako jq wget \
                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl libnotify aisleriot kicad syncthing \
                                         bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf go figlet \
                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole jq neovim \
-                                        cpio perl unrar unzip rsync wget jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole neovim \
+                                        cpio perl unrar unzip rsync jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
                                         linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
                                         ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
                                         lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
@@ -100,7 +103,6 @@
 
   cp -r .config/* /home/fabse/.config/
   rm -rf /home/fabse/.config/rsnapshot
-  mkdir /home/fabse/.config/zsh/.zim
   cp -r {librewolf,wallpapers} /home/fabse
   cp -r scripts/artix /home/fabse/scripts
   chmod u+x /home/fabse/scripts/*

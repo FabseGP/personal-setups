@@ -101,6 +101,7 @@
 # Installing dotfiles
 
   cp -r .config/* /home/fabse/.config/
+  mkdir /home/fabse/.config/zsh/.zim
   rm -rf /home/fabse/.config/rsnapshot
   cp -r {librewolf,wallpapers} /home/fabse
   cp -r scripts/artix /home/fabse/scripts

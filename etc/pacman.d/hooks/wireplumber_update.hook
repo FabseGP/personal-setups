@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = Pipewire
+
+[Action]
+Description = Checks for newer version of wireplumber...
+When = PostTransaction
+Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/wireplumber.sh"'
+

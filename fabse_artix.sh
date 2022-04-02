@@ -127,10 +127,13 @@
   doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
   doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
   doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
-  for electron in $(pacman -Qs electron1); do
-    value=${electron#*/}
-    cp /home/fabse/.config/electron-flags.conf /home/fabse/.config/$value-flags.conf
-  done
+  pacman -Q > hejsa.txt
+  grep -F "electron" hejsa.txt > hejhej.txt
+  hej=${s%% *}
+  while read line; do
+    hej=${line%% *}
+    cp /home/fabse/.config/electron-flags.conf /home/fabse/.config/$hej-flags.conf
+  done < hejhej.txt
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

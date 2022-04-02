@@ -1,7 +1,7 @@
 # Fabse's mega seje sway-config
 
   # Assign default terminal
-    exec /home/fabse/.config/sway/scripts/terminal.sh
+    exec_always /home/fabse/.config/sway/scripts/terminal.sh
     include /home/fabse/.config/sway/terminal
 
 ### Variables
@@ -237,9 +237,9 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec /home/fabse/.config/sway/scripts/sunpaper.sh -d
-    exec sworkstyle &> /tmp/sworkstyle.log
-    exec /home/fabse/scripts/autostart.sh sway
+    exec_always /home/fabse/.config/sway/scripts/sunpaper.sh -d
+    exec_always sworkstyle &> /tmp/sworkstyle.log
+    exec_always /home/fabse/scripts/autostart.sh sway
     include /home/fabse/.config/sway/exec
 
   # Theme

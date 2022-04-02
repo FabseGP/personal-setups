@@ -110,7 +110,6 @@
   cp -r .local /home/fabse
   mkdir -p /home/fabse/{Skærmbilleder,.local/bin}
   fc-cache -f -v 
-  cp .zshenv /home/fabse  
   doas cp -r etc/* /etc
   doas intel-undervolt apply
   git clone https://github.com/hexive/sunpaper.git

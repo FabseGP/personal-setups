@@ -3,8 +3,7 @@ typeset -U PATH path
 path=("/home/fabse/.local/bin" "$path[@]")
 export PATH
 
-# Export default folder for zsh-files
-export ZDOTDIR="/home/fabse/.config/zsh"
+# Export default folder for zimfw
 export ZIM_HOME="$ZDOTDIR/.zim"
 
 # Defaulting all apps to wayland

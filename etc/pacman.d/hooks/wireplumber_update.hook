@@ -6,5 +6,5 @@ Target = Pipewire
 [Action]
 Description = Checks for newer version of wireplumber...
 When = PostTransaction
-Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/wireplumber.sh"'
+Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/make_wireplumber.sh"'
 

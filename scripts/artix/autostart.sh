@@ -9,21 +9,21 @@
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec foot --server
+exec_always foot --server
 EOF
         elif [[ "$service" == "wl-paste" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec wl-paste -t text --watch clipman store
+exec_always wl-paste -t text --watch clipman store
 EOF
         elif [[ "$service" == "syncthing" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec syncthing serve --no-browser
+exec_always syncthing serve --no-browser
 EOF
         elif [[ "$service" == "yambar" ]]; then
           :
         else
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec $service
+exec_always $service
 EOF
         fi
       elif [[ $(pidof $service) ]]; then

@@ -1,10 +1,7 @@
 # Fabse's mega seje sway-config
 
-  # Starting services and assigning terminal
-    exec_always /home/fabse/scripts/autostart.sh sway
-
-  # Include other files in config-folder
-    include /home/fabse/.config/sway/exec
+  # Assign default terminal
+    exec /home/fabse/.config/sway/scripts/terminal.sh
     include /home/fabse/.config/sway/terminal
 
 ### Variables
@@ -28,9 +25,9 @@
 #
   exec swayidle -w \
        timeout 60 'swaymsg seat seat0 cursor set 2000 2000' \
-       timeout 600 'exec /home/fabse/.config/sway/screensaver.sh' \
+       timeout 600 'exec /home/fabse/.config/sway/scripts/screensaver.sh' \
        timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep 'exec /home/fabse/.config/sway/screensaver.sh'
+       before-sleep 'exec /home/fabse/.config/sway/scripts/screensaver.sh'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -53,7 +50,7 @@
       for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
 
     # Start swaylock-effects
-      bindsym Ctrl+l exec /home/fabse/.config/sway/screensaver.sh
+      bindsym Ctrl+l exec /home/fabse/.config/sway/scripts/screensaver.sh
 
     # History of copied text
       bindsym $mod+c exec clipman pick -t wofi
@@ -240,8 +237,10 @@ bar {
     smart_borders on
 
   # What to execute on startup
-    exec_always /home/fabse/.config/sway/sunpaper.sh -d
+    exec /home/fabse/.config/sway/scripts/sunpaper.sh -d
     exec sworkstyle &> /tmp/sworkstyle.log
+    exec /home/fabse/scripts/autostart.sh sway
+    include /home/fabse/.config/sway/exec
 
   # Theme
     exec_always {

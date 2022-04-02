@@ -1,7 +1,7 @@
 [Trigger]
 Operation = Upgrade
 Type = Package
-Target = Pipewire
+Target = pipewire
 
 [Action]
 Description = Checks for newer version of wireplumber...

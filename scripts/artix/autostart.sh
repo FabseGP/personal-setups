@@ -1,44 +1,33 @@
 #!/bin/bash
 
   if [[ "$1" == "sway" ]]; then
-    rm -rf /home/fabse/.config/sway/{exec,terminal}
-    touch /home/fabse/.config/sway/{exec,terminal}
+    rm -rf /home/fabse/.config/sway/exec
+    touch /home/fabse/.config/sway/exec
   fi
-  for service in yambar foot pipewire pipewire-pulse wireplumber mako syncthing wl-paste; do
+  for service in yambar foot pipewire mako syncthing wl-paste; do
     if [[ "$1" == "sway" ]]; then
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec_always foot --server
-EOF
-          cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
-set \$term footclient
+exec foot --server
 EOF
         elif [[ "$service" == "wl-paste" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec_always wl-paste -t text --watch clipman store
+exec wl-paste -t text --watch clipman store
 EOF
         elif [[ "$service" == "syncthing" ]]; then
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec_always syncthing serve --no-browser
+exec syncthing serve --no-browser
 EOF
         elif [[ "$service" == "yambar" ]]; then
           :
         else
           cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
-exec_always $service
+exec $service
 EOF
         fi
-      elif [[ "$service" == "foot" ]] && [[ $(pidof foot) ]]; then
-        if [[ $(pidof river) ]]; then
-          cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
-set \$term foot
-EOF
-        else
-          cat << EOF | tee -a /home/fabse/.config/sway/terminal > /dev/null
-set \$term footclient
-EOF
-        fi
+      elif [[ $(pidof $service) ]]; then
+        :
       fi
     elif [[ "$1" == "river" ]]; then
       if ! [[ $(pidof $service) ]]; then
@@ -51,6 +40,8 @@ EOF
         else
           riverctl spawn $service
         fi
+      elif [[ $(pidof $service) ]]; then
+        :
       fi
     fi
   done

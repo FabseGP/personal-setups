@@ -66,11 +66,9 @@
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   doas sensors-detect --auto
-  doas usermod -a -G libvirt,games,kvm fabse
+  doas usermod -a -G libvirt,games fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i 's/#user = "root"/user = "fabse"/' /etc/libvirt/qemu.conf	
-  doas sed -i 's/#group = "root"/group = "fabse"/' /etc/libvirt/qemu.conf	
+  doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf	
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -121,6 +119,12 @@
   cd librewolf || exit
   tar -xvf librewolf-browser-profile.tar.bz2 -C /home/fabse
   cd $BEGINNER_DIR || return
+  if ! [[ -d "/etc/pipewire" ]]; then
+    doas mkdir /etc/pipewire
+  fi
+  doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
+  doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
+  doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
   for electron in $(pacman -Qs electron1); do
     value=${electron#*/}
     cp /home/fabse/.config/electron-flags.conf /home/fabse/.config/$value-flags.conf

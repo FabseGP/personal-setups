@@ -36,7 +36,6 @@
     AUR="dot-bin"
   fi
   paru --noconfirm -Syu
-  cd packages || exit
   PIPES_1="$(ls -- *bash-pipes-*)"
   BASTET="$(ls -- *bastet-*)"
   BIBATA="$(ls -- *bibata-*)"

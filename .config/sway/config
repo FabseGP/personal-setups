@@ -15,7 +15,7 @@
   set $right l
 
 ### Output configuration
-#
+#3
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #  output * bg /home/fabse/wallpapers/swaypaper.jpg fill
 
@@ -23,7 +23,7 @@
 #
 # Example configuration:
 #
-  exec_always swayidle -w \
+  exec swayidle -w \
        timeout 60 'swaymsg seat seat0 cursor set 2000 2000' \
        timeout 600 '/home/fabse/.config/sway/scripts/screensaver.sh' \
        timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -260,3 +260,6 @@ bar {
   # Enable floating windows for screensaver
     for_window [title="Screensaver"] floating enable
     for_window [title="Screensaver"] fullscreen enable
+
+  # Run dbus-session
+    exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway

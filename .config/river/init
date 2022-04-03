@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run dbus-session
-  riverctl spawn "dbus-update-activation-environment XDG_CURRENT_DESKTOP=river"
+  riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river XDG_SESSION_DESKTOP=river" &
 
 # Set default wallpaper
   riverctl spawn "swaybg -m fill -i /home/fabse/wallpapers/natsu-and-happy.jpg" &

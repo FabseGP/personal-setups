@@ -262,4 +262,4 @@ bar {
     for_window [title="Screensaver"] fullscreen enable
 
   # Run dbus-session
-    exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway
+    exec dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway

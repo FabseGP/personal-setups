@@ -100,20 +100,14 @@
 
 # Installing dotfiles
 
-  cp -r .config/* /home/fabse/.config/
-  mkdir /home/fabse/.config/zsh/.zim
-  rm -rf /home/fabse/.config/rsnapshot
-  cp -r {librewolf,wallpapers} /home/fabse
-  cp -r scripts/artix /home/fabse/scripts
-  chmod u+x /home/fabse/scripts/*
-  chmod u+x /home/fabse/.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}
-  cp -r .local /home/fabse
-  mkdir -p /home/fabse/{Skærmbilleder,.local/bin}
+  cp -r {wallpapers,.config,scripts,.local} /home/fabse/
+  rm -rf /home/fabse/{scripts/alpine,.config/rsnapshot}
+  chmod u+x /home/fabse/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
+  mkdir -p /home/fabse/{Skærmbilleder,.local/bin,wallpapers/sunpaper}
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas intel-undervolt apply
   git clone https://github.com/hexive/sunpaper.git
-  mkdir /home/fabse/wallpapers/sunpaper
   cp -r sunpaper/images/* /home/fabse/wallpapers/sunpaper
   if [[ -d "/home/fabse/.librewolf" ]]; then
     rm -rf /home/fabse/.librewolf
@@ -139,14 +133,7 @@
 
 # Miscellaneous
 
-  git clone https://github.com/niizam/vantage.git
-  cd vantage || exit
-  chmod u+x install.sh
-  doas ./install.sh
   doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
-  curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh > install.sh
-  chmod u+x install.sh
-  echo "1" | ./install.sh
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 

@@ -106,6 +106,7 @@
   mkdir -p /home/fabse/{Skærmbilleder,.local/bin,wallpapers/sunpaper}
   fc-cache -f -v 
   doas cp -r etc/* /etc
+  doas ln -s /home/fabse/.config/zsh/.zshenv /etc/environment
   doas intel-undervolt apply
   git clone https://github.com/hexive/sunpaper.git
   cp -r sunpaper/images/* /home/fabse/wallpapers/sunpaper

@@ -23,11 +23,11 @@
 #
 # Example configuration:
 #
-  exec swayidle -w \
+  exec_always swayidle -w \
        timeout 60 'swaymsg seat seat0 cursor set 2000 2000' \
-       timeout 600 'exec /home/fabse/.config/sway/scripts/screensaver.sh' \
+       timeout 600 '/home/fabse/.config/sway/scripts/screensaver.sh' \
        timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep 'exec /home/fabse/.config/sway/scripts/screensaver.sh'
+       before-sleep '/home/fabse/.config/sway/scripts/screensaver.sh'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when

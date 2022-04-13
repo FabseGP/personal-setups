@@ -7,4 +7,3 @@ Target = pipewire
 Description = Checks for newer version of wireplumber...
 When = PostTransaction
 Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/make_wireplumber.sh"'
-

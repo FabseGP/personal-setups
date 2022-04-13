@@ -134,7 +134,6 @@
 
 # Miscellaneous
 
-  doas sed -i 's/Exec="\/opt\/nuclear\/nuclear" %U/Exec="\/opt\/nuclear\/nuclear" %U --enable-features=UseOzonePlatform --ozone-platform=wayland/' /usr/share/applications/nuclear.desktop
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 

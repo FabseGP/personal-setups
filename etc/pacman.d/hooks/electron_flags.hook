@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = electron
+
+[Action]
+Description = Enforces wayland-flags for all electron-apps...
+When = PostTransaction
+Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/electron_flags.sh"'
+

@@ -24,16 +24,16 @@ EOF
   doas apk update
   doas apk upgrade
   doas apk add podman-docker py3-podman podman-remote fuse-overlayfs shadow slirp4netns \
-  podman-zsh-completion podman-compose macchina bottom musl-locales openssh bc grim dialog \
-  lang libressl udisks2 sed man-pages ttf-dejavu cups-pdf git py3-pip pcmanfm wf-config \
-  dunst zstd lz4 cbonsai nerd-fonts gcc make wget build-base kbd-bkeymaps curl i2c-tools \
-  lm_sensors perl lsblk e2fsprogs-extra nftables tzdata mysql-client firefox mysql pipewire \
-  ttf-opensans pipewire-pulse libuser rclone fuzzel pavucontrol i3status-rust libreoffice fzf \
-  zsh syncthing rsync foot terminator unrar unzip zsh-autosuggestions zsh-syntax-highlighting \
-  neovim btrfs-progs mousepad xarchiver nnn mpv swappy river nodejs-current npm lsof zathura \
-  zathura-pdf-mupdf sway swaylock-effects swayidle mesa-dri-gallium xdg-desktop-portal-wlr \
-  xdg-desktop-portal-kde wl-gammarelay clipman gnome-calculator polkit-gnome wireplumper eudev \
-  grep font-awesome swaylockd podman cgroups cups connman cronie haveged sshguard rsnapshot
+  podman-zsh-completion podman-compose macchina bottom musl-locales ttf-font-awesome vimiv \
+  lang libressl udisks2 sed man-pages ttf-dejavu cups-pdf git py3-pip pcmanfm i2c-tools \
+  mako zstd lz4 cbonsai nerd-fonts gcc make wget build-base kbd-bkeymaps curl fzf iwd wofi \
+  lm_sensors perl lsblk nftables tzdata mysql-client firefox mysql pipewire libreoffice \
+  ttf-opensans pipewire-pulse pipewire-alsa pipewire-jack libuser rclone pavucontrol npm \
+  zsh syncthing rsync foot unrar unzip zsh-autosuggestions zsh-syntax-highlighting mpv nnn \
+  helix btrfs-progs xarchiver swappy river nodejs-current zathura zsh-theme-powerlevel10k \
+  zathura-pdf-mupdf swaylock-effects mesa-dri-gallium xdg-desktop-portal-wlr font-meslo-nerd \
+  wlsunset yambar clipman wireplumper eudev grep font-awesome openssh wayshot lsof handlr \
+  podman cgroups cups connman cronie haveged sshguard rsnapshot
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ EOF
   cat << EOF | doas tee -a /etc/issue.net > /dev/null
 
 ###############################################################
-#                                                      Welcome to Fabse Inc.                                                           # 
+#                                                      Welcome to fabsepi Inc.                                                           # 
 #                                   All connections are monitored and recorded                                         #
 #                          Disconnect IMMEDIATELY if you are not an authorized user!                    #
 ###############################################################
@@ -112,13 +112,31 @@ EOF
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
-# Powerlevel10k-theme
+# Default apps
 
-  mkdir -p /home/$(whoami)/.local/share/fonts
-  doas lchsh $(whoami)
-  doas lchsh
-  touch /home/$(whoami)/.zshrc
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$(whoami)/powerlevel10k
+  handlr add .pdf org.pwmt.zathura.desktop
+  handlr add .png vimiv.desktop
+  handlr add .jpeg vimiv.desktop
+
+#----------------------------------------------------------------------------------------------------------------------------------
+
+# Installing dotfiles
+
+  cp -r {wallpapers,.config,scripts,.local} /home/fabsepi
+  sed -i 's/rivercarro/rivertile/g' /home/fabsepi/.config/river/init
+  rm -rf /home/fabsepi/{scripts/artix,.config/{easyeffects,i3status-rust,sway}
+  chmod u+x /home/fabsepi/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*}}
+  mkdir -p /home/fabsepi/{Skærmbilleder,.local/bin}
+  fc-cache -f -v 
+  doas cp -r etc/zsh /etc
+  doas ln -s /home/fabsepi/.config/zsh/.zshenv /etc/environment
+  cd $BEGINNER_DIR || return
+  if ! [[ -d "/etc/pipewire" ]]; then
+    doas mkdir /etc/pipewire
+  fi
+  doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
+  doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
+  doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -130,25 +148,25 @@ EOF
   for GRP in disk wheel video audio input lp netdev plugdev users gpio spi i2c docker; do
     doas adduser $(whoami) $GRP 
   done
-  doas adduser sftpfabse
-  doas adduser sftpfabse sftpusers
+  doas adduser sftpfabsepi
+  doas adduser sftpfabsepi sftpusers
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Extra's
 
+  doas lchsh fabsepi
+  doas lchsh
   doas sed -i s/#unicode="NO"\n\n#/#unicode="NO"\n\nunicode="YES"\n\n#/ /etc/rc.conf
   doas rm -rf /etc/motd
   doas touch /etc/motd
   cat << EOF | doas tee -a /etc/motd > /dev/null
   
-Welcome to Alpine Linux - delivered to you by Fabse Inc.!
+Welcome to Alpine Linux - delivered to you by fabsepi Inc.!
 
 Proceed with caution, as puns is looming around :D
 
 EOF
-  syncthing
-  sed -i 's/127.0.0.1/192.168.0.108/g' /home/$(whoami)/.config/syncthing/config.xml
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,10 +204,10 @@ EOF
   eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/etherpad.sh"|awk '!x[$0]++'|crontab -)"
   echo "@reboot /home/$(whoami)/scripts/seagate.sh" | doas tee -a /etc/crontab > /dev/null
   eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/pipewire.sh"|awk '!x[$0]++'|crontab -)"
-  doas mv /home/fabsepi/Setup_and_configs/RPI4/rsnapshot.conf /etc/rsnapshot.conf
-  doas mv /home/fabsepi/Setup_and_configs/RPI4/Scripts/rsnapshot_daily.sh /etc/periodic/daily
-  doas mv /home/fabsepi/Setup_and_configs/RPI4/Scripts/rsnapshot_weekly.sh /etc/periodic/weekly
-  doas mv /home/fabsepi/Setup_and_configs/RPI4/Scripts/rsnapshot_monthly.sh /etc/periodic/monthly
+  doas mv /home/fabsepipi/Setup_and_configs/RPI4/rsnapshot.conf /etc/rsnapshot.conf
+  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_daily.sh /etc/periodic/daily
+  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_weekly.sh /etc/periodic/weekly
+  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_monthly.sh /etc/periodic/monthly
   doas chmod +x /etc/periodic/*/rsnapshot
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -200,14 +218,15 @@ EOF
   doas rc-service mariadb restart
   doas mysql_secure_installation
   mysql -u root --password=Alpine54321DB67890Maria -e "CREATE database etherpad_lite_db"
-  mysql -u root --password=Alpine54321DB67890Maria -e "CREATE USER etherpad_fabsepi@localhost identified by 'Ether54321Pad67890FABsePI'"
-  mysql -u root --password=Alpine54321DB67890Maria -e "grant CREATE,ALTER,SELECT,INSERT,UPDATE,DELETE on etherpad_lite_db.* to etherpad_fabsepi@localhost"   
+  mysql -u root --password=Alpine54321DB67890Maria -e "CREATE USER etherpad_fabsepipi@localhost identified by 'Ether54321Pad67890fabsepiPI'"
+  mysql -u root --password=Alpine54321DB67890Maria -e "grant CREATE,ALTER,SELECT,INSERT,UPDATE,DELETE on etherpad_lite_db.* to etherpad_fabsepipi@localhost"   
   doas rc-service mariadb restart
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # /etc/fstab
 
+  doas mkdir /media/SEAGATE
   echo 'UUID=523872dd-991a-44a7-a1d4-7050b7646236       /media/SEAGATE  btrfs   defaults,noatime,autodefrag,barrier,datacow        0       3' | doas tee -a /etc/fstab > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -220,8 +239,8 @@ EOF
 
 # Goodbye
 
-  rm -rf Setup_and_configs
   doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf
   echo
   echo "And you're welcome :))"
   echo
+  zsh

@@ -1,3 +1,3 @@
 #/usr/bin/bash
-cd /home/fabsepi/Dockers/Leon-AI/leon
+cd /home/fabsepi/dockers/Leon-AI/leon
 npm start

@@ -22,6 +22,6 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export XDG_CONFIG_HOME="/home/fabse/.config"
 export XDG_CACHE_HOME="/home/fabse/.cache"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-/home/fabse/.config}/gtk-2.0/gtkrc-2.0"
-export EDITOR="nvim"
+export EDITOR="helix"
 export VISUAL="$EDITOR"
 export TERMINAL_COMMAND="footclient"

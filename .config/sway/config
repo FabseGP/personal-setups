@@ -23,7 +23,7 @@
 #
 # Example configuration:
 #
-  exec swayidle -w \
+  exec swayidle \
        timeout 60 'swaymsg seat seat0 cursor set 2000 2000' \
        timeout 600 '/home/fabse/.config/sway/scripts/screensaver.sh' \
        timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -252,7 +252,7 @@ bar {
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
-    xwayland disable
+   # xwayland disable
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081

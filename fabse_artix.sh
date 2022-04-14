@@ -13,18 +13,18 @@
   doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
                                         iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
-                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad mousepad openshot elinks pavucontrol \
+                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad openshot elinks pavucontrol playerctl \
                                         bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
-                                        gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy go \
+                                        gnome-mahjongg gnome-calculator foot moc mpv artools handlr sway i3status-rust swayidle swappy \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland zsh \
                                         pipewire-pulse pipewire-jack wine-staging zsh-theme-powerlevel10k zsh-autosuggestions mako jq wget \
                                         zsh-syntax-highlighting texlive-most shellcheck brightnessctl libnotify aisleriot kicad syncthing \
-                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf figlet obsidian \
+                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf figlet go \
                                         bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole neovim \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole helix \
                                         cpio perl unrar unzip rsync jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
-                                        linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans playerctl \
-                                        ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-pdf cups-dinit tlp-dinit \
+                                        linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans cups-pdf  \
+                                        ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-dinit tlp-dinit \
                                         lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
                                       
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@
   paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
                                                          otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
                                                          revolt-desktop lutris-git river-noxwayland-git vimiv-qt-git avogadroapp yambar \
-                                                         wayshot-bin rivercarro-git ventoy-bin $AUR                    
+                                                         wayshot-bin rivercarro-git ventoy-bin logseq-desktop-bin $AUR                    
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -100,10 +100,11 @@
 
 # Installing dotfiles
 
-  cp -r {wallpapers,.config,scripts,.local} /home/fabse/
-  rm -rf /home/fabse/{scripts/alpine,.config/rsnapshot}
+  cp -r {wallpapers,.config,.local} /home/fabse/
+  rm -rf /home/fabse/.config/rsnapshot
+  mkdir -p /home/fabse/{scripts,Skærmbilleder,.local/bin,wallpapers/sunpaper}
+  cp -r scripts/artix/* /home/fabse/scripts
   chmod u+x /home/fabse/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
-  mkdir -p /home/fabse/{Skærmbilleder,.local/bin,wallpapers/sunpaper}
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas ln -s /home/fabse/.config/zsh/.zshenv /etc/environment

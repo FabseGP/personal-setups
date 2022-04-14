@@ -1,4 +1,4 @@
 #/usr/bin/bash
-cd /home/fabsepi/Dockers/Etherpad/etherpad-lite
+cd /home/fabsepi/dockers/Etherpad/etherpad-lite
 git pull origin
 ./src/bin/run.sh

@@ -111,8 +111,8 @@ alias "rm -r"="rm -i"
 alias "rm -f"="rm -i"
 alias "rm -rf"="rm -i"
 alias yay="paru"
-alias sway="dbus-run-session sway"
-alias river="dbus-run-session river"
+alias sway="XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway dbus-run-session sway"
+alias river="XDG_CURRENT_DESKTOP=river XDG_SESSION_DESKTOP=river dbus-run-session river"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

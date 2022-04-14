@@ -16,9 +16,9 @@
   elif [ "$identity" == docker ]; then
     identity_command="docker compose up -d"
     docker network create pacman
-    cd /home/fabsepi/Dockers/Watchtower || exit
+    cd /home/fabsepi/dockers/Watchtower || exit
     sed -i 's/var\/run\/podman\/podman.sock/var\/run\/docker.sock/g' docker compose.yml
-    cd /home/fabsepi/Dockers/Yacht || exit
+    cd /home/fabsepi/dockers/Yacht || exit
     sed -i 's/var\/run\/podman\/podman.sock/var\/run\/docker.sock/g' docker compose.yml
   fi
 
@@ -34,21 +34,21 @@
 
 # ArchiveBox
 
-  cd /home/fabsepi/Dockers/ArchiveBox || exit
+  cd /home/fabsepi/dockers/ArchiveBox || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Crowdsec
 
-  cd /home/fabsepi/Dockers/Crowdsec || exit
+  cd /home/fabsepi/dockers/Crowdsec || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Cryptofolio
 
-  cd /home/fabsepi/Dockers/Cryptofolio || exit
+  cd /home/fabsepi/dockers/Cryptofolio || exit
   mkdir data
   identity_command
 
@@ -56,14 +56,14 @@
 
 # Dashy
 
-  cd /home/fabsepi/Dockers/Dashy || exit
+  cd /home/fabsepi/dockers/Dashy || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Docspell
 
-  cd /home/fabsepi/Dockers/Docspell || exit
+  cd /home/fabsepi/dockers/Docspell || exit
   mkdir docs
   mkdir docspell-postgres_data
   mkdir docspell-solr_data
@@ -74,14 +74,14 @@
 
 # Exatorrent
 
-  cd /home/fabsepi/Dockers/Exotorrent || exit
+  cd /home/fabsepi/dockers/Exotorrent || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Filebrowser
 
-  cd /home/fabsepi/Dockers/Filebrowser || exit
+  cd /home/fabsepi/dockers/Filebrowser || exit
   mkdir config
   identity_command
 
@@ -89,14 +89,14 @@
 
 # Firefly
 
-  cd /home/fabsepi/Dockers/Firefly || exit
+  cd /home/fabsepi/dockers/Firefly || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Grafana
 
-  cd /home/fabsepi/Dockers/Grafana || exit
+  cd /home/fabsepi/dockers/Grafana || exit
   docker volume create grafana-storage
   identity_command
 
@@ -104,7 +104,7 @@
 
 # Hedgedoc
 
-  cd /home/fabsepi/Dockers/Hedgedoc || exit
+  cd /home/fabsepi/dockers/Hedgedoc || exit
   mkdir data
   mkdir config
   identity_command
@@ -113,7 +113,7 @@
 
 # Navidrome
 
-  cd /home/fabsepi/Dockers/Navidrome || exit
+  cd /home/fabsepi/dockers/Navidrome || exit
   mkdir data
   identity_command
 
@@ -121,7 +121,7 @@
 
 # Netdata
 
-  cd /home/fabsepi/Dockers/Netdata || exit
+  cd /home/fabsepi/dockers/Netdata || exit
   mkdir netdatalib
   mkdir netdatacache
   mkdir -p netdataconfig/netdata
@@ -131,7 +131,7 @@
 
 # Nginx-proxy-manager
 
-  cd /home/fabsepi/Dockers/Nginx-proxy-manager || exit
+  cd /home/fabsepi/dockers/Nginx-proxy-manager || exit
   mkdir -p data/nginx
   mkdir letsencrypt
   mkdir -p data/mariadb
@@ -141,7 +141,7 @@
 
 # OpenHAB
 
-  cd /home/fabsepi/Dockers/OpenHAB || exit
+  cd /home/fabsepi/dockers/OpenHAB || exit
   mkdir openhab_addons
   mkdir openhab_conf
   mkdir openhab_userdata
@@ -151,7 +151,7 @@
 
 # Photoprism
 
-  cd /home/fabsepi/Dockers/Photoprism || exit
+  cd /home/fabsepi/dockers/Photoprism || exit
   mkdir data
   mkdir database
   identity_command
@@ -160,14 +160,14 @@
 
 # Prometheus
 
-  cd /home/fabsepi/Dockers/Prometheus || exit
+  cd /home/fabsepi/dockers/Prometheus || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Sharry
 
-  cd /home/fabsepi/Dockers/Sharry || exit
+  cd /home/fabsepi/dockers/Sharry || exit
   mkdir postgres_data
   identity_command
 
@@ -175,7 +175,7 @@
 
 # Uptime_kuma
 
-  cd /home/fabsepi/Dockers/Uptime_kuma || exit
+  cd /home/fabsepi/dockers/Uptime_kuma || exit
   mkdir uptime-kuma
   identity_command
 
@@ -183,7 +183,7 @@
 
 # Vikunja
 
-  cd /home/fabsepi/Dockers/Vikunja || exit
+  cd /home/fabsepi/dockers/Vikunja || exit
   mkdir files
   mkdir db
   identity_command
@@ -192,21 +192,21 @@
 
 # Watchtower
 
-  cd /home/fabsepi/Dockers/Watchtower || exit
+  cd /home/fabsepi/dockers/Watchtower || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Wiki_js
 
-  cd /home/fabsepi/Dockers/Wiki.js || exit
+  cd /home/fabsepi/dockers/Wiki.js || exit
   identity_command
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Yacht
 
-  cd /home/fabsepi/Dockers/Yacht || exit
+  cd /home/fabsepi/dockers/Yacht || exit
   mkdir yacht
   identity_command
 
@@ -216,11 +216,11 @@
 
   cd /home/fabsepi || exit
   git clone --branch develop https://github.com/ether/etherpad-lite.git
-  mv Dockers/Etherpad/settings.json /home/fabsepi
-  rm Dockers/Etherpad/*
-  mv etherpad-lite Dockers/Etherpad
-  mv /home/fabsepi/settings.json Dockers/Etherpad/etherpad-lite
-  cd Dockers/Etherpad/etherpad-lite || exit
+  mv dockers/Etherpad/settings.json /home/fabsepi
+  rm dockers/Etherpad/*
+  mv etherpad-lite dockers/Etherpad
+  mv /home/fabsepi/settings.json dockers/Etherpad/etherpad-lite
+  cd dockers/Etherpad/etherpad-lite || exit
   chmod u+x src/bin/run.sh
   ./src/bin/run.sh
   export NODE_ENV=production
@@ -233,12 +233,12 @@
 # Leon-AI (npm)
 
   cd /home/fabsepi || exit
-  mv Dockers/Leon-AI/.env /home/fabsepi
-  rm Dockers/Leon-AI/*
+  mv dockers/Leon-AI/.env /home/fabsepi
+  rm dockers/Leon-AI/*
   git clone https://github.com/leon-ai/leon.git leon
-  mv leon Dockers/Leon-AI
-  mv .env Dockers/Leon-AI/leon
-  cd Dockers/Leon-AI/leon || exit
+  mv leon dockers/Leon-AI
+  mv .env dockers/Leon-AI/leon
+  cd dockers/Leon-AI/leon || exit
   npm install --save-dev @babel/node
   npm install -g node-gyp
   npm install

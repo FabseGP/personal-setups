@@ -3,7 +3,7 @@
 # Parameters
 
   BEGINNER_DIR=$(pwd)
-  echo "permit nopass $(whoami)" | doas tee -a /etc/doas.conf > /dev/null
+  echo "permit nopass fabsepi" | doas tee -a /etc/doas.conf > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ EOF
 
   doas rc-update add swap boot
   doas rc-update add haveged boot
-  for service in rsnapshot podman cronie syncthing dbus sshguard sshd cgroups cupsd mariadb fuse nftables connmand; do
+  for service in rsnapshot podman cronie dbus sshguard sshd cgroups cupsd mariadb fuse nftables connmand; do
     doas rc-update add $service default
   done
   doas rc-service mariadb start
@@ -50,17 +50,13 @@ EOF
   doas rc-service podman start
   doas modprobe tun
   doas echo tun >> /etc/modules
-  doas usermod --add-subuids 100000-165535 $(whoami)
-  doas usermod --add-subgids 100000-165535 $(whoami)
+  doas usermod --add-subuids 100000-165535 fabsepi
+  doas usermod --add-subgids 100000-165535 fabsepi
   podman system migrate
   doas /etc/init.d/sshd start
   cat << EOF | doas tee -a /etc/ssh/sshd.config > /dev/null
 
-AuthenticationMethods publickey,keyboard-interactive
-ChallengeResponseAuthentication yes
-PermitRootLogin yes
-KbdInteractiveAuthentication yes
-
+UseDNS no
 EOF
   doas sed -i -e "/PasswordAuthentication no/s/^#//" /etc/ssh/sshd.config
   doas sed -i -e "/Port 22/s/^#//" /etc/ssh/sshd.config
@@ -99,16 +95,6 @@ IPV6_SUBNET=64
 IPV4_SUBNET=24
 
 EOF
-  doas touch /etc/pam.d/sshd.pam
-  cat << EOF | doas tee -a /etc/pam.d/sshd.pam > /dev/null
-
-account		include				base-account
-
-auth		required			pam_env.so
-auth		required			pam_nologin.so	successok
-auth		include				google-authenticator
-
-EOF
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -122,11 +108,12 @@ EOF
 
 # Installing dotfiles
 
-  cp -r {wallpapers,.config,scripts,.local} /home/fabsepi
+  cp -r {wallpapers,.config,.local} /home/fabsepi
   sed -i 's/rivercarro/rivertile/g' /home/fabsepi/.config/river/init
-  rm -rf /home/fabsepi/{scripts/artix,.config/{easyeffects,i3status-rust,sway}
+  rm -rf /home/fabsepi/{.config/{easyeffects,i3status-rust,sway}
+  mkdir -p /home/fabsepi/{scripts,Skærmbilleder,.local/bin}
+  cp -r scripts/alpine/* /home/fabse/scripts
   chmod u+x /home/fabsepi/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*}}
-  mkdir -p /home/fabsepi/{Skærmbilleder,.local/bin}
   fc-cache -f -v 
   doas cp -r etc/zsh /etc
   doas ln -s /home/fabsepi/.config/zsh/.zshenv /etc/environment
@@ -146,7 +133,7 @@ EOF
     doas addgroup --system $GRP
   done
   for GRP in disk wheel video audio input lp netdev plugdev users gpio spi i2c docker; do
-    doas adduser $(whoami) $GRP 
+    doas adduser fabsepi $GRP 
   done
   doas adduser sftpfabsepi
   doas adduser sftpfabsepi sftpusers
@@ -155,8 +142,6 @@ EOF
 
 # Extra's
 
-  doas lchsh fabsepi
-  doas lchsh
   doas sed -i s/#unicode="NO"\n\n#/#unicode="NO"\n\nunicode="YES"\n\n#/ /etc/rc.conf
   doas rm -rf /etc/motd
   doas touch /etc/motd
@@ -199,15 +184,14 @@ EOF
 
 # Add fcron jobs
 
-  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/syncthing.sh"|awk '!x[$0]++'|crontab -)"
-  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/leon.sh"|awk '!x[$0]++'|crontab -)"
-  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/etherpad.sh"|awk '!x[$0]++'|crontab -)"
-  echo "@reboot /home/$(whoami)/scripts/seagate.sh" | doas tee -a /etc/crontab > /dev/null
-  eval "$(crontab -l; echo "@reboot /home/$(whoami)/scripts/pipewire.sh"|awk '!x[$0]++'|crontab -)"
-  doas mv /home/fabsepipi/Setup_and_configs/RPI4/rsnapshot.conf /etc/rsnapshot.conf
-  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_daily.sh /etc/periodic/daily
-  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_weekly.sh /etc/periodic/weekly
-  doas mv /home/fabsepipi/Setup_and_configs/RPI4/Scripts/rsnapshot_monthly.sh /etc/periodic/monthly
+  eval "$(crontab -l; echo "@reboot /home/fabsepi/scripts/syncthing.sh"|awk '!x[$0]++'|crontab -)"
+  eval "$(crontab -l; echo "@reboot /home/fabsepi/scripts/leon.sh"|awk '!x[$0]++'|crontab -)"
+  eval "$(crontab -l; echo "@reboot /home/fabsepi/scripts/etherpad.sh"|awk '!x[$0]++'|crontab -)"
+  echo "@reboot /home/fabsepi/scripts/seagate.sh" | doas tee -a /etc/crontab > /dev/null
+  doas ln -s /home/fabsepi/.config/rsnapshot/rsnapshot.conf /etc/rsnapshot.conf
+  doas ln -s /home/fabsepi/scripts/rsnapshot_daily.sh /etc/periodic/daily
+  doas ln -s /home/fabsepi/scripts/rsnapshot_weekly.sh /etc/periodic/weekly
+  doas ln -s /home/fabsepi/scripts/rsnapshot_monthly.sh /etc/periodic/monthly
   doas chmod +x /etc/periodic/*/rsnapshot
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -218,8 +202,8 @@ EOF
   doas rc-service mariadb restart
   doas mysql_secure_installation
   mysql -u root --password=Alpine54321DB67890Maria -e "CREATE database etherpad_lite_db"
-  mysql -u root --password=Alpine54321DB67890Maria -e "CREATE USER etherpad_fabsepipi@localhost identified by 'Ether54321Pad67890fabsepiPI'"
-  mysql -u root --password=Alpine54321DB67890Maria -e "grant CREATE,ALTER,SELECT,INSERT,UPDATE,DELETE on etherpad_lite_db.* to etherpad_fabsepipi@localhost"   
+  mysql -u root --password=Alpine54321DB67890Maria -e "CREATE USER etherpad_fabsepi@localhost identified by 'Ether54321Pad67890fabsePI'"
+  mysql -u root --password=Alpine54321DB67890Maria -e "grant CREATE,ALTER,SELECT,INSERT,UPDATE,DELETE on etherpad_lite_db.* to etherpad_fabsepi@localhost"   
   doas rc-service mariadb restart
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -233,14 +217,16 @@ EOF
 
 # cmdline.txt
 
-  doas sed -i 's/modules=sd-mod,usb-storage,btrfs quiet rootfstype=btrfs/modules=modules=sd-mod,usb-storage,btrfs,iptables,i2c-dev,fuse,tun,snd_seq quiet rootfstype=btrfs fsck.repair cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1/' /boot/cmdline.txt
+  doas sed -i 's/modules=sd-mod,usb-storage,btrfs quiet rootfstype=btrfs/modules=modules=sd-mod,usb-storage,btrfs,iptables,i2c-dev,fuse,tun quiet rootfstype=btrfs fsck.repair cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1/' /boot/cmdline.txt
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Goodbye
 
-  doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf
+  doas sed -i "/permit nopass fabsepi/d" /etc/doas.conf
   echo
   echo "And you're welcome :))"
   echo
+  doas lchsh fabsepi
+  doas lchsh
   zsh

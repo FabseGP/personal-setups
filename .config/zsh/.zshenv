@@ -1,7 +1,6 @@
 # Export paths
 typeset -U PATH path
-path=("/home/fabse/.local/bin" "$path[@]")
-path+=("/home/fabse/.cargo/bin")
+path=("/home/fabse/.local/bin:/home/fabse/.cargo/bin" "$path[@]")
 export PATH
 
 # Export default folder for zimfw

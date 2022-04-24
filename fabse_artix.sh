@@ -64,13 +64,14 @@
 
 # Dinit-services
 
-  for service in cupsd lm_sensors intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd; do
+  for service in cupsd lm_sensors intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd sshd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   doas sensors-detect --auto
   doas usermod -a -G libvirt,games fabse
   doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
   doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf	
+  eval `ssh-agent -s`
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

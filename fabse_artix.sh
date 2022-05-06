@@ -3,6 +3,7 @@
 # Parameters
 
   BEGINNER_DIR=$(pwd)
+  MODE="$1"
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -11,21 +12,30 @@
   cd packages || exit
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
-  doas pacman --noconfirm --needed -Syu virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns pcmanfm-gtk3 geany bat \
-                                        iso-profiles avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins alacritty \
-                                        libreoffice-fresh qutebrowser thunderbird obs-studio freecad openshot pavucontrol playerctl \
-                                        bitwarden foliate easyeffects gimp gnuplot librewolf zathura zathura-pdf-mupdf kicad-library-3d \
-                                        gnome-mahjongg galculator foot moc mpv artools handlr sway i3status-rust swayidle swappy elinks \
-                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa wayland zsh \
-                                        pipewire-pulse pipewire-jack wine-staging zsh-theme-powerlevel10k zsh-autosuggestions mako jq wget \
-                                        zsh-syntax-highlighting texlive-most shellcheck brightnessctl libnotify aisleriot kicad syncthing \
-                                        bsd-games mypaint android-tools man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf figlet go \
-                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire kicad-library rust \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto pahole helix \
-                                        cpio perl unrar unzip rsync jdk-openjdk meson clang nodejs boost python python-pip rclone zenity \
-                                        linux-lts linux-lts-headers vulkan-intel libva-intel-driver lib32-vulkan-intel ttf-opensans cups-pdf \
-                                        ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols cups-dinit tlp-dinit \
-                                        lm_sensors-dinit avahi-dinit intel-undervolt-dinit thermald-dinit libvirt-dinit
+  doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland \
+                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf elinks pahole swappy \
+                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget \
+                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa \
+                                        pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq \
+                                        zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot helix vulkan-intel \
+                                        bsd-games mypaint man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf figlet zenity \
+                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto \
+                                        cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
+                                        lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
+                                        tlp-dinit lm_sensors-dinit thermald-dinit
+  if ! [[ "$MODE" == "MINIMAL" ]]; then
+    doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
+                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser thunderbird \
+                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-staging texlive-most go \
+                                        kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost \
+                                        cups-pdf cups-dinit avahi-dinit libvirt-dinit
+  fi
+  if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
+    doas pacman --noconfirm --needed -S intel-undervolt-dinit
+  elif grep -q AMD "/proc/cpuinfo"; then
+    :
+  fi
                                       
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -53,10 +63,12 @@
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $PIPES_2 \
                                       $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TOKYONIGHT $TTF_POWER
   cd $BEGINNER_DIR || exit
-  paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nuclear-player-bin sworkstyle nodejs-reveal-md wlsunset clipman \
-                                                         otf-openmoji sunwait-git sway-launcher-desktop swaylock-effects-git macchina \
-                                                         revolt-desktop lutris-git river-noxwayland-git vimiv-qt-git avogadroapp yambar \
-                                                         wayshot-bin rivercarro-git ventoy-bin logseq-desktop-bin $AUR                    
+  paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle wlsunset clipman otf-openmoji sunwait-git \
+                                                         sway-launcher-desktop swaylock-effects-git macchina revolt-desktop yambar \
+                                                         lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git $AUR                                                                             
+  if ! [[ "$MODE" == "MINIMAL" ]]; then
+    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin logseq-desktop-bin
+  fi
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk
 
@@ -64,13 +76,23 @@
 
 # Dinit-services
 
-  for service in cupsd lm_sensors intel-undervolt tlp thermald avahi-daemon libvirtd virtlogd sshd; do
+  for service in lm_sensors tlp thermald sshd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
-  doas sensors-detect --auto
-  doas usermod -a -G libvirt,games fabse
-  doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
-  doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf	
+  if ! [[ "$MODE" == "MINIMAL" ]]; then
+    for service in cupsd intel-undervolt avahi-daemon libvirtd virtlogd; do
+      doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
+    done
+    doas usermod -a -G libvirt,games fabse
+    doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
+    doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
+  fi   
+  if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
+    doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
+  elif grep -q AMD "/proc/cpuinfo"; then
+    :
+  fi
+  doas sensors-detect --auto	
   eval `ssh-agent -s`
 
 #----------------------------------------------------------------------------------------------------------------------------------

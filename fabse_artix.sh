@@ -4,6 +4,11 @@
 
   BEGINNER_DIR=$(pwd)
   MODE="$1"
+  if ! grep -qF "permit nopasswd fabse" /etc/doas.conf; then
+    cat << EOF | doas tee -a /etc/doas.conf > /dev/null
+      permit nopasswd $(whoami)
+    EOF
+  fi
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +69,7 @@
                                       $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TOKYONIGHT $TTF_POWER
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle wlsunset clipman otf-openmoji sunwait-git \
-                                                         sway-launcher-desktop swaylock-effects-git macchina revolt-desktop yambar \
+                                                         sway-launcher-desktop swaylock-effects-git macchina-bin revolt-desktop yambar \
                                                          lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin logseq-desktop-bin
@@ -83,14 +88,14 @@
     for service in cupsd intel-undervolt avahi-daemon libvirtd virtlogd; do
       doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
     done
-    doas usermod -a -G libvirt,games fabse
+    doas usermod -a -G libvirt,games $(whoami)
     doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
     doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
   fi   
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
   elif grep -q AMD "/proc/cpuinfo"; then
-    :
+    paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin
   fi
   doas sensors-detect --auto	
   eval `ssh-agent -s`
@@ -107,7 +112,7 @@
 
 # Default shell
 
-  doas usermod --shell /usr/bin/zsh fabse
+  doas usermod --shell /usr/bin/zsh $(whoami)
   doas usermod --shell /usr/bin/zsh root
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -123,22 +128,24 @@
 
 # Installing dotfiles
 
-  cp -r {wallpapers,.config,.local} /home/fabse/
-  rm -rf /home/fabse/.config/rsnapshot
-  mkdir -p /home/fabse/{scripts,Skærmbilleder,.local/bin,wallpapers/sunpaper}
-  cp -r scripts/artix/* /home/fabse/scripts
-  chmod u+x /home/fabse/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
+  cp -r {wallpapers,.config,.local} /home/$(whoami)/
+  rm -rf /home/$(whoami)/.config/rsnapshot
+  mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/bin,wallpapers/sunpaper}
+  cp -r scripts/artix/* /home/$(whoami)/scripts
+  chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
   fc-cache -f -v 
   doas cp -r etc/* /etc
-  doas ln -s /home/fabse/.config/zsh/.zshenv /etc/environment
-  doas intel-undervolt apply
+  doas ln -s /home/$(whoami)/.config/zsh/.zshenv /etc/environment
+  if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
+    doas intel-undervolt apply
+  fi
   git clone https://github.com/hexive/sunpaper.git
-  cp -r sunpaper/images/* /home/fabse/wallpapers/sunpaper
-  if [[ -d "/home/fabse/.librewolf" ]]; then
-    rm -rf /home/fabse/.librewolf
+  cp -r sunpaper/images/* /home/$(whoami)/wallpapers/sunpaper
+  if [[ -d "/home/$(whoami)/.librewolf" ]]; then
+    rm -rf /home/$(whoami)/.librewolf
   fi
   cd librewolf || exit
-  tar -xvf librewolf-browser-profile.tar.bz2 -C /home/fabse
+  tar -xvf librewolf-browser-profile.tar.bz2 -C /home/$(whoami)
   cd $BEGINNER_DIR || return
   if ! [[ -d "/etc/pipewire" ]]; then
     doas mkdir /etc/pipewire
@@ -151,7 +158,7 @@
   hej=${s%% *}
   while read line; do
     hej=${line%% *}
-    cp /home/fabse/.config/electron-flags.conf /home/fabse/.config/$hej-flags.conf
+    cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
   done < hejhej.txt
 
 #----------------------------------------------------------------------------------------------------------------------------------

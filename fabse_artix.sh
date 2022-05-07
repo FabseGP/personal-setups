@@ -28,7 +28,7 @@
                                         tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto \
                                         cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
                                         lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
-                                        tlp-dinit lm_sensors-dinit thermald-dinit
+                                        tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
                                         avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser thunderbird \

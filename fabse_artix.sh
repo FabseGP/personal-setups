@@ -128,7 +128,7 @@
 
 # Installing dotfiles
 
-  cp -r {wallpapers,.config,.local} /home/$(whoami)/
+  cp -r {wallpapers,.config,.local,programs} /home/$(whoami)/
   rm -rf /home/$(whoami)/.config/rsnapshot
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/bin,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts

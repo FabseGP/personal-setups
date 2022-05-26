@@ -14,6 +14,7 @@ EOF
 
 # Package-installation
   
+  doas sed -i "s/mkinitcpio/mkinitcpio wireplumber/g" /etc/pacman.conf
   cd packages || exit
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER

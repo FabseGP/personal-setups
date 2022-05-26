@@ -4,9 +4,9 @@
 
   BEGINNER_DIR=$(pwd)
   MODE="$1"
-  if ! grep -qF "permit nopasswd fabse" /etc/doas.conf; then
+  if ! grep -qF "permit nopass $(whoami)" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
-      permit nopasswd $(whoami)
+      permit nopass $(whoami)
 EOF
   fi
 

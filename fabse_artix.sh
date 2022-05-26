@@ -73,7 +73,7 @@ EOF
                                                          sway-launcher-desktop swaylock-effects-git macchina-bin revolt-desktop yambar \
                                                          lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin logseq-desktop-bin
+    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin
   fi
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk

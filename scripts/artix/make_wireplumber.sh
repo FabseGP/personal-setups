@@ -7,7 +7,7 @@
   local_wireplumber=${local#*/}
 
   make_wireplumber() {
-    cd /home/fabse
+    cd /home/$(whoami)
     rm -rf wireplumber_make
     mkdir wireplumber_make
     cd wireplumber_make
@@ -17,8 +17,8 @@
     sed -i 's/options=(debug)/options=()/' PKGBUILD
     sed -i '/^package_wireplumber-docs() {$/,/^}$/d' PKGBUILD
     makepkg -s
-    cd /home/fabse
-    cp wireplumber_make/wireplumber-* /home/fabse
+    cd /home/$(whoami)
+    cp wireplumber_make/wireplumber-* /home/$(whoami)
     rm -rf wireplumber_make
 }
 

@@ -71,7 +71,7 @@ EOF
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle wlsunset clipman otf-openmoji sunwait-git \
                                                          sway-launcher-desktop swaylock-effects-git macchina-bin revolt-desktop yambar \
-                                                         lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git $AUR                                                                             
+                                                         lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git youtube-music $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin
   fi

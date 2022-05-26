@@ -7,7 +7,7 @@
   if ! grep -qF "permit nopasswd fabse" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
       permit nopasswd $(whoami)
-    EOF
+EOF
   fi
 
 #----------------------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
   BEGINNER_DIR=$(pwd)
   MODE="$1"
-  if ! grep -qF "permit nopass $(whoami)" /etc/doas.conf; then
+  if ! grep -qF "permit nopass fabse" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
       permit nopass $(whoami)
 EOF
@@ -170,4 +170,5 @@ This object that you, sir, are using is property of Fabse Inc. - expect therefor
 
 EOF
   doas pacman --noconfirm -Syu
+  doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf
   zsh

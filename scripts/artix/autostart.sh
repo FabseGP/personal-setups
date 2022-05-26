@@ -1,28 +1,28 @@
 #!/bin/bash
 
   if [[ "$1" == "sway" ]]; then
-    rm -rf /home/fabse/.config/sway/exec
-    touch /home/fabse/.config/sway/exec
+    rm -rf /home/$(whoami)/.config/sway/exec
+    touch /home/$(whoami)/.config/sway/exec
   fi
   for service in yambar foot pipewire mako syncthing wl-paste; do
     if [[ "$1" == "sway" ]]; then
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then
-          cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
+          cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
 exec_always foot --server
 EOF
         elif [[ "$service" == "wl-paste" ]]; then
-          cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
+          cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
 exec_always wl-paste -t text --watch clipman store
 EOF
         elif [[ "$service" == "syncthing" ]]; then
-          cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
+          cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
 exec_always syncthing serve --no-browser
 EOF
         elif [[ "$service" == "yambar" ]]; then
           :
         else
-          cat << EOF | tee -a /home/fabse/.config/sway/exec > /dev/null
+          cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
 exec_always $service
 EOF
         fi

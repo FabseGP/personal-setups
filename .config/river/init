@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set default wallpaper
-  riverctl spawn "swaybg -m fill -i /home/fabse/wallpapers/natsu-and-happy.jpg" &
+  riverctl spawn "swaybg -m fill -i /home/$(whoami)/wallpapers/natsu-and-happy.jpg" &
 
 # Set default terminal depending on foot running or not
   if ! [[ $(pidof foot) ]]; then
@@ -15,7 +15,7 @@
   fi
 
 # Services to execute at start
-  bash /home/fabse/scripts/autostart.sh river &
+  bash /home/$(whoami)/scripts/autostart.sh river &
 
 # Shortcut to terminal
   riverctl map normal Super Return spawn $terminal &
@@ -57,10 +57,10 @@
   riverctl map normal Control l spawn "swaylock -f"
 
 # Shortcut to exit river
-  riverctl map normal Super+Shift E spawn "/home/fabse/scripts/logout.sh river"
+  riverctl map normal Super+Shift E spawn "/home/$(whoami)/scripts/logout.sh river"
 
 # Shortcut to reload river configuration
-  riverctl map normal Super+Shift C spawn "~/.config/river/init"
+  riverctl map normal Super+Shift C spawn "/home/$(whoami)/.config/river/init"
 
 # Shortcut to toggle float
   riverctl map normal Super Space toggle-float

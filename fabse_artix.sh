@@ -20,7 +20,7 @@ EOF
   doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland \
                                         bitwarden easyeffects librewolf zathura zathura-pdf-mupdf elinks pahole swappy \
-                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget \
+                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa \
                                         pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq \
                                         zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot helix vulkan-intel \

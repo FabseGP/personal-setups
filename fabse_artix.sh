@@ -68,9 +68,8 @@ EOF
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
-  TOKYONIGHT="$(ls -- *neovim-*)"
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_GTK \
-                                      $SWEET_QT $TELA $TOKYONIGHT
+                                      $SWEET_QT $TELA
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
                                                          macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \

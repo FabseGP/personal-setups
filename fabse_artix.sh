@@ -23,22 +23,23 @@ EOF
   cd packages || exit
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
-  doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland \
-                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf elinks pahole swappy \
-                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg \
-                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa \
-                                        pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq \
-                                        zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot helix vulkan-intel \
-                                        bsd-games mypaint man-db gvfs gvfs-mtp wallutils tumbler xarchiver fzf figlet zenity \
-                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto \
+  doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland lutris-git \
+                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git \
+                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
+                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
+                                        pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \
+                                        zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git \
+                                        bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
+                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
+                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
                                         cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
                                         lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
+                                        bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks \
                                         tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
                                         avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser thunderbird \
-                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-staging texlive-most go \
+                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go \
                                         kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost \
                                         cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
@@ -59,8 +60,6 @@ EOF
   paru --noconfirm -Syu
   PIPES_1="$(ls -- *bash-pipes-*)"
   BASTET="$(ls -- *bastet-*)"
-  BIBATA="$(ls -- *bibata-*)"
-  CANDY="$(ls -- *candy-*)"
   CBONSAI="$(ls -- *cbonsai-*)"
   NUDOKU="$(ls -- *nudoku-*)"
   PIPES_2="$(ls -- *pipes.sh-*)"
@@ -70,15 +69,14 @@ EOF
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
   TOKYONIGHT="$(ls -- *neovim-*)"
-  TTF_POWER="$(ls -- *ttf-*)"
-  doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $BIBATA $CANDY $CBONSAI $NUDOKU $PIPES_2 \
-                                      $POKEMON $SUNWAIT $SWEET_GTK $SWEET_QT $TELA $TOKYONIGHT $TTF_POWER
+  doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_GTK \
+                                      $SWEET_QT $TELA $TOKYONIGHT
   cd $BEGINNER_DIR || exit
-  paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle wlsunset clipman otf-openmoji sunwait-git \
-                                                         sway-launcher-desktop swaylock-effects-git macchina-bin revolt-desktop yambar \
-                                                         lutris-git river-noxwayland-git vimiv-qt-git wayshot-bin rivercarro-git youtube-music $AUR                                                                             
+  paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
+                                                         macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
+                                                         rivercarro-git youtube-music $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp ventoy-bin
+    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp
   fi
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk

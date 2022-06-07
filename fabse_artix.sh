@@ -59,7 +59,6 @@ EOF
   fi
   paru --noconfirm -Syu
   PIPES_1="$(ls -- *bash-pipes-*)"
-  BASTET="$(ls -- *bastet-*)"
   CBONSAI="$(ls -- *cbonsai-*)"
   NUDOKU="$(ls -- *nudoku-*)"
   PIPES_2="$(ls -- *pipes.sh-*)"
@@ -73,7 +72,7 @@ EOF
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
                                                          macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
-                                                         rivercarro-git youtube-music $AUR                                                                             
+                                                         rivercarro-git youtube-music bastet $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp
   fi

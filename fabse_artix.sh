@@ -24,7 +24,7 @@ EOF
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland lutris-git \
-                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git \
+                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
                                         gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
                                         pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \
@@ -38,7 +38,7 @@ EOF
                                         tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
-                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser thunderbird \
+                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird \
                                         obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go \
                                         kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost \
                                         cups-pdf cups-dinit avahi-dinit libvirt-dinit

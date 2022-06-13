@@ -24,7 +24,7 @@ EOF
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 bat alacritty libreoffice-fresh pavucontrol playerctl zsh wayland lutris-git \
-                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git pnpm \
+                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git \
                                         gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
                                         bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
                                         pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \

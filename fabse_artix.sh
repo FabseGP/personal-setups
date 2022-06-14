@@ -71,8 +71,8 @@ EOF
                                       $SWEET_QT $TELA
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
-                                                         macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
-                                                         rivercarro-git youtube-music bastet protonvpn-cli-community $AUR                                                                             
+                                                        macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
+                                                        rivercarro-git youtube-music bastet protonvpn-cli-community $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp
   fi

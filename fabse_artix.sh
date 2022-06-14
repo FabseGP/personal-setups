@@ -24,24 +24,24 @@ EOF
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat \
-                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
-                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
-                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
-                                        pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \
-                                        zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git \
-                                        bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
-                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
-                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
-                                        cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
-                                        lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
-                                        bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks \
-                                        tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
+                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
+                                       gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
+                                       bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
+                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \
+                                       zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git \
+                                       bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
+                                       bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
+                                       tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
+                                       cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
+                                       lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
+                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks \
+                                       tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
-                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird \
-                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go \
-                                        kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost \
-                                        cups-pdf cups-dinit avahi-dinit libvirt-dinit
+                                       avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird \
+                                       obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go \
+                                       kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost \
+                                       cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas pacman --noconfirm --needed -S intel-undervolt-dinit

@@ -1,7 +1,6 @@
-version: "3.8"
 services:
   dashy:
-    image: lissy93/dashy:multi-arch
+    image: lissy93/dashy:latest
     container_name: Dashy
     volumes:
       - ./config/fabse_conf.yml:/app/public/conf.yml
@@ -15,4 +14,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

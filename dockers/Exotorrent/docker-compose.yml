@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   torrent:
     container_name: Exatorrent
@@ -15,4 +14,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

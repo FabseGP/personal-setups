@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   app:
     container_name: Nginx-proxy-manager
@@ -37,4 +36,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

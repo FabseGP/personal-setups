@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   watchtower:
     container_name: Watchtower
@@ -17,4 +16,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

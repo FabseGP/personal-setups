@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   photoprism:
     image: photoprism/photoprism:preview
@@ -63,4 +62,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

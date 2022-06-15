@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   navidrome:
     image: deluan/navidrome:develop
@@ -18,4 +17,4 @@ services:
 networks:
   default:
     external:
-      name: pacman
+      name: sakamoto

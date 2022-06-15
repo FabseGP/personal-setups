@@ -1,26 +1,7 @@
 #!/bin/bash
 
-# Parameters
-
-  identity=""
-  identity_command=""
-
-#----------------------------------------------------------------------------------------------------------------------------------
-
-# Doas or sudo
-
-  read -rp "Are you, sir, using either \"podman\" or \"docker\"? " identity
-  if [ "$identity" == podman ]; then
     identity_command="DOCKER_HOST=unix:///run/podman/podman.sock docker compose up -d"
-    podman network create pacman
-  elif [ "$identity" == docker ]; then
-    identity_command="docker compose up -d"
-    docker network create pacman
-    cd /home/fabsepi/dockers/Watchtower || exit
-    sed -i 's/var\/run\/podman\/podman.sock/var\/run\/docker.sock/g' docker compose.yml
-    cd /home/fabsepi/dockers/Yacht || exit
-    sed -i 's/var\/run\/podman\/podman.sock/var\/run\/docker.sock/g' docker compose.yml
-  fi
+    podman network create sakamoto
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

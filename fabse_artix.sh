@@ -23,7 +23,7 @@ EOF
   cd packages || exit
   WIREPLUMBER="$(ls -- *wireplumber-*)"
   doas pacman --noconfirm --needed -U $WIREPLUMBER
-  doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat \
+  doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \

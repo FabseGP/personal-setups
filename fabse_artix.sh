@@ -167,6 +167,10 @@ EOF
 
 # Miscellaneous
 
+  cat << EOF | doas tee -a /etc/security/limits.conf
+
+fabse hard nofile 524288
+EOF
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 

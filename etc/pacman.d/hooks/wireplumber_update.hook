@@ -1,9 +1,9 @@
 [Trigger]
 Operation = Upgrade
 Type = Package
-Target = pipewire
+Target = wireplumber
 
 [Action]
-Description = Checks for newer version of wireplumber...
+Description = Disables logind module for wireplumber...
 When = PostTransaction
-Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/make_wireplumber.sh"'
+Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/wireplumber_disable_logind.sh"'

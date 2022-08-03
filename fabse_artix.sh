@@ -21,8 +21,6 @@ EOF
   doas pacman --noconfirm -Syu
   doas sed -i "s/mkinitcpio/mkinitcpio wireplumber/g" /etc/pacman.conf
   cd packages || exit
-  WIREPLUMBER="$(ls -- *wireplumber-*)"
-  doas pacman --noconfirm --needed -U $WIREPLUMBER
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
@@ -34,7 +32,7 @@ EOF
                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
                                        cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
                                        lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
-                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks \
+                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks wireplumber \
                                        tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
@@ -87,7 +85,7 @@ EOF
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    for service in cupsd intel-undervolt avahi-daemon libvirtd virtlogd; do
+    for service in cupsd intel-undervolt intel-undervolt-loop avahi-daemon libvirtd virtlogd; do
       doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
     done
     doas usermod -a -G libvirt,games $(whoami)

@@ -19,7 +19,6 @@ EOF
   doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
   doas cp configs/pacman.conf /etc/pacman.conf
   doas pacman --noconfirm -Syu
-  doas sed -i "s/mkinitcpio/mkinitcpio wireplumber/g" /etc/pacman.conf
   cd packages || exit
   doas pacman --noconfirm --needed -Syu pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \

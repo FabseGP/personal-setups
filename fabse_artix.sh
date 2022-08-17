@@ -4,7 +4,7 @@
 
   BEGINNER_DIR=$(pwd)
   MODE="$1"
-  if ! grep -qF "permit nopass fabse" /etc/doas.conf; then
+  if ! doas grep -qF "permit nopass fabse" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
       permit nopass $(whoami)
 EOF
@@ -16,7 +16,7 @@ EOF
   
   doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
   doas pacman-key --lsign-key FBA220DFC880C036
-  doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
   doas cp configs/pacman.conf /etc/pacman.conf
   doas pacman --noconfirm -Syu
   cd packages || exit

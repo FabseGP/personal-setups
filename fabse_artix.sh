@@ -84,7 +84,7 @@ EOF
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    for service in cupsd intel-undervolt intel-undervolt-loop avahi-daemon libvirtd virtlogd; do
+    for service in cupsd intel-undervolt avahi-daemon libvirtd virtlogd; do
       doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
     done
     doas usermod -a -G libvirt,games $(whoami)
@@ -92,7 +92,7 @@ EOF
     doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
   fi   
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
-    doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
+    doas ln -s /etc/dinit.d/intel-undervolt intel-undervolt-loop /etc/dinit.d/boot.d
   elif grep -q AMD "/proc/cpuinfo"; then
     paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin
   fi
@@ -134,7 +134,7 @@ EOF
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
   fc-cache -f -v 
   doas cp -r etc/* /etc
-  doas ln -s /home/$(whoami)/.config/zsh/.zshenv /etc/environment
+  doas ln -sf /home/$(whoami)/.config/zsh/.zshenv /etc/environment
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas intel-undervolt apply
   fi

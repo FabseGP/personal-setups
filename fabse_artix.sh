@@ -71,7 +71,7 @@ EOF
                                                         macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
                                                         rivercarro-git youtube-music bastet protonvpn-cli-community ydotool $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md avogadroapp
+    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md 
   fi
   paru -Scd --noconfirm
   doas archlinux-java set java-17-openjdk

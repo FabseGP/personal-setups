@@ -4,18 +4,10 @@
   riverctl spawn "swaybg -m fill -i /home/$(whoami)/wallpapers/natsu-and-happy.jpg" &
 
 # Set default terminal depending on foot running or not
-  if ! [[ $(pidof foot) ]]; then
-    terminal="footclient"
-  elif [[ $(pidof foot) ]]; then
-    if ! [[ $(pidof sway) ]]; then
-      terminal="footclient"
-    else
-      terminal="foot"
-    fi
-  fi
+  terminal="footclient"
 
 # Services to execute at start
-  bash /home/$(whoami)/scripts/autostart.sh river &
+  riverctl spawn yambar &
 
 # Shortcut to terminal
   riverctl map normal Super Return spawn $terminal &

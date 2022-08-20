@@ -1,9 +1,5 @@
 # Fabse's mega seje sway-config
 
-  # Assign default terminal
-    exec_always /home/fabse/.config/sway/scripts/terminal.sh
-    include /home/fabse/.config/sway/terminal
-
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -14,6 +10,9 @@
   set $up k
   set $right l
 
+# Terminal
+  set $term footclient
+ 
 ### Output configuration
 #3
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)

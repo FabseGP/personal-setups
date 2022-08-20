@@ -1,0 +1,6 @@
+type = process
+load-options = sub-vars
+logfile = $HOME/.local/share/dinit/mako.log
+command = mako 
+restart = true
+depends-on = dbus.user

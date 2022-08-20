@@ -1,0 +1,7 @@
+type = process
+load-options = sub-vars
+logfile = $HOME/.local/share/dinit/foot.log
+command = foot --server 
+restart = true
+depends-on = dbus.user
+

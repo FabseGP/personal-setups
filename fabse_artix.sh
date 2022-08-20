@@ -81,7 +81,7 @@ EOF
 
 # Dinit-services
 
-  for service in lm_sensors tlp thermald sshd; do
+  for service in lm_sensors tlp thermald sshd dinit-usersvd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   if ! [[ "$MODE" == "MINIMAL" ]]; then
@@ -133,6 +133,8 @@ EOF
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
+  doas chmod u+x /etc/dinit.d/user/scripts/*
+  ln -sf /home/$(whoami)/.config/dinit.d/{dbus.user,pipewire.user,foot.user,mako.user,syncthing.user,wl_paste.user} /home/$(whoami)/.config/dinit.d/boot.d
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas ln -sf /home/$(whoami)/.config/zsh/.zshenv /etc/environment

@@ -129,7 +129,7 @@ EOF
 
   cp -r {wallpapers,.config,.local,programs} /home/$(whoami)/
   rm -rf /home/$(whoami)/.config/rsnapshot
-  mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/bin,wallpapers/sunpaper}
+  mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
   fc-cache -f -v 

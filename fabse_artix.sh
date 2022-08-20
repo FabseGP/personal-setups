@@ -81,7 +81,7 @@ EOF
 
 # Dinit-services
 
-  for service in lm_sensors tlp thermald sshd dinit-usersvd; do
+  for service in lm_sensors tlp thermald sshd dinit-userservd; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   if ! [[ "$MODE" == "MINIMAL" ]]; then

@@ -64,6 +64,7 @@ EOF
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
+  DINIT="$(ls -- *dinit-)"
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_GTK \
                                       $SWEET_QT $TELA
   cd $BEGINNER_DIR || exit
@@ -167,6 +168,10 @@ EOF
   cat << EOF | doas tee -a /etc/security/limits.conf
 
 fabse hard nofile 524288
+EOF
+  cat << EOF | doas tee -a /etc/pam.d/system-login
+
+session optional pam_dinit_userservd.so
 EOF
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 

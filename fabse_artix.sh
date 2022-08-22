@@ -36,7 +36,7 @@ EOF
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird \
-                                       obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go \
+                                       obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go fuse \
                                        kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost xorg-xwayland \
                                        cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi

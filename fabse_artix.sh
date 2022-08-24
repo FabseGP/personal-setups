@@ -64,7 +64,7 @@ EOF
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
   TELA="$(ls -- *tela-*)"
-  DINIT="$(ls -- *dinit-)"
+  DINIT="$(ls -- *dinit-*)"
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_GTK \
                                       $SWEET_QT $TELA
   cd $BEGINNER_DIR || exit

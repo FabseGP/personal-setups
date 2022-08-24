@@ -93,7 +93,7 @@ EOF
     doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
   fi   
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
-    doas ln -s /etc/dinit.d/intel-undervolt intel-undervolt-loop /etc/dinit.d/boot.d
+    doas ln -s /etc/dinit.d/intel-undervolt-loop /etc/dinit.d/boot.d
   elif grep -q AMD "/proc/cpuinfo"; then
     paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin
   fi

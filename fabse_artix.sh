@@ -30,7 +30,7 @@ EOF
                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
                                        cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
-                                       lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols ethtool \
+                                       lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols ethtool linux-libre linux-libre-headers \
                                        bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks wireplumber dbus-broker \
                                        tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
@@ -81,18 +81,16 @@ EOF
 
 # Dinit-services
 
-  for service in lm_sensors tlp thermald sshd dinit-userservd; do
+  for service in lm_sensors tlp thermald sshd dinit-userservd ; do
     doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
   done
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    for service in cupsd intel-undervolt avahi-daemon libvirtd virtlogd; do
-      doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d
-    done
     doas usermod -a -G libvirt,games $(whoami)
     doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf
     doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf
   fi   
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
+    doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d
     doas ln -s /etc/dinit.d/intel-undervolt-loop /etc/dinit.d/boot.d
   elif grep -q AMD "/proc/cpuinfo"; then
     paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin

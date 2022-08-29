@@ -59,6 +59,7 @@ EOF
   if ! grep -q "Flagged out-of-date" dot-bin; then
     AUR="dot-bin"
   fi
+  cd packages || exit
   paru --noconfirm -Syu
   PIPES_1="$(ls -- *bash-pipes-*)"
   CBONSAI="$(ls -- *cbonsai-*)"
@@ -136,10 +137,10 @@ EOF
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
-  doas chmod u+x /etc/dinit.d/user/scripts/*
   ln -sf /home/$(whoami)/.config/dinit.d/{dbus.user,pipewire.user,foot.user,mako.user,syncthing.user,wl_paste.user} /home/$(whoami)/.config/dinit.d/boot.d
   fc-cache -f -v 
   doas cp -r etc/* /etc
+  doas chmod u+x /etc/dinit.d/user/scripts/*
   doas ln -sf /home/$(whoami)/.config/zsh/.zshenv /etc/environment
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas intel-undervolt apply

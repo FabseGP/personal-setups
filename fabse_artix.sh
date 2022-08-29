@@ -52,6 +52,9 @@ EOF
 
 # Installation of packages from AUR
 
+  cd $BEGINNER_DIR || exit
+  doas cp etc/pacman.d/hooks/dinit-userservd.hook /etc/pacman.d/hooks
+  doas cp configs/dinit-userservd /.secret
   wget https://aur.archlinux.org/packages/dot-bin
   if ! grep -q "Flagged out-of-date" dot-bin; then
     AUR="dot-bin"

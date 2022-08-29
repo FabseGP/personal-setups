@@ -22,7 +22,7 @@ EOF
   doas cp configs/pacman.conf /etc/pacman.conf
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
+  doas pacman --noconfirm --needed -S pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \

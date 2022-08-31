@@ -26,7 +26,7 @@ EOF
                                        bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
                                        gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
                                        bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
-                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset \
+                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
                                        zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git \
                                        bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \

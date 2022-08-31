@@ -31,7 +31,7 @@ EOF
                                        bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
                                        bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
                                        tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
-                                       cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans \
+                                       cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
                                        lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols ethtool linux-libre linux-libre-headers nano \
                                        bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks wireplumber dbus-broker \
                                        tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit

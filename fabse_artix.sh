@@ -22,25 +22,28 @@ EOF
   doas cp configs/pacman.conf /etc/pacman.conf
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed -S pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam \
-                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin \
-                                       gnome-mahjongg galculator foot moc mpv handlr sway i3status-rust swayidle wget swaybg clipman \
-                                       bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf \
-                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
-                                       zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git \
-                                       bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop \
-                                       bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs \
-                                       tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db \
-                                       cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
-                                       lib32-vulkan-intel ttf-font-awesome noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols ethtool linux-libre linux-libre-headers nano \
-                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad helix elinks wireplumber dbus-broker \
-                                       tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
+  doas pacman --noconfirm --needed -S pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix \
+                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin elinks \
+                                      gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
+                                      bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud \
+                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
+                                      zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git wget \
+                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop gamemode \
+                                      bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs nano moc \
+                                      tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool \
+                                      cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
+                                      lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols linux-libre linux-libre-headers \
+                                      bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad wireplumber dbus-broker \
+                                      lib32-giflib lib32-libpng lib32-libldap lib32-gnutls lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse \
+                                      lib32-alsa-plugins lib32-alsa-lib lib32-libjpeg-turbo lib32-libxcomposite lib32-libxinerama lib32-ncurses \
+                                      lib32-opencl-icd-loader lib32-libxslt lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs lib32-vulkan-icd-loader \
+                                      samba dosbox tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
-                                       avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird elogind \
-                                       obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go fuse polkit-gnome \
-                                       kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost xorg-xwayland \
-                                       cups-pdf cups-dinit avahi-dinit libvirt-dinit
+                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird elogind \
+                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go fuse polkit-gnome \
+                                        kicad syncthing android-tools kicad-library linux-lts linux-lts-headers meson clang nodejs boost xorg-xwayland \
+                                        cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas pacman --noconfirm --needed -S intel-undervolt-dinit

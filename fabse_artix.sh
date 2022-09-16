@@ -27,10 +27,10 @@ EOF
                                       gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
                                       bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud perl \
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
-                                      zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git wget \
-                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop gamemode \
-                                      bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs nano moc \
-                                      tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool \
+                                      zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git wget nano \
+                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop gamemode moc \
+                                      bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone gvfs nemo-fileroller \
+                                      tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool lsd \
                                       cpio unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
                                       lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols linux-libre linux-libre-headers \
                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad wireplumber dbus-broker \

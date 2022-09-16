@@ -6,7 +6,7 @@
   MODE="$1"
   if ! doas grep -qF "permit nopass fabse" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
-      permit nopass $(whoami)
+permit nopass $(whoami)
 EOF
   fi
 
@@ -22,16 +22,16 @@ EOF
   doas cp configs/pacman.conf /etc/pacman.conf
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed -S pcmanfm-gtk3 alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix \
-                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin elinks \
+  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks \
+                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin lolcat \
                                       gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
-                                      bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud \
+                                      bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud perl \
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
                                       zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git wget \
                                       bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop gamemode \
                                       bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr lsd wofi pipewire rclone gvfs nano moc \
                                       tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool \
-                                      cpio perl unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
+                                      cpio unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
                                       lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols linux-libre linux-libre-headers \
                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad wireplumber dbus-broker \
                                       lib32-giflib lib32-libpng lib32-libldap lib32-gnutls lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse \
@@ -39,10 +39,10 @@ EOF
                                       lib32-opencl-icd-loader lib32-libxslt lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs lib32-vulkan-icd-loader \
                                       samba dosbox tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf dnsmasq vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust \
+    doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust fuse boost \
                                         avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird elogind \
-                                        obs-studio freecad openshot foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go fuse polkit-gnome \
-                                        kicad syncthing android-platform kicad-library linux-lts linux-lts-headers meson clang nodejs boost xorg-xwayland \
+                                        obs-studio blender shotcut foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go polkit-gnome \
+                                        kicad syncthing android-platform kicad-library linux-lts linux-lts-headers meson clang nodejs xorg-xwayland \
                                         cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
@@ -78,13 +78,14 @@ EOF
                                       $SWEET_QT $TELA $DINIT
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
-                                                        macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
-                                                        rivercarro-git youtube-music-bin bastet protonvpn-cli-community ydotool dupeguru rtl8812au-dkms-git $AUR                                                                             
+                                                         macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
+                                                         rivercarro-git youtube-music-bin bastet protonvpn-cli-community ydotool \
+                                                         dupeguru rtl8812au-dkms-git $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md 
   fi
   paru -Scd --noconfirm
-  doas archlinux-java set java-17-openjdk
+  doas archlinux-java set java-18-openjdk
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

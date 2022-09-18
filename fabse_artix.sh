@@ -35,7 +35,7 @@ EOF
                                       bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone gvfs nemo-fileroller \
                                       tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool lsd \
                                       cpio unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
-                                      lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols linux-libre linux-libre-headers \
+                                      lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
                                       bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad wireplumber dbus-broker \
                                       lib32-giflib lib32-libpng lib32-libldap lib32-gnutls lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse \
                                       lib32-alsa-plugins lib32-alsa-lib lib32-libjpeg-turbo lib32-libxcomposite lib32-libxinerama lib32-ncurses \
@@ -53,7 +53,9 @@ EOF
   elif grep -q AMD "/proc/cpuinfo"; then
     :
   fi
-                                      
+
+ # linux-libre linux-libre-headers
+
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Installation of packages from AUR

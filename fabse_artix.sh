@@ -147,6 +147,7 @@ EOF
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
   ln -sf /home/$(whoami)/.config/dinit.d/{dbus.user,pipewire.user,foot.user,mako.user,syncthing.user,wl_paste.user} /home/$(whoami)/.config/dinit.d/boot.d
+  doas cp -f /.secret/dinit-userservd /etc/dinit.d
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas chmod u+x /etc/dinit.d/user/scripts/*

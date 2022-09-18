@@ -13,13 +13,16 @@ EOF
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Package-installation
-  
-  doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-  doas pacman-key --lsign-key FBA220DFC880C036
-  doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-  doas cp configs/pacman1.conf /etc/pacman.conf
-  doas pacman -U --noconfirm https://www.parabola.nu/packages/libre/x86_64/parabola-keyring/download
-  doas cp configs/pacman.conf /etc/pacman.conf
+  if [[ -z "$(pacman -Qs chaotic-keyring)" ]]; then
+    doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+    doas pacman-key --lsign-key FBA220DFC880C036
+    doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+    doas cp configs/pacman1.conf /etc/pacman.conf
+  fi
+  if [[ -z "$(pacman -Qs parabola-keyring)" ]]; then
+    doas pacman -U --noconfirm https://www.parabola.nu/packages/libre/x86_64/parabola-keyring/download
+    doas cp configs/pacman.conf /etc/pacman.conf
+  fi
   doas pacman --noconfirm -Syu
   cd packages || exit
   doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks \

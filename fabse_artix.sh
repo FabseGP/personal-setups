@@ -17,36 +17,28 @@ EOF
     doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
     doas pacman-key --lsign-key FBA220DFC880C036
     doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-    doas cp configs/pacman1.conf /etc/pacman.conf
-  fi
-  if [[ -z "$(pacman -Qs parabola-keyring)" ]]; then
-    doas pacman -U --noconfirm https://www.parabola.nu/packages/libre/x86_64/parabola-keyring/download
-    doas cp configs/pacman.conf /etc/pacman.conf
+    doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf
   fi
   doas pacman --noconfirm -Syu
   cd packages || exit
   doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks \
-                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf pahole swappy candy-icons-git brave-bin lolcat \
+                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat \
                                       gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
-                                      bemenu-wayland qt5-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud perl \
-                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset libselinux \
-                                      zsh-syntax-highlighting shellcheck brightnessctl libnotify aisleriot vulkan-intel vimiv-qt-git wget nano \
-                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet zenity sway-launcher-desktop gamemode moc \
-                                      bashtop nnn alsa-utils bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone gvfs nemo-fileroller \
-                                      tar xz python-sphinx python-sphinx_rtd_theme python-pywal graphviz imagemagick xmlto man-db ethtool lsd \
-                                      cpio unrar unzip rsync jdk-openjdk python python-pip libva-intel-driver ttf-opensans libxcrypt-compat \
-                                      lib32-vulkan-intel noto-fonts-emoji ttf-iosevka-nerd ttf-nerd-fonts-symbols \
-                                      bibata-rainbow-cursor-theme ttf-meslo-nerd-font-powerlevel10k ventoy-bin mousepad wireplumber dbus-broker \
-                                      lib32-giflib lib32-libpng lib32-libldap lib32-gnutls lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse \
-                                      lib32-alsa-plugins lib32-alsa-lib lib32-libjpeg-turbo lib32-libxcomposite lib32-libxinerama lib32-ncurses \
-                                      lib32-opencl-icd-loader lib32-libxslt lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs lib32-vulkan-icd-loader \
-                                      samba dosbox tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux \
+                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset nano \
+                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot vulkan-intel vimiv-qt-git wget moc \
+                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet sway-launcher-desktop gamemode samba \
+                                      bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller \
+                                      python-pywal xmlto man-db ethtool lsd lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox \
+                                      unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin \
+                                      ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt \
+                                      lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    doas pacman --noconfirm --needed -S virt-manager qemu edk2-ovmf vde2 bridge-utils dnsmasq nss-mdns geany iso-profiles gimp rust fuse boost \
-                                        avogadrolibs sagemath arduino-cli arduino-avr-core geogebra geany-plugins qutebrowser betterbird elogind \
-                                        obs-studio blender shotcut foliate gnuplot kicad-library-3d artools wine-wl-git texlive-most go polkit-gnome \
-                                        kicad syncthing android-platform kicad-library linux-lts linux-lts-headers meson clang nodejs xorg-xwayland \
-                                        cups-pdf cups-dinit avahi-dinit libvirt-dinit
+    doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp fuse2 avogadrolibs sagemath arduino-cli arduino-avr-core \
+                                        geogebra geany-plugins qutebrowser betterbird elogind boost obs-studio blender kdenlive foliate gnuplot meson \
+                                        kicad-library-3d artools wine-wl-git texlive-most polkit-gnome kicad syncthing android-platform kicad-library \
+                                        linux-tkg-cfs linux-tkg-cfs-headers xorg-xwayland cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas pacman --noconfirm --needed -S intel-undervolt-dinit
@@ -77,17 +69,16 @@ EOF
   SUNWAIT="$(ls -- *sunwait-*)"
   SWEET_GTK="$(ls -- *sweet-gtk-*)"
   SWEET_QT="$(ls -- *sweet-kde-*)"
-  TELA="$(ls -- *tela-*)"
   DINIT="$(ls -- *dinit-*)"
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_GTK \
-                                      $SWEET_QT $TELA $DINIT
+                                      $SWEET_QT $DINIT
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
-                                                         macchina-bin revolt-desktop yambar river-noxwayland-git wayshot-bin \
+                                                         macchina-bin river-noxwayland-git wayshot-bin rtl8812au-dkms-git \
                                                          rivercarro-git youtube-music-bin bastet protonvpn-cli-community ydotool \
-                                                         dupeguru rtl8812au-dkms-git $AUR                                                                             
+                                                         $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
-    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx nodejs-reveal-md 
+    paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx 
   fi
   paru -Scd --noconfirm
   doas archlinux-java set java-18-openjdk
@@ -111,7 +102,7 @@ EOF
     paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin
   fi
   doas sensors-detect --auto	
-  eval `ssh-agent -s`
+  eval $(ssh-agent -s)
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -141,7 +132,7 @@ EOF
 
 # Installing dotfiles
 
-  cp -r {wallpapers,.config,.local,programs} /home/$(whoami)/
+  cp -r {wallpapers,.config,.local} /home/$(whoami)
   rm -rf /home/$(whoami)/.config/rsnapshot
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
@@ -157,11 +148,6 @@ EOF
   fi
   git clone https://github.com/hexive/sunpaper.git
   cp -r sunpaper/images/* /home/$(whoami)/wallpapers/sunpaper
-  if [[ -d "/home/$(whoami)/.librewolf" ]]; then
-    rm -rf /home/$(whoami)/.librewolf
-  fi
-  cd librewolf || exit
-  tar -xvf librewolf-browser-profile.tar.bz2 -C /home/$(whoami)
   cd $BEGINNER_DIR || return
   if ! [[ -d "/etc/pipewire" ]]; then
     doas mkdir /etc/pipewire
@@ -172,7 +158,7 @@ EOF
   pacman -Q > hejsa.txt
   grep -F "electron" hejsa.txt > hejhej.txt
   hej=${s%% *}
-  while read line; do
+  while read -r line; do
     hej=${line%% *}
     cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
   done < hejhej.txt

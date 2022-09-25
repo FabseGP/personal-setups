@@ -7,5 +7,5 @@ Target = dinit-userservd
 [Action]
 Description = Fixes init-files for dinit-userservd...
 When = PostTransaction
-Exec = /bin/sh -c 'cp -f /.secret/dinit-userservd /etc/dinit.d/dinit-userservd && chmod 777 /etc/dinit.d/dinit-userservd'
+Exec = /usr/bin/bash -c 'cp -f /.secret/dinit-userservd /etc/dinit.d/dinit-userservd && chmod 777 /etc/dinit.d/dinit-userservd'
 

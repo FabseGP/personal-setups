@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
   if [[ "$1" == "sway" ]]; then
     rm -rf /home/$(whoami)/.config/sway/exec

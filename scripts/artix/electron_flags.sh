@@ -6,7 +6,7 @@
   pacman -Q > hejsa.txt
   grep -F "electron" hejsa.txt > hejhej.txt
   hej=${s%% *}
-  while read line; do
+  while read -r line; do
     hej=${line%% *}
     cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
   done < hejhej.txt

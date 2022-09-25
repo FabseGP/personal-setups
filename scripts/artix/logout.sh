@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
   if [[ "$1" == "sway" ]] && [[ $(pidof river) ]]; then
     swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session and make everyone sad.' -b '*Sigh* Roger roger' 'swaymsg exit'

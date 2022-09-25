@@ -6,4 +6,4 @@ Target = wireplumber
 [Action]
 Description = Disables logind module for wireplumber...
 When = PostTransaction
-Exec = /bin/sh -c 'su -l fabse "/home/fabse/scripts/wireplumber_disable_logind.sh"'
+Exec = /usr/bin/bash -c 'su -l fabse "/home/fabse/scripts/wireplumber_disable_logind.sh"'

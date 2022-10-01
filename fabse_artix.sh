@@ -76,7 +76,7 @@ EOF
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji swaylock-effects-git \
                                                          macchina-bin river-noxwayland-git wayshot-bin rtl8812au-dkms-git \
                                                          rivercarro-git youtube-music-bin bastet protonvpn-cli-community ydotool \
-                                                         freerouting $AUR                                                                             
+                                                         freerouting-zh-cn-git $AUR                                                                             
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     paru --cleanafter --removemake --noconfirm --useask -S stm32cubemx 
   fi

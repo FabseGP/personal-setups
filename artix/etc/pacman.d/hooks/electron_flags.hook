@@ -6,4 +6,4 @@ Target = electron
 [Action]
 Description = Enforces wayland-flags for all electron-apps...
 When = PostTransaction
-Exec = /usr/bin/bash -c 'su -l fabse "/home/fabse/scripts/electron_flags.sh"'
+Exec = /usr/bin/bash -c 'su -l fabse "/home/fabse/.local/bin/electron_flags.sh"'

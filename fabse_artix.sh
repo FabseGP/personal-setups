@@ -2,6 +2,7 @@
 
 # Parameters
 
+  cd artix
   BEGINNER_DIR=$(pwd)
   MODE="$1"
   if ! doas grep -qF "permit nopass fabse" /etc/doas.conf; then

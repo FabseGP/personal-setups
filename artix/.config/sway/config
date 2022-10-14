@@ -238,7 +238,7 @@ bar {
   # What to execute on startup
     exec_always /home/fabse/.config/sway/scripts/sunpaper.sh -d
     exec_always sworkstyle &> /tmp/sworkstyle.log
-    #exec_always /home/fabse/scripts/autostart.sh sway
+    #exec_always /home/fabse/.local/bin/autostart sway
     #include /home/fabse/.config/sway/exec
     exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 

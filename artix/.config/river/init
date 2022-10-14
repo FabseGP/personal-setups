@@ -49,7 +49,7 @@
   riverctl map normal Control l spawn "swaylock -f"
 
 # Shortcut to exit river
-  riverctl map normal Super+Shift E spawn "/home/$(whoami)/scripts/logout.sh river"
+  riverctl map normal Super+Shift E spawn "/home/$(whoami)/.local/bin/logout river"
 
 # Shortcut to reload river configuration
   riverctl map normal Super+Shift C spawn "/home/$(whoami)/.config/river/init"

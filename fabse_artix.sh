@@ -23,10 +23,10 @@ EOF
   doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks \
                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat \
                                       gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
-                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux \
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux samba \
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset nano moc \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vulkan-intel vimiv-qt-git tela-icon-theme-git \
-                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet sway-launcher-desktop gamemode samba \
+                                      bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet sway-launcher-desktop gamemode smartmontools \
                                       bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller npm \
                                       python-pywal xmlto man-db ethtool lsd lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox wget \
                                       unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin \

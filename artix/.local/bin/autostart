@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
   if [[ "$1" == "sway" ]]; then rm -rf /home/$(whoami)/.config/sway/exec; touch /home/$(whoami)/.config/sway/exec; fi
-  for service in yambar foot pipewire mako syncthing wl-paste; do
+  for service in yambar foot pipewire mako wl-paste; do
     if [[ "$1" == "sway" ]]; then
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then
@@ -11,10 +11,6 @@ EOF
         elif [[ "$service" == "wl-paste" ]]; then
           cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
 exec_always wl-paste -t text --watch clipman store
-EOF
-        elif [[ "$service" == "syncthing" ]]; then
-          cat << EOF | tee -a /home/$(whoami)/.config/sway/exec > /dev/null
-exec_always syncthing serve --no-browser
 EOF
         elif [[ "$service" == "yambar" ]]; then :;
         else
@@ -27,7 +23,6 @@ EOF
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then riverctl spawn "foot --server";
         elif [[ "$service" == "wl-paste" ]]; then riverctl spawn "wl-paste -t text --watch clipman store";
-        elif [[ "$service" == "syncthing" ]]; then riverctl spawn "syncthing serve --no-browser";
         else riverctl spawn $service; fi
       elif [[ $(pidof $service) ]]; then :; fi
     fi

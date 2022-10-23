@@ -20,18 +20,18 @@ EOF
   fi
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks \
-                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat \
-                                      gnome-mahjongg galculator foot mpv handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome \
-                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux samba \
-                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset nano moc \
+  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks lsd \
+                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat moc xmlto \
+                                      gnome-mahjongg galculator handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode \
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux samba foot \
+                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset protontricks-git \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vulkan-intel vimiv-qt-git tela-icon-theme-git \
                                       bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet sway-launcher-desktop gamemode smartmontools \
-                                      bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller npm \
-                                      python-pywal xmlto man-db ethtool lsd lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox wget \
-                                      unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin \
+                                      bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller npm wget \
+                                      python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git \
+                                      unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin nano \
                                       ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv \
                                       lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp fuse2 avogadrolibs sagemath arduino-cli arduino-avr-core \
@@ -72,7 +72,7 @@ EOF
 
 # Dinit-services
 
-  for service in lm_sensors tlp thermald sshd dinit-userservd ; do doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d; done
+  for service in lm_sensors tlp thermald; do doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d; done
   if ! [[ "$MODE" == "MINIMAL" ]]; then doas usermod -a -G libvirt,games $(whoami); doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf; doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf; fi   
   if grep -q Intel "/proc/cpuinfo"; then doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d; doas ln -s /etc/dinit.d/intel-undervolt-loop /etc/dinit.d/boot.d;
   elif grep -q AMD "/proc/cpuinfo"; then paru --cleanafter --removemake --noconfirm --useask -S ryzen-controller-bin; fi

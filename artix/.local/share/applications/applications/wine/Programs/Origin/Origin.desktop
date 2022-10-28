@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Origin
+Exec=env WINEPREFIX="/home/fabse/Games/origin" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Origin\\\\Origin.lnk
+Type=Application
+StartupNotify=true
+Comment=Origin
+Path=/home/fabse/Games/origin/dosdevices/c:/Program Files (x86)/Origin
+Icon=49F4_Origin.0
+StartupWMClass=origin.exe

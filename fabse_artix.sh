@@ -20,24 +20,24 @@ EOF
   fi
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks lsd \
+  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git zsh bat steam helix elinks lsd nano \
                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat moc xmlto \
                                       gnome-mahjongg galculator handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa fzf mangohud libselinux samba foot \
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions mako jq wlsunset protontricks-git \
-                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot vulkan-intel vimiv-qt-git tela-icon-theme-git \
+                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot mesa-tkg-git vimiv-qt-git tela-icon-theme-git \
                                       bsd-games mypaint gvfs-mtp wallutils tumbler xarchiver figlet sway-launcher-desktop gamemode smartmontools \
-                                      bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller npm wget \
+                                      bashtop nnn alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr wofi pipewire rclone nemo-fileroller wget tlp-rdw \
                                       python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git \
-                                      unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin nano \
+                                      unrar libva-intel-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin protonup-qt \
                                       ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv npm \
                                       lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp fuse2 avogadrolibs sagemath arduino-cli arduino-avr-core \
                                         geogebra geany-plugins qutebrowser betterbird elogind boost obs-studio blender kdenlive foliate gnuplot meson \
                                         kicad-library-3d artools wine-wl-git texlive-most polkit-gnome kicad syncthing android-platform kicad-library \
-                                        linux-tkg-cfs linux-tkg-cfs-headers xorg-xwayland cups-pdf cups-dinit avahi-dinit libvirt-dinit
+                                        linux-tkg-cfs-generic_v3 linux-tkg-cfs-generic_v3-headers xorg-xwayland cups-pdf cups-dinit avahi-dinit libvirt-dinit
   fi
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas pacman --noconfirm --needed -S intel-undervolt-dinit
@@ -142,6 +142,11 @@ EOF
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
+EOF
+  cat << EOF | doas tee -a /etc/dinit.d/config/rc.local
+
+powertop --auto-tune
+sh /home/fabse/Scripts/local/autosuspend.sh
 EOF
   doas pacman --noconfirm -Syu
   doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf

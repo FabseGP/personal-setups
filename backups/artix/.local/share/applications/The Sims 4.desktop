@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=The Sims™ 4
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/1222670
+Icon=steam_icon_1222670
+Terminal=false
+Type=Application
+Categories=Game;

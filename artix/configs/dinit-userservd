@@ -1,6 +1,0 @@
-# dinit-userservd service
-
-type            = process
-command         = /usr/bin/dinit-userservd
-smooth-recovery = true
-logfile         = /var/log/dinit-userservd.log

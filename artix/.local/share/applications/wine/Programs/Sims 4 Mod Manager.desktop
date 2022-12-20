@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Sims 4 Mod Manager
+Exec=env WINEPREFIX="/home/fabse/.wine" wine C:\\\\users\\\\fabse\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Sims\\ 4\\ Mod\\ Manager.lnk
+Type=Application
+StartupNotify=true
+Path=/home/fabse/.wine/dosdevices/c:/users/fabse/AppData/Local/Programs/Sims 4 Mod Manager
+Icon=90D3_Sims 4 Mod Manager.0
+StartupWMClass=sims 4 mod manager.exe

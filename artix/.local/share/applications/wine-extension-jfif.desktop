@@ -2,7 +2,7 @@
 Type=Application
 Name=Wine Internet Explorer
 MimeType=image/jpeg;
-Exec=env WINEPREFIX="/home/fabse/Games/origin" wine start /ProgIDOpen pjpegfile %f
+Exec=env WINEPREFIX="/home/fabse/Games/ea-desktop" wine start /ProgIDOpen pjpegfile %f
 NoDisplay=true
 StartupNotify=true
 Icon=ECB7_iexplore.0

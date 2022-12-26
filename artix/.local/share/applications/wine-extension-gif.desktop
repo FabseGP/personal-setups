@@ -2,7 +2,7 @@
 Type=Application
 Name=Wine Internet Explorer
 MimeType=image/gif;
-Exec=env WINEPREFIX="/home/fabse/Games/origin" wine start /ProgIDOpen giffile %f
+Exec=env WINEPREFIX="/home/fabse/Games/ea-desktop" wine start /ProgIDOpen giffile %f
 NoDisplay=true
 StartupNotify=true
 Icon=ECB7_iexplore.0

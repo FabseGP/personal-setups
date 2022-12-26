@@ -20,18 +20,18 @@ EOF
   fi
   doas pacman --noconfirm -Syu
   cd packages || exit
-  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git steam helix elinks sweet-gtk-theme-dark moc \
-                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat xmlto modprobed-db \
-                                      gnome-mahjongg galculator handlr sway i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet nano \
-                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux samba wlsunset android-udev \
-                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions foot protontricks-git youtube-music-bin fzf \
-                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot mesa-tkg-git vimiv-qt-git tela-icon-theme-git mako wofi cura \
-                                      bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects rpi-imager \
-                                      bashtop alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr pipewire rclone nemo-fileroller tlp-rdw vkd3d-proton-tkg-git nnn \
-                                      python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git mypaint dkms \
-                                      unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd bat wget \
-                                      ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv npm freecad \
+  doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git steam helix elinks sweet-gtk-theme-dark docbook-xsl \
+                                      bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat modprobed-db inetutils nano \
+                                      gnome-mahjongg galculator handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt \
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux samba wlsunset android-udev moc \
+                                      pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git youtube-music-bin reshade-shaders-git \
+                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot mesa-tkg-git vimiv-qt-git tela-icon-theme-git mako wofi cura xmlto dkms \
+                                      bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects rpi-imager fzf \
+                                      bashtop alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr pipewire rclone nemo-fileroller tlp-rdw vkd3d-proton-tkg-git fwupd sway \
+                                      python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git mypaint docbook-xml nnn \
+                                      unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils foot \
+                                      ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui bat npm \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv freecad protonup-qt \
                                       lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit earlyoom-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp fuse2 avogadrolibs sagemath arduino-cli arduino-avr-core \
@@ -56,8 +56,9 @@ EOF
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_QT
   cd $BEGINNER_DIR || exit
   paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin \
-                                                         river-noxwayland-git wayshot-bin freerouting rivercarro-git \
-                                                         bastet protonvpn-cli-community ydotool proton-ge-custom-bin
+                                                         wayshot-bin freerouting rivercarro-git \
+                                                         bastet protonvpn-cli-community ydotool rtl8812au-dkms-git
+# river-noxwayland-git 
   paru -Scd --noconfirm
   doas archlinux-java set java-19-openjdk
 
@@ -138,7 +139,7 @@ EOF
   cat << EOF | doas tee -a /etc/dinit.d/config/rc.local
 
 powertop --auto-tune
-sh /home/fabse/Scripts/local/autosuspend.sh
+sh /home/fabse/local/autosuspend.sh
 EOF
   doas cp configs/misc /etc/cron.daily
   doas pacman --noconfirm -Syu

@@ -1,9 +1,43 @@
 #!/usr/bin/bash
 
+# setup
+setup-keymap dk dk-winkeys
+setup-hostname fabsemanpi
+setup-interfaces
+setup-timezone -z Europe/Copenhagen
+setup-ntp -c chrony
+setup-apkrepos
+passwd
+setup-sshd -c openssh
+
+# confidential
+
+RPI4_SUPERHELT_110802
+fabsepi_54321_AWESOME_67890
+
+
+# ssh
+
+(...)
+Port 22
+(...)
+PermitRootLogin yes
+(...)
+PubkeyAuthentication yes
+(...)
+PasswordAuthentication yes
+PermitEmptyPasswords no
+(...)
+
+
+# btrbk
+
+mangler 
+
+
 # Parameters
 
-  BEGINNER_DIR=$(pwd)
-  echo "permit nopass fabsepi" | doas tee -a /etc/doas.conf > /dev/null
+  echo "permit persist setenv { XAUTHORITY LANG LC_ALL } :wheel" | tee -a /etc/doas.conf > /dev/null
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -23,17 +57,9 @@ EOF
 
   doas apk update
   doas apk upgrade
-  doas apk add podman-docker py3-podman podman-remote fuse-overlayfs shadow slirp4netns \
-  podman-zsh-completion podman-compose macchina bottom musl-locales ttf-font-awesome vimiv \
-  lang libressl udisks2 sed man-pages ttf-dejavu cups-pdf git py3-pip pcmanfm i2c-tools \
-  mako zstd lz4 cbonsai nerd-fonts gcc make wget build-base kbd-bkeymaps curl fzf iwd wofi \
-  lm_sensors perl lsblk nftables tzdata mysql-client firefox mysql pipewire libreoffice \
-  ttf-opensans pipewire-pulse pipewire-alsa pipewire-jack libuser rclone pavucontrol npm \
-  zsh syncthing rsync foot unrar unzip zsh-autosuggestions zsh-syntax-highlighting mpv nnn \
-  helix btrfs-progs xarchiver swappy river nodejs-current zathura zsh-theme-powerlevel10k \
-  zathura-pdf-mupdf swaylock-effects mesa-dri-gallium xdg-desktop-portal-wlr font-meslo-nerd \
-  wlsunset yambar clipman wireplumper eudev grep font-awesome openssh wayshot lsof handlr \
-  podman cgroups cups connman cronie haveged sshguard rsnapshot
+  doas apk add git lang libressl udisks2 sed man-pages zstd nftables tzdata kbd-bkeymaps syncthing rsync rclone \
+               eudev grep lsof openssh wget libuser mysql mysql-client helix libcgroup podman podman-docker util-linux \
+               musl-locales cronie fuse haveged python3 py3-pip unzip tar mesa-dri-gallium btrbk podman-compose lm_sensors
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -41,26 +67,17 @@ EOF
 
   doas rc-update add swap boot
   doas rc-update add haveged boot
-  for service in rsnapshot podman cronie dbus sshguard sshd cgroups cupsd mariadb fuse nftables connmand; do
+  for service in podman cronie dbus sshd cgroups mariadb fuse nftables; do
     doas rc-update add $service default
   done
   doas rc-service mariadb start
-  doas rc-service syncthing start
-  doas rc-service fcron start
-  doas rc-service podman start
   doas modprobe tun
-  doas echo tun >> /etc/modules
-  doas usermod --add-subuids 100000-165535 fabsepi
-  doas usermod --add-subgids 100000-165535 fabsepi
+  echo "tun" | doas tee -a /etc/modules > /dev/null
+  echo 'fabsepi:100000:65536' | doas tee -a /etc/subuid > /dev/null
+  echo 'fabsepi:100000:65536' | doas tee -a /etc/subgid > /dev/null
   podman system migrate
+  doas sed -i 's/driver = "overlay"/driver = "btrfs"/' /etc/containers/storage.conf
   doas /etc/init.d/sshd start
-  cat << EOF | doas tee -a /etc/ssh/sshd.config > /dev/null
-
-UseDNS no
-EOF
-  doas sed -i -e "/PasswordAuthentication no/s/^#//" /etc/ssh/sshd.config
-  doas sed -i -e "/Port 22/s/^#//" /etc/ssh/sshd.config
-  doas sed -i 's/Port 22/Port 1111/' /etc/ssh/sshd.config
   cat << EOF | doas tee -a /etc/issue.net > /dev/null
 
 ###############################################################
@@ -70,39 +87,8 @@ EOF
 ###############################################################
 
 EOF
-  doas sed -i -e "/Banner \/some\/path/s/^#//" /etc/ssh/sshd.config
-  doas sed -i 's/Banner \/some\/path/Banner \/etc\/issue.net/' /etc/ssh/sshd.config
-  doas touch /etc/sshguard.conf
-  cat << EOF | doas tee -a /etc/sshguard.conf > /dev/null
-
-#!/bin/bash
-BACKEND='/usr/libexec/sshg-fw-nft-sets'
-FILES='/var/log/messages'
-
-# How many problematic attempts trigger a block
-THRESHOLD=20
-# Blocks last at least 180 seconds
-BLOCK_TIME=180
-# The attackers are remembered for up to 3600 seconds
-DETECTION_TIME=3600
-
-# Blacklist threshold and file name
-BLACKLIST_FILE=100:/var/db/sshguard/blacklist.db
-
-# IPv6 subnet size to block. Defaults to a single address, CIDR notation. (optional, default to 128)
-IPV6_SUBNET=64
-# IPv4 subnet size to block. Defaults to a single address, CIDR notation. (optional, default to 32)
-IPV4_SUBNET=24
-
-EOF
-
-#----------------------------------------------------------------------------------------------------------------------------------
-
-# Default apps
-
-  handlr add .pdf org.pwmt.zathura.desktop
-  handlr add .png vimiv.desktop
-  handlr add .jpeg vimiv.desktop
+  doas sed -i -e "/Banner \/some\/path/s/^#//" /etc/ssh/sshd_config
+  doas sed -i 's/Banner \/some\/path/Banner \/etc\/issue.net/' /etc/ssh/sshd_config
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -132,7 +118,7 @@ EOF
   for GRP in spi i2c gpio docker sftpusers; do
     doas addgroup --system $GRP
   done
-  for GRP in disk wheel video audio input lp netdev plugdev users gpio spi i2c docker; do
+  for GRP in disk wheel video audio input lp netdev users gpio spi i2c docker; do
     doas adduser fabsepi $GRP 
   done
   doas adduser sftpfabsepi
@@ -172,12 +158,13 @@ EOF
 # usercfg.txt
 
   doas touch /boot/usercfg.txt
-  cat << EOF | doas tee -a /boot/usercfg.txt > /dev/null
-dtparam=audio=on
-dtparam=i2c_arm=on
+  cat << EOF | doas tee -a /boot/config.txt > /dev/null
+
+# Custom
 dtoverlay=vc4-fkms-v3d
-gpu_mem=256
-enable_uart=1
+arm_freq=2250
+gpu_freq=750
+over_voltage=8
 EOF
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -211,22 +198,19 @@ EOF
 # /etc/fstab
 
   doas mkdir /media/SEAGATE
-  echo 'UUID=523872dd-991a-44a7-a1d4-7050b7646236       /media/SEAGATE  btrfs   defaults,noatime,autodefrag,barrier,datacow        0       3' | doas tee -a /etc/fstab > /dev/null
+fstab: noatime,compress-force=zstd,discard=async,autodefrag
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # cmdline.txt
 
-  doas sed -i 's/modules=sd-mod,usb-storage,btrfs quiet rootfstype=btrfs/modules=modules=sd-mod,usb-storage,btrfs,iptables,i2c-dev,fuse,tun quiet rootfstype=btrfs fsck.repair cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1/' /boot/cmdline.txt
+/boot/cmdline.txt: 
+modules=sd-mod,usb-storage,btrfs,iptables,fuse,tun quiet rootfstype=btrfs fsck.repair cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Goodbye
 
-  doas sed -i "/permit nopass fabsepi/d" /etc/doas.conf
   echo
   echo "And you're welcome :))"
   echo
-  doas lchsh fabsepi
-  doas lchsh
-  zsh

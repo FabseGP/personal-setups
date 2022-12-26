@@ -1,4 +1,5 @@
 8250_dw
+8812au
 ac97_bus
 acpi_pad
 acpi_thermal_rel
@@ -23,12 +24,15 @@ crc32_pclmul
 crct10dif_pclmul
 cryptd
 crypto_simd
+crypto_user
 dm_crypt
 dm_mod
+dm_multipath
 drm_buddy
 drm_display_helper
 ecdh_generic
 encrypted_keys
+ext4
 fat
 fuse
 gf128mul
@@ -71,6 +75,7 @@ intel_wmi_thunderbolt
 irqbypass
 iTCO_vendor_support
 iTCO_wdt
+jbd2
 joydev
 kfifo_buf
 kvm
@@ -80,6 +85,7 @@ libcrc32c
 libps2
 loop
 mac_hid
+mbcache
 mei
 mei_hdcp
 mei_me

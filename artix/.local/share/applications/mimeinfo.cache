@@ -16,3 +16,5 @@ text/html=wine-extension-htm.desktop;
 text/plain=wine-extension-txt.desktop;
 text/vbscript=wine-extension-vbs.desktop;
 x-scheme-handler/discord-668477264995811338=nuclear.desktop;
+x-scheme-handler/steam=steam.desktop;
+x-scheme-handler/steamlink=steam.desktop;

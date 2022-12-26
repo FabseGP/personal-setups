@@ -3,7 +3,8 @@
 # Parameters
 
   cd artix || exit
-  BEGINNER_DIR=$(pwd) && MODE="$1"
+  BEGINNER_DIR=$(pwd) 
+  MODE="$1"
   if ! doas grep -qF "permit nopass fabse" /etc/doas.conf; then
     cat << EOF | doas tee -a /etc/doas.conf > /dev/null
 permit nopass $(whoami)
@@ -14,7 +15,8 @@ EOF
 
 # Package-installation
   if [[ -z "$(pacman -Qs chaotic-keyring)" ]]; then
-    doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com && doas pacman-key --lsign-key FBA220DFC880C036
+    doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com 
+    doas pacman-key --lsign-key FBA220DFC880C036
     doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
     doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf
   fi
@@ -52,13 +54,20 @@ EOF
   cd $BEGINNER_DIR || exit
   cd packages || exit
   paru --noconfirm -Syu
-  PIPES_1="$(ls -- *bash-pipes-*)" && CBONSAI="$(ls -- *cbonsai-*)" && NUDOKU="$(ls -- *nudoku-*)" && PIPES_2="$(ls -- *pipes.sh-*)" && POKEMON="$(ls -- *pokemon-*)" && SUNWAIT="$(ls -- *sunwait-*)" && SWEET_QT="$(ls -- *sweet-kde-*)" 
+  PIPES_1="$(ls -- *bash-pipes-*)" 
+  CBONSAI="$(ls -- *cbonsai-*)" 
+  NUDOKU="$(ls -- *nudoku-*)" 
+  PIPES_2="$(ls -- *pipes.sh-*)" 
+  POKEMON="$(ls -- *pokemon-*)" 
+  SUNWAIT="$(ls -- *sunwait-*)" 
+  SWEET_QT="$(ls -- *sweet-kde-*)" 
   doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_QT
   cd $BEGINNER_DIR || exit
-  paru --cleanafter --removemake --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin \
+  paru --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin \
                                                          wayshot-bin freerouting rivercarro-git \
                                                          bastet protonvpn-cli-community ydotool rtl8812au-dkms-git
 # river-noxwayland-git 
+  paru --noconfirm --useask -Syu
   paru -Scd --noconfirm
   doas archlinux-java set java-19-openjdk
 
@@ -77,19 +86,24 @@ EOF
 
 # Default apps
 
-  handlr add .pdf org.pwmt.zathura.desktop && handlr add .png vimiv.desktop && handlr add .jpeg vimiv.desktop
+  handlr add .pdf org.pwmt.zathura.desktop
+  handlr add .png vimiv.desktop 
+  handlr add .jpeg vimiv.desktop
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Default shell
 
-  doas usermod --shell /usr/bin/zsh $(whoami) && doas usermod --shell /usr/bin/zsh root
+  doas usermod --shell /usr/bin/zsh $(whoami) 
+  doas usermod --shell /usr/bin/zsh root
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Grub-theme
 
-  git clone https://github.com/vinceliuice/grub2-themes.git && cd grub2-themes || return && doas ./install.sh -b
+  git clone https://github.com/vinceliuice/grub2-themes.git
+  cd grub2-themes || return 
+  doas ./install.sh -b
   cd $BEGINNER_DIR || return
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -114,10 +128,12 @@ EOF
   doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
   doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
   doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
-  pacman -Q > hejsa.txt && grep -F "electron" hejsa.txt > hejhej.txt
+  pacman -Q > hejsa.txt 
+  grep -F "electron" hejsa.txt > hejhej.txt
   hej=${s%% *}
   while read -r line; do
-    hej=${line%% *} && cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
+    hej=${line%% *} 
+    cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
   done < hejhej.txt
 
 #----------------------------------------------------------------------------------------------------------------------------------

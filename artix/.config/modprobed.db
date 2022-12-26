@@ -95,6 +95,7 @@ mousedev
 nvme
 nvme_common
 nvme_core
+overlay
 pcspkr
 platform_profile
 polyval_clmulni

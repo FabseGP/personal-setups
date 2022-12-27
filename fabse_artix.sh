@@ -21,16 +21,17 @@ EOF
     doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf
   fi
   doas pacman --noconfirm -Syu
+  yes | doas pacman --noconfirm -S mesa-tkg-git paru hdf5-openmpi
   doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git steam helix elinks sweet-gtk-theme-dark docbook-xsl \
                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat modprobed-db inetutils nano \
                                       gnome-mahjongg galculator handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux samba wlsunset android-udev moc \
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git youtube-music-bin reshade-shaders-git \
-                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot mesa-tkg-git vimiv-qt-git tela-icon-theme-git mako wofi cura xmlto dkms \
+                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt-git tela-icon-theme-git mako wofi cura xmlto dkms \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects rpi-imager fzf \
-                                      bashtop alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr pipewire rclone nemo-fileroller tlp-rdw vkd3d-proton-tkg-git fwupd sway \
+                                      bashtop bottom ld-lsb xdg-desktop-portal-wlr pipewire rclone nemo-fileroller tlp-rdw vkd3d-proton-tkg-git fwupd sway \
                                       python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git mypaint docbook-xml nnn \
-                                      unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils foot \
+                                      unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils foot handlr \
                                       ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui bat npm nuclear-player-bin \
                                       ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv freecad protonup-qt jre17-openjdk \
                                       lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit earlyoom-dinit
@@ -52,13 +53,12 @@ EOF
 # Installation of packages from AUR
 
   cd $BEGINNER_DIR || exit
-  paru --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git \
-                               wayshot-bin freerouting rivercarro-git cbonsai bash-pipes pokemon-cursor bastet \
+  paru --needed --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git \
+                               wayshot-bin freerouting rivercarro-git cbonsai bash-pipes bastet \
                                nudoku-git protonvpn-cli-community ydotool-bin rtl8812au-dkms-git sweet-kde-git
 # river-noxwayland-git 
   paru --noconfirm --useask -Syu
   paru -Scd --noconfirm
-  doas archlinux-java set java-19-openjdk
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,7 +104,6 @@ EOF
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
-  ln -sf /home/$(whoami)/.config/dinit.d/{dbus.user,pipewire.user,foot.user,mako.user,syncthing.user,wl_paste.user} /home/$(whoami)/.config/dinit.d/boot.d
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas chmod u+x /etc/dinit.d/user/scripts/*
@@ -129,19 +128,15 @@ EOF
 
 # Miscellaneous
 
-  cat << EOF | doas tee -a /etc/security/limits.conf
+  cat << EOF | doas tee -a /etc/security/limits.conf > /dev/null
 
 fabse hard nofile 524288
-EOF
-  cat << EOF | doas tee -a /etc/pam.d/system-login
-
-session optional pam_dinit_userservd.so
 EOF
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
 EOF
-  cat << EOF | doas tee -a /etc/dinit.d/config/rc.local
+  cat << EOF | doas tee -a /etc/dinit.d/config/rc.local > /dev/null
 
 powertop --auto-tune
 sh /home/fabse/local/autosuspend.sh

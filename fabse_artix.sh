@@ -31,8 +31,8 @@ EOF
                                       bashtop alsa-utlis bottom ld-lsb xdg-desktop-portal-wlr pipewire rclone nemo-fileroller tlp-rdw vkd3d-proton-tkg-git fwupd sway \
                                       python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git mypaint docbook-xml nnn \
                                       unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils foot \
-                                      ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui bat npm \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv freecad protonup-qt \
+                                      ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui bat npm nuclear-player-bin \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt mpv freecad protonup-qt jre17-openjdk \
                                       lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit earlyoom-dinit
   if ! [[ "$MODE" == "MINIMAL" ]]; then
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp fuse2 avogadrolibs sagemath arduino-cli arduino-avr-core \
@@ -43,6 +43,7 @@ EOF
   if grep -q Intel "/proc/cpuinfo"; then # Poor soul :(
     doas pacman --noconfirm --needed -S intel-undervolt-dinit
   elif grep -q AMD "/proc/cpuinfo"; then :; fi
+  doas archlinux-java set java-17-openjdk
 
  # linux-libre linux-libre-headers
 
@@ -51,9 +52,9 @@ EOF
 # Installation of packages from AUR
 
   cd $BEGINNER_DIR || exit
-  paru --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git \
+  paru --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git \
                                wayshot-bin freerouting rivercarro-git cbonsai bash-pipes pokemon-cursor bastet \
-                               nudoku-git protonvpn-cli-community ydotool rtl8812au-dkms-git sweet-kde-git
+                               nudoku-git protonvpn-cli-community ydotool-bin rtl8812au-dkms-git sweet-kde-git
 # river-noxwayland-git 
   paru --noconfirm --useask -Syu
   paru -Scd --noconfirm
@@ -99,7 +100,7 @@ EOF
 # Installing dotfiles
 
   cp -r {wallpapers,.config,.local} /home/$(whoami)
-  rm -rf /${home/$(whoami)/.config/rsnapshot:?}
+  rm -rf /home/$(whoami)/.config/rsnapshot
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
   cp -r scripts/artix/* /home/$(whoami)/scripts
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}

@@ -52,20 +52,9 @@ EOF
 # Installation of packages from AUR
 
   cd $BEGINNER_DIR || exit
-  cd packages || exit
-  paru --noconfirm -Syu
-  PIPES_1="$(ls -- *bash-pipes-*)" 
-  CBONSAI="$(ls -- *cbonsai-*)" 
-  NUDOKU="$(ls -- *nudoku-*)" 
-  PIPES_2="$(ls -- *pipes.sh-*)" 
-  POKEMON="$(ls -- *pokemon-*)" 
-  SUNWAIT="$(ls -- *sunwait-*)" 
-  SWEET_QT="$(ls -- *sweet-kde-*)" 
-  doas pacman --noconfirm --needed -U $PIPES_1 $BASTET $CBONSAI $NUDOKU $PIPES_2 $POKEMON $SUNWAIT $SWEET_QT
-  cd $BEGINNER_DIR || exit
-  paru --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin \
-                                                         wayshot-bin freerouting rivercarro-git \
-                                                         bastet protonvpn-cli-community ydotool rtl8812au-dkms-git
+  paru --noconfirm --useask -S nuclear-player-bin sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git \
+                               wayshot-bin freerouting rivercarro-git cbonsai bash-pipes pokemon-cursor bastet \
+                               nudoku-git protonvpn-cli-community ydotool rtl8812au-dkms-git sweet-kde-git
 # river-noxwayland-git 
   paru --noconfirm --useask -Syu
   paru -Scd --noconfirm

@@ -21,7 +21,6 @@ EOF
     doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf
   fi
   doas pacman --noconfirm -Syu
-  cd packages || exit
   doas pacman --noconfirm --needed -S nemo alacritty libreoffice-fresh pavucontrol playerctl wayland lutris-git steam helix elinks sweet-gtk-theme-dark docbook-xsl \
                                       bitwarden easyeffects librewolf zathura zathura-pdf-mupdf swappy candy-icons-git brave-bin lolcat modprobed-db inetutils nano \
                                       gnome-mahjongg galculator handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt \

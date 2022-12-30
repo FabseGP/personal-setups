@@ -29,7 +29,7 @@ EOF
                                       pipewire-pulse pipewire-jack zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git youtube-music-bin reshade-shaders-git \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt-git tela-icon-theme-git mako wofi cura xmlto dkms \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects rpi-imager fzf \
-                                      bashtop bottom ld-lsb xdg-desktop-portal-wlr pipewire wireplumber rclone nemo-fileroller tlp-rdw gendesk fwupd sway \
+                                      bashtop bottom ld-lsb xdg-desktop-portal-wlr pipewire wireplumber rclone nemo-fileroller gendesk fwupd sway \
                                       python-pywal man-db ethtool lib32-opencl-icd-loader bcachefs-tools-git dupeguru dosbox reshade-shaders-git mypaint docbook-xml nnn \
                                       unrar intel-media-driver ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils foot handlr \
                                       ttf-nerd-fonts-symbols-2048-em revolt-desktop-git yambar-git bibata-rainbow-cursor-theme mousepad dbus-broker zsh s-tui bat npm nuclear-player-bin \

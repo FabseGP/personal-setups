@@ -27,7 +27,7 @@ EOF
                                       bitwarden easyeffects librewolf zathura-pdf-mupdf swappy candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm cheese \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf helix qt5ct ttf-dejavu-nerd \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins pass kdeconnect \
-                                      pipewire-pulse zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww \
+                                      pipewire-pulse zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects python-pyclip wine-gecko \
                                       bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin wine-staging \

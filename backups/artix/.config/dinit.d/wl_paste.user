@@ -1,6 +1,0 @@
-type = process
-load-options = sub-vars
-logfile = $HOME/.local/share/dinit/wl_paste.log
-command = wl-paste -t text --watch clipman store 
-restart = true
-depends-on = dbus.user

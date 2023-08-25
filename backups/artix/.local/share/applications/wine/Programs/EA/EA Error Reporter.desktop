@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=EA Error Reporter
-Exec=env WINEPREFIX="/home/fabse/Games/ea-desktop" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\EA\\\\EA\\ Error\\ Reporter.lnk
-Type=Application
-StartupNotify=true
-Path=/home/fabse/Games/ea-desktop/dosdevices/c:/Program Files/Electronic Arts/EA Desktop/EA Desktop
-Icon=AB76_ErrorReporter.0
-StartupWMClass=errorreporter.exe

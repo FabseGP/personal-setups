@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=App Recovery
-Exec=env WINEPREFIX="/home/fabse/Games/ea-desktop" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\EA\\\\App\\ Recovery.lnk
-Type=Application
-StartupNotify=true
-Path=/home/fabse/Games/ea-desktop/dosdevices/c:/Program Files/Electronic Arts/EA Desktop/EA Desktop
-Icon=8A48_EALauncher.0
-StartupWMClass=ealauncher.exe

@@ -18,10 +18,11 @@ EOF
   if [[ -z "$(pacman -Qs chaotic-keyring)" ]]; then
     doas pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
     doas pacman-key --lsign-key 3056513887B78AEB
-    doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+    doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
     doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf; fi
+    
   doas pacman --noconfirm -Syu
-  yes | doas pacman --noconfirm -S mesa-tkg-git paru hdf5-openmpi
+  yes | doas pacman -S mesa-tkg-git paru
   doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git steam elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db \
                                       bitwarden easyeffects librewolf zathura-pdf-mupdf swappy candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf helix qt5ct \
@@ -40,16 +41,13 @@ EOF
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp sagemath arduino-cli arduino-avr-core geogebra freecad-git \
                                         qutebrowser betterbird elogind boost obs-studio vbam-wx blender kdenlive foliate gnuplot meson kicad-library stremio \
-                                        kicad-library-3d artools wine-staging texlive-most polkit-kde-agent kicad-git syncthing inkscape waydroid motrix-bin \
+                                        kicad-library-3d artools-base artools-pkg wine-staging texlive polkit-kde-agent kicad-git syncthing inkscape waydroid motrix-bin \
                                         wine-gecko wine-mono podman-compose podman python-pipx cups-pdf cups-dinit avahi-dinit libvirt-dinit; fi
 
   if grep -q Intel "/proc/cpuinfo"; then doas pacman --noconfirm --needed -S intel-undervolt-dinit; # Poor soul :(
-  elif grep -q AMD "/proc/cpuinfo"; then 
-    doas pacman --noconfirm --needed -S zenpower3-dkms ryzenadj-git
-
+  elif grep -q AMD "/proc/cpuinfo"; then doas pacman --noconfirm --needed -S zenpower3-dkms ryzenadj-git; fi
   if [[ "$GPU" == *"Intel"* ]]; then doas pacman --noconfirm --needed -S intel-media-driver intel-gpu-tools;
   elif [[ "$GPU" == *"AMD"* ]]; then paru --needed --noconfirm --useask -S amdgpu_top-bin; fi
- fi
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,8 +58,8 @@ EOF
                                         wayshot wl-gammarelay-rs rivercarro cbonsai bash-pipes bastet rtl8812au-dkms-git nuclear-player-bin \
                                         nudoku deezer-enhanced-bin river-noxwayland sweet-kde-git deemix cmst 8bitdo-ultimate-controller-udev \
                                         catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git
-  if ! [[ "$MODE" == "MINIMAL" ]]; then
-  paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
+                                        
+  if ! [[ "$MODE" == "MINIMAL" ]]; then paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
   paru --noconfirm --useask -Syu
   paru -Scd --noconfirm
 

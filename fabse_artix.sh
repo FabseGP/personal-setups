@@ -27,7 +27,7 @@ EOF
                                       bitwarden easyeffects librewolf zathura-pdf-mupdf swappy candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf helix qt5ct \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins pass kdeconnect \
-                                      pipewire-pulse zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron \
+                                      pipewire-pulse zsh-theme-powerlevel10k zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects python-pyclip \
                                       bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin \
@@ -100,29 +100,18 @@ EOF
 # Installing dotfiles
 
   cp -r {wallpapers,.config,.local} /home/$(whoami)
-  rm -rf /home/$(whoami)/.config/rsnapshot
-  mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d,wallpapers/sunpaper}
-  cp -r scripts/artix/* /home/$(whoami)/scripts
+  mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d}
   chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas chmod u+x /etc/dinit.d/user/scripts/*
   doas ln -sf /home/$(whoami)/.config/zsh/.zshenv /etc/environment
   if grep -q Intel "/proc/cpuinfo"; then doas intel-undervolt apply; fi
-  git clone https://github.com/hexive/sunpaper.git
-  cp -r sunpaper/images/* /home/$(whoami)/wallpapers/sunpaper
   cd $BEGINNER_DIR || return
   if ! [[ -d "/etc/pipewire" ]]; then doas mkdir /etc/pipewire; fi
   doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
   doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
   doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
-  pacman -Q > hejsa.txt 
-  grep -F "electron" hejsa.txt > hejhej.txt
-  hej=${s%% *}
-  while read -r line; do
-    hej=${line%% *} 
-    cp /home/$(whoami)/.config/electron-flags.conf /home/$(whoami)/.config/$hej-flags.conf
-  done < hejhej.txt
 
 # [target.x86_64-unknown-linux-gnu]
 # rustflags = ["-C", "target-cpu=native"]
@@ -138,10 +127,6 @@ EOF
   cat << EOF | doas tee -a /etc/issue > /dev/null
 This object that you, sir, are using is property of Fabse Inc. - expect therefore puns! 
 
-EOF
-  cat << EOF | doas tee -a /etc/dinit.d/config/rc.local > /dev/null
-
-sh /home/fabse/local/autosuspend.sh
 EOF
   doas cp configs/misc /etc/cron.daily
   doas pacman --noconfirm -Syu

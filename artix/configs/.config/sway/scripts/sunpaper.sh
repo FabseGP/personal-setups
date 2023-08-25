@@ -9,6 +9,7 @@
 # There's also pretty good documentation on the wiki
 # https://github.com/hexive/sunpaper/wiki
 
+
 #################################################
 # BASIC CONFIGURATION
 #################################################
@@ -18,7 +19,7 @@ latitude="55.270630N"
 longitude="9.900540W"
 
 # Set full path to the wallpaper theme folder
-# Theme folder names:
+# Theme folder names:grep
 #
 # Blake Watson & Sunpaper: Corporate-Synergy
 # Apple: The-Beach The-Cliffs The-Lake The-Desert
@@ -79,6 +80,36 @@ weather_api_key="ba6e5d8c7ea61606ae0d38e335243ebd"
 # Check on http://openweathermap.org/find
 #
 weather_city_id="2624502"
+
+
+#################################################
+# Animate transitions with SWWW MODE 
+# requires (https://github.com/Horus645/swww)
+# and Wayland
+#################################################
+#
+# For smooth low memory animated transitions between 
+# images.
+#
+# This also resolves the gray flash in Sway whenever changing
+# wallpaper. (https://github.com/swaywm/sway/issues/3693)
+#
+# enable this mode here with 
+# swww_enable="true"
+swww_enable="true"
+
+# swww should already be installed and configured.
+# sunpaper will launch the swww daemon if it's not
+# already started.
+
+# swww takes two options for animation control of the
+# transition between images: frame rate and step (more
+# info: https://github.com/Horus645/swww/issues/51)
+#
+# swww_fps <1 to 255>
+# swww_step <1 to 255>
+swww_fps="3"
+swww_step="3"
 
 
 #################################################
@@ -145,29 +176,6 @@ status_icon=""
 
 
 #################################################
-# SWAY / OGURI MODE 
-# requires (https://github.com/vilhalmer/oguri)
-#################################################
-# Sway has an known issue https://github.com/swaywm/sway/issues/3693
-# that causes a gray flash whenever changing wallpaper.
-# Oguri uses an IPC which allows for smoother
-# no-flash wallpaper changes in sway.
-#
-# enable this mode here with 
-# oguri_enable="true"
-oguri_enable="false"
-
-# oguri should already be installed and configured.
-# sunpaper will launch the oguri socket with the
-# location of your oguri configuration file set here
-oguri_config="$HOME/.config/oguri/config"
-
-# oguri takes three options for wallpaper display
-# fill | tile | stretch
-wallpaperModeOguri="fill"
-
-
-#################################################
 # EXTERNAL CONFIGURATION
 #################################################
 # Congratulations you've found a super secret undocumented
@@ -186,15 +194,17 @@ wallpaperModeOguri="fill"
 
 
 #Sunpaper Version History
-#2.26 - initial commit
-#2.27 - functionize & option flags
-#2.28 - new darkmode feature
-#3.01 - new waybar feature
-#3.03 - pywall integration
-#3.05 - oguri integration
-#3.17 - moonphase & weather
+#
+#1.0 - initial commit
+#1.1 - functionize & option flags
+#1.2 - new darkmode feature
+#1.3 - new waybar feature
+#1.4 - pywall integration
+#1.5 - oguri integration (ended with 2.0)
+#1.6 - moonphase & weather
+#2.0 - swww animations & let it snow
 
-version="3.17"
+version="2.0"
 
 # Check for external config file
 CONFIG_FILE=$HOME/.config/sunpaper/config
@@ -220,6 +230,7 @@ set_cache(){
         touch "$cacheFileWall"
         echo "0" > "$cacheFileWall"
         currentpaper=0
+        swww_first="true"
     fi
 
 }
@@ -453,21 +464,31 @@ setpaper_construct(){
 
 
     ################
-    # Oguri
+    # SWWW
 
-    if [ "$oguri_enable" == "true" ];then 
+    if [ "$swww_enable" == "true" ];then 
 
-        # Check for oguri socket and launch it if it isn't running
-        exec_oguri
+        # Check for swww dameon and launch it if it isn't running
+        exec_swww
 
         #TODO: is there a need to make this configurable?
         #output $display_output
 
-        # it takes awhile for that socket to start so make sure there's success before moving on
-        until ogurictl output \* --scaling-mode "$wallpaperModeOguri" --image "$wallpaperPath"/"$image".jpg > /dev/null 2>&1; do
-            ((c++)) && ((c==10)) && break
-            sleep 1
-        done
+        # it takes awhile for that daemon to start so make sure there's success before moving on
+
+        if [ "$swww_first" == "true" ];then 
+            # don't animate first load image
+            until swww img "$wallpaperPath"/"$image".jpg --transition-step 255 --transition-fps 255 > /dev/null 2>&1; do
+                 ((c++)) && ((c==10)) && break
+                sleep 1
+            done
+        else 
+        
+            until swww img "$wallpaperPath"/"$image".jpg --transition-step "$swww_fps" --transition-fps "$swww_step" > /dev/null 2>&1; do
+                 ((c++)) && ((c==10)) && break
+                 sleep 1
+            done
+        fi
 
     else
         ################
@@ -622,9 +643,6 @@ get_weather(){
                 
     else 
 
-        # TODO: HO HO HO we need some snow wallpapers
-        # [[ "$weather_main" = *Snow* ]]
-
         if [[ "$weather_main" = *Rain* ]] || [[ "${weather_main}" = *Drizzle* ]] || [[ "$weather_main" = *Mist* ]]; then
             currentWeather="rain"
 
@@ -637,6 +655,9 @@ get_weather(){
         elif [[ "$weather_main" = *Fog* ]] || [[ "$weather_main" = *Haze* ]] || [[ "$weather_main" = *Smoke* ]] || [[ "$weather_main" = *Dust* ]] || [[ "$weather_main" = *Sand* ]] || [[ "$weather_main" = *Ash* ]]; then
             currentWeather="fog"
 
+        elif [[ "$weather_main" = *Snow* ]] || [[ "$weather_main" = *Sleet* ]] ; then
+            currentWeather="snow"
+
         else
             currentWeather="cloud"
 
@@ -645,14 +666,16 @@ get_weather(){
     fi
 }
 
-exec_oguri(){
+exec_swww(){
 
-    #Check if oguri socket is already running
-    if pgrep -x "oguri" > /dev/null ;then
+    #Check if swww daemon is already running
+    if pgrep -x "swww" > /dev/null ;then
         #do nothing
         true
+
     else
-        nohup oguri -c "$oguri_config" > /dev/null 2>&1 &
+        nohup swww init > /dev/null 2>&1 &
+
     fi
 }
 

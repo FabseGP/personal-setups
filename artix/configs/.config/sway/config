@@ -236,6 +236,7 @@ bar {
     smart_borders on
 
   # What to execute on startup
+    exec_always swww init
     exec_always /home/fabse/.config/sway/scripts/sunpaper.sh -d
     exec_always sworkstyle &> /tmp/sworkstyle.log
     exec_always /home/fabse/.local/bin/autostart.sh sway
@@ -252,7 +253,10 @@ bar {
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
-  #  xwayland disable
+    xwayland disable
+  
+  # Fractional scaling
+    output <name> scale 1.5
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081

@@ -4,7 +4,7 @@
     rm -rf /home/$(whoami)/.config/sway/exec
     touch /home/$(whoami)/.config/sway/exec
   fi
-  for service in yambar foot pipewire mako wl-paste; do
+  for service in yambar foot pipewire wireplumber pipewire-pulse mako wl-paste; do
     if [[ "$1" == "sway" ]]; then
       if ! [[ $(pidof $service) ]]; then
         if [[ "$service" == "foot" ]]; then

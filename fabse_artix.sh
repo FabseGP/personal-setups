@@ -101,17 +101,13 @@ EOF
 
   cp -r {wallpapers,.config,.local} /home/$(whoami)
   mkdir -p /home/$(whoami)/{scripts,Skærmbilleder,.local/{share/dinit,bin},.config/dinit.d/boot.d}
-  chmod u+x /home/$(whoami)/{scripts/*,.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*}}
+  chmod u+x /home/$(whoami)/{.config/{river/init,yambar/{cpu.sh,weather.sh,playerctl/*},sway/scripts/*},.local/bin/*}
   fc-cache -f -v 
   doas cp -r etc/* /etc
   doas chmod u+x /etc/dinit.d/user/scripts/*
   doas ln -sf /home/$(whoami)/.config/zsh/.zshenv /etc/environment
   if grep -q Intel "/proc/cpuinfo"; then doas intel-undervolt apply; fi
   cd $BEGINNER_DIR || return
-  if ! [[ -d "/etc/pipewire" ]]; then doas mkdir /etc/pipewire; fi
-  doas cp /usr/share/pipewire/pipewire.conf /etc/pipewire
-  doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
-  doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

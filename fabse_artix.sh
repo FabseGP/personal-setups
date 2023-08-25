@@ -16,11 +16,9 @@ EOF
 
 # Package-installation
   if [[ -z "$(pacman -Qs chaotic-keyring)" ]]; then
-    doas pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com 
-    doas pacman-key --lsign-key FBA220DFC880C036
-    doas pacman --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-    doas pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
-    doas pacman-key --lsign-key F3B607488DB35A47
+    doas pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    doas pacman-key --lsign-key 3056513887B78AEB
+    doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
     doas cp configs/pacman_with_chaotic.conf /etc/pacman.conf; fi
   doas pacman --noconfirm -Syu
   yes | doas pacman --noconfirm -S mesa-tkg-git paru hdf5-openmpi

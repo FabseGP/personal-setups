@@ -113,9 +113,6 @@ EOF
   doas sed -i 's/#{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/' /etc/pipewire/pipewire.conf
   doas sed -i '/{ path = "\/usr\/bin\/pipewire" args = "-c pipewire-pulse.conf" }/a { path = "wireplumber"  args = "" }' /etc/pipewire/pipewire.conf
 
-# [target.x86_64-unknown-linux-gnu]
-# rustflags = ["-C", "target-cpu=native"]
-
 #----------------------------------------------------------------------------------------------------------------------------------
 
 # Miscellaneous

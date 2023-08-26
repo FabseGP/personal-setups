@@ -5,7 +5,7 @@
   elif [[ "$1" == "river" ]] && [[ $(pidof sway) ]]; then
     riverctl exit
   else
-    for service in yambar foot pipewire mako wl-paste sunpaper sworkstyle syncthing; do
+    for service in yambar foot pipewire pipewire-pulse wireplumber swww mako wl-paste sunpaper sworkstyle syncthing; do
       if [[ $(pidof $service) ]]; then
         killall $service
       fi

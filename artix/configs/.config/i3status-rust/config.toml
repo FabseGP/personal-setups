@@ -17,7 +17,7 @@ click_temp = 3000
 
 [[block]]
 block = "backlight"
-device = "intel_backlight"
+device = "amdgpu_bl1"
 minimum = 0
 maximum = 100
 step_width=2
@@ -40,7 +40,7 @@ block = "temperature"
 format = " $icon $average average "
 format_alt = " $icon $min min, $max max, $average avg "
 interval = 10
-chip = "*-isa-*"
+chip = "zenpower-pci-00c3"
 
 [[block]]
 block = "battery"

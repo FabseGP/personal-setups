@@ -216,7 +216,7 @@ input type:touchpad {
 }
 
 bar {
-    font pango:DejaVu Sans Mono, FontAwesome 12
+    font pango:DejaVuSansM Nerd Font, FontAwesome 12
     position top
     status_command /usr/bin/i3status-rs /home/fabse/.config/i3status-rust/config.toml
     colors {
@@ -253,10 +253,10 @@ bar {
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
-    xwayland disable
+#    xwayland disable
   
   # Fractional scaling
-    output <name> scale 1.5
+    output eDP-1 scale 1.25
 
   # Shortcut to night-mode
     bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081

@@ -1,7 +1,7 @@
 [theme]
 theme = "solarized-dark"
 [icons]
-icons = "awesome5"
+icons = "material-nf"
 
 [[block]]
 block = "sound"
@@ -31,6 +31,13 @@ warning_mem = 70
 critical_mem = 90
 
 [[block]]
+block = "amd_gpu"
+device = "card1"
+format = " $icon $utilization "
+format_alt = " $icon MEM: $vram_used_percents ($vram_used/$vram_total) "
+interval = 1
+
+[[block]]
 block = "cpu"
 interval = 1
 format = " $icon $barchart $utilization $frequency "
@@ -45,7 +52,7 @@ chip = "zenpower-pci-00c3"
 [[block]]
 block = "battery"
 format = " $icon $percentage {$time |}"
-device = "BAT0"
+device = "DisplayDevice"
 driver = "upower"
 
 [[block]]
@@ -54,4 +61,3 @@ interval = 1
 [block.format]
 full = " $icon $timestamp.datetime(f:'%a %d/%m %T') "
 short = " $icon $timestamp.datetime(f:%R) "
-

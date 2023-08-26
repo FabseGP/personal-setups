@@ -51,11 +51,8 @@
     # Start swaylock-effects
       bindsym Ctrl+l exec /home/fabse/.config/sway/scripts/screensaver.sh
 
-    # History of copied text
-      bindsym $mod+c exec clipman pick -t wofi
-
     # Taking a screenshot
-      bindsym Print exec wayshot -c -s "$(slurp)"
+      bindsym Print exec wayshot -s "$(slurp -f \"%x %y %w %h\")" --stdout | swappy -f -
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -253,17 +250,17 @@ bar {
     seat seat0 xcursor_theme Bibata-Rainbow-Modern 32
 
   # Disable xwayland
-#    xwayland disable
+  #  xwayland disable
   
   # Fractional scaling
     output eDP-1 scale 1.25
 
-  # Shortcut to night-mode
-    bindsym $mod+y exec wlsunset -l 55.27023 -L 9.90081
-
   # Enable floating windows for screensaver
     for_window [title="Screensaver"] floating enable
     for_window [title="Screensaver"] fullscreen enable
+
+  # Clipboard
+    exec wl-paste -p -t text --watch clipman store --no-persist -P --histpath="~/.local/share/clipman-primary.json"
 
   # Run dbus-session
     exec dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway

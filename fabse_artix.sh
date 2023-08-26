@@ -29,10 +29,10 @@ EOF
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect \
                                       pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager \
-                                      bsd-games jq gvfs-mtp wallutils tumbler xarchiver sway-launcher-desktop gamemode smartmontools swaylock-effects python-pyclip wine-gecko \
-                                      bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin wine-staging \
+                                      bsd-games jq gvfs-mtp wallutils tumbler xarchiver gamemode smartmontools swaylock-effects python-pyclip wine-gecko wine-staging swappy \
+                                      bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin nnn wdisplays \
                                       python-pywal ethtool lib32-ocl-icd bcachefs-tools-git dupeguru dosbox reshade-shaders-git fzf blueman android-tools bat rclone wine-mono \
-                                      unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo nnn mousepad \
+                                      unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
                                       ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt lzip libva-utils swtpm \
                                       tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit
@@ -57,7 +57,8 @@ EOF
   paru --needed --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git ydotool-git miru-bin tachidesk-sorayomi-bin \
                                         wayshot wl-gammarelay-rs rivercarro cbonsai bash-pipes bastet rtl8812au-dkms-git nuclear-player-bin \
                                         nudoku deezer-enhanced-bin river-noxwayland sweet-kde-git deemix cmst 8bitdo-ultimate-controller-udev \
-                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git stremio-beta zsh-theme-powerlevel10k-bin-git
+                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git stremio-beta zsh-theme-powerlevel10k-bin-git \
+                                        sway-launcher-desktop                   
                                         
   if ! [[ "$MODE" == "MINIMAL" ]]; then paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
   paru --noconfirm --useask -Syu
@@ -122,6 +123,7 @@ This object that you, sir, are using is property of Fabse Inc. - expect therefor
 
 EOF
   doas cp configs/misc /etc/cron.daily
+  doas cp configs/cleanup /etc/cron.weekly
   doas pacman --noconfirm -Syu
   doas sed -i "/permit nopass $(whoami)/d" /etc/doas.conf
   zsh

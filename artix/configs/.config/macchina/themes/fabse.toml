@@ -28,13 +28,13 @@ x = 1
 y = 0
 
 [custom_ascii]
-color = "Yellow"
+color = "#F7D43A"
 path = ".config/macchina/ascii/fabse.ascii"
 
 [randomize]
 key_color = true
 separator_color = true
-pool = "plain"
+pool = "hexadecimal"
 
 [keys]
 host = "host"

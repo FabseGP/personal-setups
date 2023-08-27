@@ -10,7 +10,7 @@ interface_name_exclude = [".*kdeconnect.*", "mpd"]
 
 [[block]]
 block = "pacman"
-interval = 3600
+interval = 86640
 format = " $icon $pacman + $aur = $both updates "
 format_singular = " $icon $both update available "
 format_up_to_date = " $icon system up to date "

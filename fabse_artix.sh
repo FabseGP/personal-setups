@@ -57,7 +57,7 @@ EOF
   paru --needed --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git ydotool-git miru-bin tachidesk-sorayomi-bin \
                                         wayshot wl-gammarelay-rs cbonsai bash-pipes bastet rtl8812au-dkms-git nuclear-player-bin stremio-beta \
                                         nudoku deezer-enhanced-bin tlpui-git deemix cmst 8bitdo-ultimate-controller-udev sway-launcher-desktop \
-                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git          
+                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git cava      
                                         
   if ! [[ "$MODE" == "MINIMAL" ]]; then paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
   paru --noconfirm --useask -Syu

@@ -24,7 +24,7 @@ EOF
   doas pacman --noconfirm -Syu
   yes | doas pacman -S --needed mesa-tkg-git paru hdf5-openmpi
   doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git steam elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db hyprland \
-                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm cheese \
+                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm cheese tlpui \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf qt5ct ttf-dejavu-nerd \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect \
                                       pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp \
@@ -40,7 +40,7 @@ EOF
   if ! [[ "$MODE" == "MINIMAL" ]]; then
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47
     doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp sagemath arduino-cli arduino-avr-core geogebra freecad-git java-runtime-common \
-                                        qutebrowser betterbird elogind boost obs-studio vbam-wx blender kdenlive foliate gnuplot meson kicad-library motrix-bin \
+                                        qutebrowser betterbird elogind boost obs-studio vbam-wx blender olive foliate gnuplot meson kicad-library motrix-bin \
                                         kicad-library-3d artools-base artools-pkg texlive polkit-kde-agent kicad-git syncthing inkscape waydroid podman-compose \
                                         podman-compose podman python-pipx cups-pdf cups-dinit avahi-dinit libvirt-dinit; fi
 

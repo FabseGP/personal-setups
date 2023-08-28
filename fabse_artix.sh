@@ -24,11 +24,11 @@ EOF
   doas pacman --noconfirm -Syu
   yes | doas pacman -S --needed mesa-tkg-git paru hdf5-openmpi
   doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git steam elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db hyprland \
-                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils moc mpv fwupd sway npm cheese \
+                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils fwupd sway cheese sweet-kde-theme-git \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf qt5ct ttf-dejavu-nerd \
-                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect \
-                                      pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp \
-                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager \
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect npm \
+                                      pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp mpv \
+                                      zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager moc \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver gamemode smartmontools swaylock-effects python-pyclip wine-gecko wine-staging swappy \
                                       bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin nnn wdisplays \
                                       python-pywal ethtool lib32-ocl-icd bcachefs-tools-git dupeguru dosbox reshade-shaders-git fzf blueman android-tools bat rclone wine-mono \
@@ -56,8 +56,8 @@ EOF
   cd $BEGINNER_DIR || exit
   paru --needed --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git ydotool-git miru-bin tachidesk-sorayomi-bin \
                                         wayshot wl-gammarelay-rs cbonsai bash-pipes bastet rtl8812au-dkms-git nuclear-player-bin stremio-beta \
-                                        nudoku deezer-enhanced-bin sweet-kde-git deemix cmst 8bitdo-ultimate-controller-udev sway-launcher-desktop \
-                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git tlpui-git            
+                                        nudoku deezer-enhanced-bin tlpui-git deemix cmst 8bitdo-ultimate-controller-udev sway-launcher-desktop \
+                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git          
                                         
   if ! [[ "$MODE" == "MINIMAL" ]]; then paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
   paru --noconfirm --useask -Syu

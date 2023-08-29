@@ -9,15 +9,6 @@ format = " $icon {$combo.str(max_w:20) $prev $play $next |}"
 interface_name_exclude = [".*kdeconnect.*", "mpd"]
 
 [[block]]
-block = "pacman"
-interval = 86640
-format = " $icon $pacman + $aur = $both updates "
-format_singular = " $icon $both update available "
-format_up_to_date = " $icon system up to date "
-aur_command = "paru -Qua"
-signal = 1
-
-[[block]]
 block = "sound"
 step_width = 2
 [block.mappings]

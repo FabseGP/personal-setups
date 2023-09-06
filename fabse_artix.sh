@@ -32,9 +32,9 @@ EOF
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver gamemode smartmontools swaylock-effects python-pyclip wine-gecko wine-staging swappy \
                                       bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin nnn wdisplays \
                                       python-pywal ethtool lib32-ocl-icd bcachefs-tools-git dupeguru dosbox reshade-shaders-git fzf blueman android-tools bat rclone wine-mono \
-                                      unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad \
+                                      unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad lzip \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt lzip libva-utils swtpm \
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder\
                                       tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then

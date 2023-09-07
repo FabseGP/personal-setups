@@ -35,7 +35,7 @@ EOF
                                       unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad lzip \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
                                       ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder\
-                                      tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit
+                                      tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47
@@ -67,7 +67,7 @@ EOF
 
 # Dinit-service s
 
-  for service in lm_sensors tlp iwd; do doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d; done
+  for service in lm_sensors tlp iwd bluetoothd; do doas ln -s /etc/dinit.d/$service /etc/dinit.d/boot.d; done
   if ! [[ "$MODE" == "MINIMAL" ]]; then doas usermod -a -G libvirt,games $(whoami); doas sed -i -e '/unix_sock_group = "libvirt"/s/^#//' /etc/libvirt/libvirtd.conf; doas sed -i -e '/unix_sock_rw_perms = "0770"/s/^#//' /etc/libvirt/libvirtd.conf; fi   
   if grep -q Intel "/proc/cpuinfo"; then doas ln -s /etc/dinit.d/intel-undervolt /etc/dinit.d/boot.d; doas ln -s /etc/dinit.d/intel-undervolt-loop /etc/dinit.d/boot.d; doas ln -s /etc/dinit.d/thermald /etc/dinit.d/boot.d; fi
   doas sensors-detect --auto	

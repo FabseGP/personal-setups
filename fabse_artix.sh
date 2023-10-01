@@ -35,7 +35,7 @@ EOF
                                       unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad lzip \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
                                       ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder\
-                                      tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit
+                                      turnstile-experimental tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47

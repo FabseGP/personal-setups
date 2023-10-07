@@ -26,15 +26,15 @@ EOF
   doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db hyprland sway \
                                       bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils fwupd cheese sweet-kde-theme-git \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf qt5ct ttf-dejavu-nerd \
-                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect npm \
-                                      pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp mpv \
+                                      bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect npm mpv \
+                                      pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp bottles \
                                       zsh-syntax-highlighting shellcheck brightnessctl aisleriot vimiv-qt tela-icon-theme-git mako wofi cura-bin rpi-imager font-manager moc \
                                       bsd-games jq gvfs-mtp wallutils tumbler xarchiver gamemode smartmontools swaylock-effects python-pyclip wine-gecko wine-staging swappy \
                                       bottom ld-lsb xdg-desktop-portal-wlr wireplumber nemo-fileroller gendesk schedtool samba qt6ct dkms foot sshfs upscayl-bin nnn wdisplays \
                                       python-pywal ethtool lib32-ocl-icd bcachefs-tools-git dupeguru dosbox reshade-shaders-git fzf blueman android-tools bat rclone wine-mono \
                                       unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad lzip \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
-                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder\
+                                      ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder \
                                       turnstile-experimental tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit turnstile-dinit
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then

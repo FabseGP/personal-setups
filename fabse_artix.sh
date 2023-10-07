@@ -23,8 +23,8 @@ EOF
     
   doas pacman --noconfirm -Syu
   yes | doas pacman -S --needed mesa-tkg-git paru hdf5-openmpi
-  doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git steam elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db hyprland \
-                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils fwupd sway cheese sweet-kde-theme-git \
+  doas pacman --noconfirm --needed -S alacritty libreoffice-fresh pavucontrol playerctl lutris-git elinks sweet-gtk-theme-dark protonup-qt bluez-utils man-db hyprland sway \
+                                      bitwarden easyeffects librewolf zathura-pdf-mupdf helix candy-icons-git lolcat modprobed-db inetutils fwupd cheese sweet-kde-theme-git \
                                       kmahjongg handlr i3status-rust swayidle swaybg clipman ttf-font-awesome lib32-gamemode figlet lib32-vkbasalt calf qt5ct ttf-dejavu-nerd \
                                       bemenu-wayland qt6-wayland kvantum-qt5 phonon-qt5-gstreamer pipewire-alsa mangohud libselinux android-udev lsp-plugins kdeconnect npm \
                                       pipewire-pulse zsh-autosuggestions protontricks-git docbook-xsl xmlto octave discord_arch_electron swww xorg-xwayland pass slurp mpv \
@@ -35,7 +35,7 @@ EOF
                                       unrar ttf-opensans libxcrypt-compat noto-fonts-emoji ttf-iosevka-nerd ventoy-bin llvm lsd wget patchutils mypaint s-tui nemo mousepad lzip \
                                       ttf-iosevka-nerd yambar-git bibata-rainbow-cursor-theme lib32-libva lib32-gtk3 lib32-gst-plugins-base-libs heroic-games-launcher-bin \
                                       ttf-meslo-nerd-font-powerlevel10k lib32-giflib lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libxslt libva-utils swtpm wf-recorder\
-                                      turnstile-experimental tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit
+                                      turnstile-experimental tlp-dinit lm_sensors-dinit thermald-dinit openssh-dinit openvpn-dinit bluez-dinit turnstile-dinit
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47
@@ -57,7 +57,7 @@ EOF
   paru --needed --noconfirm --useask -S sworkstyle otf-openmoji macchina-bin pipes.sh sunwait-git ydotool-git miru-bin tachidesk-sorayomi-bin \
                                         wayshot wl-gammarelay-rs cbonsai bash-pipes bastet rtl8812au-dkms-git nuclear-player-bin stremio-beta \
                                         nudoku deezer-enhanced-bin tlpui-git deemix cmst 8bitdo-ultimate-controller-udev sway-launcher-desktop \
-                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git cava      
+                                        catppuccin-frappe-grub-theme-git grub-theme-tela-color-2k-git zsh-theme-powerlevel10k-bin-git cava opensteam-git   
                                         
   if ! [[ "$MODE" == "MINIMAL" ]]; then paru --needed --noconfirm --useask -S pcbdraw qucs-s; fi
   paru --noconfirm --useask -Syu

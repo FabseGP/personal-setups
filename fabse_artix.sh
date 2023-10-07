@@ -138,7 +138,7 @@ EOF
 
   if ! [[ "$MODE" == "MINIMAL" ]]; then
    # doas pacman --needed -S plasma plasma-wayland-session # 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,31,32,33,34,35,36,37,38,39,40,41,42,43,48,46,47
-    doas pacman --noconfirm --needed -S virt-manager qemu bridge-utils dnsmasq nss-mdns gimp sagemath arduino-cli arduino-avr-core geogebra freecad-git java-runtime-common \
+    doas pacman --noconfirm --needed -S virt-manager qemu-full bridge-utils dnsmasq nss-mdns gimp sagemath arduino-cli arduino-avr-core geogebra freecad-git java-runtime-common \
                                         qutebrowser betterbird elogind boost obs-studio vbam-wx blender kdenlive foliate gnuplot meson kicad-library motrix-bin \
                                         kicad-library-3d artools-base artools-pkg texlive polkit-kde-agent kicad-git syncthing inkscape waydroid podman-compose \
                                         podman-compose podman python-pipx cups-pdf cups-dinit avahi-dinit libvirt-dinit; fi
